@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Equiflow | Create Account</title>
+<!-- Private page — tell search engines not to index this -->
+<meta name="robots" content="noindex, nofollow">
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%236366f1'/><polyline points='6,22 12,14 18,18 26,8' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+<!-- Performance preconnects -->
+<link rel="preconnect" href="https://cdn.tailwindcss.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://unpkg.com/lucide@0.383.0/dist/umd/lucide.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  theme: { extend: { fontFamily: { sans: ['Inter','system-ui','sans-serif'] } } }
+}
+</script>
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  body{background:#04050a;color:#e2e4ed;font-family:'Inter',system-ui,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+  .card{background:#0c0e18;border:1px solid rgba(255,255,255,.08);border-radius:20px}
+  .input{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:11px;padding:10px 14px;color:#e2e4ed;font-family:'Inter',sans-serif;font-size:13px;outline:none;transition:border-color .15s}
+  .input:focus{border-color:#6366f1}
+  .input::placeholder{color:#4b5563}
+  .tier-card{border:2px solid rgba(255,255,255,.08);border-radius:14px;padding:16px;cursor:pointer;transition:all .18s;background:rgba(255,255,255,.03);position:relative}
+  .tier-card:hover{border-color:rgba(99,102,241,.4);background:rgba(99,102,241,.06)}
+  .tier-card.selected{border-color:#6366f1;background:rgba(99,102,241,.1)}
+  .tier-card .check{display:none;position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:50%;background:#6366f1;align-items:center;justify-content:center}
+  .tier-card.selected .check{display:flex}
+  .btn-primary{background:linear-gradient(135deg,#6366f1,#a855f7);color:#fff;border:none;border-radius:12px;padding:13px 20px;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;cursor:pointer;width:100%;transition:opacity .15s;display:flex;align-items:center;justify-content:center;gap:8px}
+  .btn-primary:hover{opacity:.9}
+  .btn-primary:active{transform:scale(.98)}
+  .btn-primary:disabled{opacity:.5;cursor:not-allowed}
+  .error-box{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:10px 14px;font-size:12px;color:#f87171;display:none}
+  .error-box.show{display:block}
+  .pill{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+  .pill-green{background:rgba(34,197,94,.1);color:#22c55e;border:1px solid rgba(34,197,94,.2)}
+  .pill-amber{background:rgba(245,158,11,.1);color:#f59e0b;border:1px solid rgba(245,158,11,.2)}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .fade-in{animation:fadeIn .3s ease}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .spin{animation:spin .7s linear infinite;display:inline-block}
+
+  /* Steps */
+  .step{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:500;color:#6b7280;padding:6px 0}
+  .step.active{color:#818cf8}
+  .step.done{color:#22c55e}
+  .step-dot{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;shrink:0}
+  .step.active .step-dot{background:rgba(99,102,241,.2);border-color:#6366f1;color:#818cf8}
+  .step.done .step-dot{background:rgba(34,197,94,.15);border-color:#22c55e;color:#22c55e}
+</style>
+</head>
+<body>
+
+<!-- INVALID INVITE SCREEN -->
+<div id="invalid-screen" class="hidden text-center max-w-sm w-full">
+  <div class="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2)">
+    <i data-lucide="shield-x" class="w-7 h-7" style="color:#f87171"></i>
+  </div>
+  <h1 class="text-xl font-bold mb-2">Invalid Invite Link</h1>
+  <p class="text-sm text-gray-500 mb-6">This registration link is invalid or has already been used. Please join the waitlist to receive a new invite.</p>
+  <a href="index.html" class="btn-primary" style="text-decoration:none;display:inline-flex;width:auto;padding:11px 24px">← Back to Homepage</a>
+</div>
+
+<!-- MAIN REGISTER FORM -->
+<div id="register-screen" class="hidden w-full max-w-4xl fade-in">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+
+    <!-- LEFT: Steps sidebar -->
+    <div class="hidden lg:block">
+      <div class="card p-5 sticky top-6">
+        <!-- Logo -->
+        <div class="flex items-center gap-2 mb-6">
+          <div class="w-7 h-7 rounded-lg flex items-center justify-center" style="background:linear-gradient(135deg,#6366f1,#a855f7)">
+            <i data-lucide="trending-up" class="w-3.5 h-3.5 text-white"></i>
+          </div>
+          <span class="text-sm font-bold">EQUIFLOW</span>
+        </div>
+
+        <p class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-4">Registration Steps</p>
+
+        <div id="step-account" class="step active">
+          <div class="step-dot">1</div>
+          <span>Account Details</span>
+        </div>
+        <div class="w-0.5 h-4 ml-3" style="background:rgba(255,255,255,.06)"></div>
+        <div id="step-tier" class="step">
+          <div class="step-dot">2</div>
+          <span>Choose Tier</span>
+        </div>
+        <div class="w-0.5 h-4 ml-3" style="background:rgba(255,255,255,.06)"></div>
+        <div id="step-confirm" class="step">
+          <div class="step-dot">3</div>
+          <span>Confirm & Create</span>
+        </div>
+
+        <div class="mt-6 pt-5 border-t" style="border-color:rgba(255,255,255,.07)">
+          <div id="invite-badge" class="flex items-center gap-2 p-3 rounded-xl mb-3" style="background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.15)">
+            <i data-lucide="check-circle" class="w-4 h-4 text-green-400 shrink-0"></i>
+            <div>
+              <p class="text-xs font-semibold text-green-400">Invite Valid</p>
+              <p id="invite-email-display" class="text-xs text-gray-500 mt-0.5 truncate"></p>
+            </div>
+          </div>
+          <p class="text-xs text-gray-600 leading-relaxed">Your tier locks the deposit amount. You cannot change it after registration.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Form -->
+    <div class="lg:col-span-2 space-y-4">
+
+      <!-- STEP 1: Account details -->
+      <div id="form-step-1" class="card p-6">
+        <h2 class="text-base font-bold mb-1">Create Your Account</h2>
+        <p class="text-xs text-gray-500 mb-5">Fill in your details to get started</p>
+
+        <div id="err-box" class="error-box mb-4"></div>
+
+        <div class="space-y-3">
+          <div>
+            <label class="text-xs font-medium text-gray-500 block mb-1.5">Full Name</label>
+            <input class="input" id="reg-name" type="text" placeholder="John Doe">
+          </div>
+          <div>
+            <label class="text-xs font-medium text-gray-500 block mb-1.5">Email Address</label>
+            <input class="input" id="reg-email" type="email" placeholder="you@example.com"
+                   readonly style="opacity:.7;cursor:not-allowed"
+                   title="This email is tied to your invite and cannot be changed.">
+          </div>
+          <div>
+            <label class="text-xs font-medium text-gray-500 block mb-1.5">Password</label>
+            <div style="position:relative">
+              <input class="input" id="reg-pass" type="password" placeholder="Min 8 characters" style="padding-right:44px">
+              <button type="button" onclick="togglePass()" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#6b7280">
+                <i data-lucide="eye" id="pass-eye" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+          <div>
+            <label class="text-xs font-medium text-gray-500 block mb-1.5">Confirm Password</label>
+            <input class="input" id="reg-pass2" type="password" placeholder="Re-enter password">
+          </div>
+        </div>
+
+        <button onclick="goToStep2()" class="btn-primary mt-5">
+          Continue to Tier Selection <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- STEP 2: Tier selection (hidden initially) -->
+      <div id="form-step-2" class="card p-6 hidden">
+        <div class="flex items-center gap-2 mb-1">
+          <button onclick="backToStep1()" class="text-gray-500 hover:text-white transition-colors">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          </button>
+          <h2 class="text-base font-bold">Choose Your Investment Tier</h2>
+        </div>
+        <p class="text-xs text-gray-500 mb-5 ml-6">Your selected tier sets your deposit amount. This cannot be changed after registration.</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5" id="tier-grid">
+          <!-- tiers rendered by JS -->
+        </div>
+
+        <!-- Selected tier summary -->
+        <div id="tier-summary" class="hidden rounded-xl p-4 mb-5" style="background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.2)">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-xs font-medium text-gray-400">Selected Tier</p>
+              <p id="ts-label" class="text-base font-bold mt-0.5"></p>
+            </div>
+            <div class="text-right">
+              <p class="text-xs font-medium text-gray-400">Required Deposit</p>
+              <p id="ts-amount" class="text-xl font-bold text-green-400 mt-0.5"></p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 mt-3 pt-3 border-t" style="border-color:rgba(255,255,255,.08)">
+            <div class="flex-1">
+              <p class="text-xs text-gray-500">Daily ROI</p>
+              <p class="text-sm font-semibold text-green-400">5.7% / day</p>
+            </div>
+            <div class="flex-1">
+              <p class="text-xs text-gray-500">Cycle Duration</p>
+              <p class="text-sm font-semibold">30 Days</p>
+            </div>
+            <div class="flex-1">
+              <p class="text-xs text-gray-500">30-Day Return</p>
+              <p id="ts-return" class="text-sm font-semibold text-indigo-300"></p>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="goToStep3()" id="tier-next-btn" class="btn-primary" disabled style="opacity:.4;cursor:not-allowed">
+          Review &amp; Create Account <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- STEP 3: Confirm (hidden initially) -->
+      <div id="form-step-3" class="card p-6 hidden">
+        <div class="flex items-center gap-2 mb-1">
+          <button onclick="backToStep2()" class="text-gray-500 hover:text-white transition-colors">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          </button>
+          <h2 class="text-base font-bold">Confirm Your Details</h2>
+        </div>
+        <p class="text-xs text-gray-500 mb-5 ml-6">Review everything before creating your account</p>
+
+        <div id="confirm-summary" class="space-y-3 mb-5"></div>
+
+        <div class="flex gap-2 p-3.5 rounded-xl mb-5" style="background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.15)">
+          <i data-lucide="info" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
+          <p class="text-xs text-amber-300 leading-relaxed">After account creation, you will be taken to the deposit page to send your <strong id="warn-amount"></strong> investment. Your portfolio activates once our admin confirms the deposit.</p>
+        </div>
+
+        <button onclick="createAccount()" id="create-btn" class="btn-primary">
+          Create Account &amp; Proceed to Deposit
+        </button>
+      </div>
+
+      <!-- SUCCESS -->
+      <div id="form-success" class="card p-8 text-center hidden fade-in">
+        <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4" style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2)">
+          <i data-lucide="check-circle" class="w-8 h-8 text-green-400"></i>
+        </div>
+        <h2 class="text-xl font-bold mb-2">Account Created!</h2>
+        <p class="text-sm text-gray-400 mb-6">Redirecting you to the deposit page…</p>
+        <div class="flex items-center justify-center gap-2 text-indigo-400">
+          <span class="spin text-lg">⟳</span>
+          <span class="text-sm font-medium">Loading dashboard…</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+/* ══ Supabase init ══ */
+const SUPABASE_URL = 'https://gffqtqvdljtuttkrrzcb.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdmZnF0cXZkbGp0dXR0a3JyemNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3MjM3MTcsImV4cCI6MjA4OTI5OTcxN30.joYEFbdtDvjSXMFedzd7y3EnICI3cAKo5Sm1ANmXcDw';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+/* ── Constants ── */
+const TIERS = {
+  1: { label:'Tier 1', amount:5000,  daily:0.057, color:'#22c55e',  bg:'rgba(34,197,94,.08)',   border:'rgba(34,197,94,.2)'   },
+  2: { label:'Tier 2', amount:10000, daily:0.057, color:'#818cf8',  bg:'rgba(99,102,241,.08)',  border:'rgba(99,102,241,.2)'  },
+  3: { label:'Tier 3', amount:25000, daily:0.057, color:'#f59e0b',  bg:'rgba(245,158,11,.08)',  border:'rgba(245,158,11,.2)'  },
+  4: { label:'Tier 4', amount:50000, daily:0.057, color:'#f472b6',  bg:'rgba(244,114,182,.08)', border:'rgba(244,114,182,.2)' },
+};
+
+const $ = id => document.getElementById(id);
+const fmt = n => '$' + Number(n).toLocaleString();
+
+/* ── State ── */
+let inviteCode   = null;
+let inviteEntry  = null;
+let selectedTier = null;
+let regData      = {};
+let referredBy   = null;  // ref code of the user who referred this person
+
+/* ── Boot: validate invite via Supabase ── */
+async function boot() {
+  lucide.createIcons();
+
+  const params = new URLSearchParams(window.location.search);
+  inviteCode = params.get('invite');
+  referredBy = params.get('ref') || null;  // capture referral code
+
+  if (!inviteCode) { showInvalid('No invite code found.'); return; }
+
+  // If a stale auth session exists from a previous registration attempt,
+  // sign it out first so we start completely fresh
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) {
+    // Check if this session already has a complete profile
+    const { data: existingProfile } = await sb.from('users').select('id').eq('id', session.user.id).maybeSingle();
+    if (existingProfile) {
+      // Already registered and has a profile — redirect to dashboard
+      window.location.href = 'dashboard.html';
+      return;
+    }
+    // Has session but no profile (incomplete registration) — sign out and continue
+    await sb.auth.signOut();
+  }
+
+  const { data, error } = await sb
+    .from('waitlist')
+    .select('*')
+    .eq('invite_code', inviteCode)
+    .single();
+
+  if (error || !data) {
+    showInvalid('This invite link is invalid or expired. Please contact support.');
+    return;
+  }
+
+  if (data.status === 'REGISTERED') {
+    // Check if the account was actually completed — if not, allow re-registration
+    const { data: existingUser } = await sb.from('users')
+      .select('id')
+      .eq('invite_code', inviteCode)
+      .maybeSingle();
+
+    if (existingUser) {
+      showInvalid('This invite has already been used. <a href="dashboard.html" style="color:#818cf8;text-decoration:underline">Go to login →</a>');
+      return;
+    }
+    // Waitlist says REGISTERED but no user row found (data was cleared)
+    // Reset status and allow re-registration
+    await sb.from('waitlist').update({ status: 'INVITED' }).eq('invite_code', inviteCode);
+  }
+
+  inviteEntry = data;
+
+  // Pre-fill email & show form
+  $('reg-email').value = data.email;
+  $('invite-email-display').textContent = data.email;
+  $('register-screen').classList.remove('hidden');
+  $('invalid-screen').classList.add('hidden');
+
+  renderTiers();
+}
+
+function showInvalid(msg) {
+  const msgEl = document.querySelector('#invalid-screen p');
+  if (msgEl && msg) msgEl.innerHTML = msg;
+  $('invalid-screen').classList.remove('hidden');
+  $('register-screen').classList.add('hidden');
+  lucide.createIcons();
+}
+
+/* ── Tier rendering ── */
+function renderTiers() {
+  const grid = $('tier-grid');
+  grid.innerHTML = Object.entries(TIERS).map(([k, t]) => `
+    <div class="tier-card" onclick="selectTier(${k})" id="tier-${k}">
+      <div class="check"><i data-lucide="check" style="width:12px;height:12px;color:white"></i></div>
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-xs font-bold uppercase tracking-widest" style="color:${t.color}">${t.label}</span>
+        <span class="pill" style="background:${t.bg};color:${t.color};border:1px solid ${t.border}">5.7%/day</span>
+      </div>
+      <p class="text-xl font-bold mb-1">${fmt(t.amount)}</p>
+      <p class="text-xs text-gray-500">Required deposit</p>
+      <div class="mt-3 pt-3 border-t" style="border-color:rgba(255,255,255,.07)">
+        <p class="text-xs text-gray-500">30-Day Projection</p>
+        <p class="text-sm font-semibold" style="color:${t.color}">${fmt(Math.round(t.amount * Math.pow(1+t.daily, 30)))}</p>
+      </div>
+    </div>`).join('');
+  lucide.createIcons();
+}
+
+function selectTier(k) {
+  selectedTier = parseInt(k);
+  document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('selected'));
+  $(`tier-${k}`).classList.add('selected');
+
+  const t = TIERS[k];
+  $('ts-label').textContent  = t.label;
+  $('ts-amount').textContent = fmt(t.amount);
+  $('ts-return').textContent = fmt(Math.round(t.amount * Math.pow(1+t.daily, 30)));
+  $('tier-summary').classList.remove('hidden');
+
+  const btn = $('tier-next-btn');
+  btn.disabled    = false;
+  btn.style.opacity  = '';
+  btn.style.cursor   = '';
+
+  lucide.createIcons();
+}
+
+/* ── Step navigation ── */
+function goToStep2() {
+  const name  = $('reg-name').value.trim();
+  const email = $('reg-email').value.trim();
+  const pass  = $('reg-pass').value;
+  const pass2 = $('reg-pass2').value;
+  const errBox = $('err-box');
+
+  if (!name)                return showErr('Please enter your full name.');
+  if (!email.includes('@')) return showErr('Please enter a valid email address.');
+  if (pass.length < 8)      return showErr('Password must be at least 8 characters.');
+  if (pass !== pass2)       return showErr('Passwords do not match.');
+
+  // Prevent the user from changing the invite email to a different address
+  // The invite is tied to a specific email — using a different one would
+  // bypass the invite system and register against someone else's invite slot
+  if (inviteEntry && email.toLowerCase() !== inviteEntry.email.toLowerCase()) {
+    return showErr(`Please use the invited email address: ${inviteEntry.email}`);
+  }
+
+  errBox.classList.remove('show');
+  regData = { name, email: inviteEntry ? inviteEntry.email : email, pass };
+
+  $('form-step-1').classList.add('hidden');
+  $('form-step-2').classList.remove('hidden');
+  markStep('step-account', 'done');
+  markStep('step-tier', 'active');
+}
+
+function goToStep3() {
+  if (!selectedTier) return;
+  const t = TIERS[selectedTier];
+  regData.tier       = selectedTier;
+  regData.tierAmount = t.amount;
+  regData.tierLabel  = t.label;
+
+  $('confirm-summary').innerHTML = `
+    <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px">
+      <div class="grid grid-cols-2 gap-4">
+        <div><p style="font-size:10px;color:#6b7280;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Full Name</p><p style="font-size:14px;font-weight:600">${regData.name}</p></div>
+        <div><p style="font-size:10px;color:#6b7280;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Email</p><p style="font-size:13px;font-weight:500">${regData.email}</p></div>
+        <div><p style="font-size:10px;color:#6b7280;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Selected Tier</p><p style="font-size:14px;font-weight:700;color:#818cf8">${t.label}</p></div>
+        <div><p style="font-size:10px;color:#6b7280;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Deposit Required</p><p style="font-size:18px;font-weight:800;color:#22c55e">${fmt(t.amount)}</p></div>
+      </div>
+    </div>`;
+  $('warn-amount').textContent = fmt(t.amount);
+
+  $('form-step-2').classList.add('hidden');
+  $('form-step-3').classList.remove('hidden');
+  markStep('step-tier', 'done');
+  markStep('step-confirm', 'active');
+}
+
+function backToStep1() {
+  $('form-step-2').classList.add('hidden');
+  $('form-step-1').classList.remove('hidden');
+  markStep('step-account', 'active');
+  markStep('step-tier', '');
+}
+
+function backToStep2() {
+  $('form-step-3').classList.add('hidden');
+  $('form-step-2').classList.remove('hidden');
+  markStep('step-tier', 'active');
+  markStep('step-confirm', '');
+}
+
+function markStep(id, state) {
+  const el = $(id);
+  if (!el) return;
+  el.className = 'step';
+  if (state) el.classList.add(state);
+}
+
+/* ── Create account via Supabase Auth ── */
+async function createAccount() {
+  const btn = $('create-btn');
+  btn.disabled  = true;
+  btn.innerHTML = '<span class="spin">⟳</span>&nbsp;Creating Account…';
+
+  const resetBtn = () => {
+    btn.disabled  = false;
+    btn.innerHTML = 'Create Account &amp; Proceed to Deposit';
+  };
+
+  try {
+    const t = TIERS[regData.tier];
+
+    // ── Step 1: Sign up ──────────────────────────────────────────
+    let finalUser    = null;
+    let finalSession = null;
+
+    const { data: signUpData, error: signUpErr } = await sb.auth.signUp({
+      email:    regData.email,
+      password: regData.pass,
+      options: {
+        emailRedirectTo: window.location.origin + '/dashboard.html',
+        data: { name: regData.name }
+      }
+    });
+
+    if (signUpErr) {
+      const msg = signUpErr.message || '';
+      const alreadyExists =
+        msg.toLowerCase().includes('already registered') ||
+        msg.toLowerCase().includes('already been registered') ||
+        signUpErr.status === 422;
+
+      if (alreadyExists) {
+        // Auth user exists but profile was deleted — try signing in to recover
+        const { data: recoverData, error: recoverErr } = await sb.auth.signInWithPassword({
+          email:    regData.email,
+          password: regData.pass,
+        });
+        if (recoverErr || !recoverData?.user) {
+          showErr('This email is already registered. Delete the auth user in Supabase → Authentication → Users and try again.');
+          resetBtn(); return;
+        }
+        finalUser    = recoverData.user;
+        finalSession = recoverData.session;
+      } else {
+        showErr(msg || 'Registration failed. Please try again.');
+        resetBtn(); return;
+      }
+    } else {
+      if (!signUpData?.user) {
+        showErr('Registration failed — no user returned. Please try again.');
+        resetBtn(); return;
+      }
+      finalUser    = signUpData.user;
+      finalSession = signUpData.session;
+    }
+
+    const userId     = finalUser.id;
+    const newRefCode = userId.replace(/-/g, '').slice(0, 8).toUpperCase();
+
+    // ── Step 2: Upsert user profile ──────────────────────────────
+    const { error: userErr } = await sb.from('users').upsert({
+      id:          userId,
+      name:        regData.name,
+      email:       regData.email,
+      tier:        regData.tier,
+      tier_label:  t.label,
+      tier_amount: t.amount,
+      status:      'DEPOSIT_PENDING',
+      invite_code: inviteCode,
+      ref_code:    newRefCode,
+      referred_by: referredBy || null,
+    }, { onConflict: 'id' });
+    if (userErr) console.error('User upsert error:', userErr);
+
+    // ── Step 3: Create deposit record ────────────────────────────
+    // Remove any old AWAITING_PAYMENT record first (safe re-register)
+    await sb.from('deposits')
+      .delete()
+      .eq('user_id', userId)
+      .eq('status', 'AWAITING_PAYMENT');
+
+    const { error: depErr } = await sb.from('deposits').insert({
+      user_id: userId,
+      amount:  t.amount,
+      tier:    t.label,
+      status:  'AWAITING_PAYMENT',
+    });
+    // Throw so the catch block resets the button — user must never reach
+    // the deposit screen without a deposit record existing
+    if (depErr) throw depErr;
+
+    // ── Step 4: Mark waitlist as REGISTERED ──────────────────────
+    await sb.from('waitlist')
+      .update({ status: 'REGISTERED' })
+      .eq('invite_code', inviteCode);
+
+    // ── Step 5: Show success screen ──────────────────────────────
+    $('form-step-3').classList.add('hidden');
+    $('form-success').classList.remove('hidden');
+    markStep('step-confirm', 'done');
+
+    if (finalSession) {
+      // Email confirmation OFF → session exists → go straight to dashboard
+      lucide.createIcons();
+      setTimeout(() => { window.location.href = 'dashboard.html'; }, 1800);
+    } else {
+      // Email confirmation ON → tell user to check inbox
+      $('form-success').innerHTML = `
+        <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
+             style="background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.2)">
+          <i data-lucide="mail" class="w-8 h-8 text-indigo-400"></i>
+        </div>
+        <h2 class="text-xl font-bold mb-2">Check Your Email!</h2>
+        <p class="text-sm text-gray-400 mb-3">We sent a confirmation link to</p>
+        <p class="text-sm font-semibold text-indigo-300 mb-4">${regData.email}</p>
+        <p class="text-xs text-gray-500 leading-relaxed">
+          Click the link in your email to activate your account and access your dashboard.
+        </p>`;
+      lucide.createIcons();
+    }
+
+  } catch (err) {
+    // Safety net — button NEVER stays stuck
+    console.error('createAccount unexpected error:', err);
+    showErr('Something went wrong. Please try again or contact support.');
+    resetBtn();
+  }
+}
+
+/* ── Helpers ── */
+function showErr(msg) {
+  const b     = $('err-box');
+  const step1 = $('form-step-1');
+  if (b) { b.textContent = msg; b.classList.add('show'); }
+  // err-box lives inside form-step-1 which is hidden on step 2/3
+  // Fall back to alert so the error is never silently invisible
+  if (!step1 || step1.classList.contains('hidden')) {
+    alert(msg);
+  }
+}
+
+function togglePass() {
+  const inp = $('reg-pass');
+  const eye = $('pass-eye');
+  if (inp.type === 'password') {
+    inp.type = 'text';
+    eye.setAttribute('data-lucide','eye-off');
+  } else {
+    inp.type = 'password';
+    eye.setAttribute('data-lucide','eye');
+  }
+  lucide.createIcons();
+}
+
+/* ── Init ── */
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', boot);
+} else {
+  boot();
+}
+</script>
+</body>
+</html>

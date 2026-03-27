@@ -1,0 +1,13 @@
+# Equiflow AI — robots.txt
+# Only the landing page should be indexed.
+# Dashboard, admin, and register are private authenticated pages.
+
+User-agent: *
+Allow: /index.html
+Allow: /$
+Disallow: /admin.html
+Disallow: /dashboard.html
+Disallow: /register.html
+
+# Sitemap location
+Sitemap: https://equiflow.io/sitemap.xml

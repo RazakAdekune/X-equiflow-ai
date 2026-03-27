@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equiflow AI — AI-Powered Investment Platform</title>
+<meta name="description" content="Equiflow AI uses institutional-grade artificial intelligence to manage and grow your portfolio. Invite-only access. Capital at risk — not financial advice.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://equiflow.io/">
+
+<!-- Open Graph — controls how links look on WhatsApp, Telegram, Facebook, LinkedIn -->
+<meta property="og:type"        content="website">
+<meta property="og:url"         content="https://equiflow.io/">
+<meta property="og:title"       content="Equiflow AI — AI-Powered Investment Platform">
+<meta property="og:description" content="Institutional-grade AI investment. Invite-only. Capital at risk — not financial advice.">
+<meta property="og:image"       content="https://equiflow.io/images/og-preview.jpg">
+<meta property="og:site_name"   content="Equiflow AI">
+
+<!-- Twitter / X card -->
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="Equiflow AI — AI-Powered Investment Platform">
+<meta name="twitter:description" content="Institutional-grade AI investment. Invite-only. Capital at risk.">
+<meta name="twitter:image"       content="https://equiflow.io/images/og-preview.jpg">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%236366f1'/><polyline points='6,22 12,14 18,18 26,8' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+
+<!-- Performance: preconnect to external origins used on this page -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.tailwindcss.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://api.coingecko.com">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://unpkg.com/lucide@0.383.0/dist/umd/lucide.min.js" defer crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #060608;
+  --surface: rgba(255,255,255,0.045);
+  --border: rgba(255,255,255,0.08);
+  --blue: #2563EB;
+  --blue-light: #60A5FA;
+  --green: #22C55E;
+  --green-light: #4ADE80;
+  --amber: #F59E0B;
+  --red: #EF4444;
+  --text: #F8FAFC;
+  --muted: #64748B;
+  --muted-light: #94A3B8;
+  --card: rgba(15,17,25,0.8);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+* { -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+h1,h2,h3,h4,h5 { font-family: 'Bricolage Grotesque', sans-serif; }
+
+/* ─── NOISE LAYER ─── */
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  z-index:0;
+  opacity:0.025;
+  pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px;
+}
+
+/* ─── GLASS ─── */
+.glass {
+  background: var(--surface);
+  backdrop-filter: blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  border: 1px solid var(--border);
+}
+
+/* ─── TYPOGRAPHY ─── */
+.display { font-size: clamp(3rem, 8vw, 7rem); font-weight: 800; line-height: 1.0; letter-spacing: -0.04em; }
+.headline { font-size: clamp(2rem, 5vw, 3.75rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.035em; }
+.label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.label-blue { color: var(--blue-light); }
+
+/* ─── BUTTONS ─── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--blue);
+  color: white; font-weight: 600; font-size: 15px;
+  padding: 14px 28px; border-radius: 100px;
+  transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
+  border: none; cursor: pointer;
+}
+.btn-primary:hover { background: #3B82F6; transform: translateY(-1px); box-shadow: 0 8px 32px rgba(37,99,235,0.4); }
+.btn-primary:active { transform: translateY(0); }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--muted-light);
+  font-weight: 500; font-size: 15px;
+  padding: 14px 28px; border-radius: 100px;
+  border: 1px solid var(--border);
+  transition: all 0.2s ease; cursor: pointer;
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.2); color: white; background: var(--surface); }
+
+/* ─── CARD HOVER ─── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover { transform: translateY(-4px); box-shadow: 0 24px 48px rgba(0,0,0,0.5); border-color: rgba(255,255,255,0.12); }
+
+/* ─── PHONE MOCKUP ─── */
+.phone-wrap {
+  perspective: 1200px;
+  display: flex; justify-content: center; align-items: center;
+  position: relative;
+}
+
+.phone {
+  width: 300px;
+  height: 610px;
+  position: relative;
+  transform: rotateY(-28deg) rotateX(8deg) rotateZ(4deg);
+  transform-style: preserve-3d;
+  animation: phone-float 8s ease-in-out infinite;
+  filter: drop-shadow(-40px 60px 80px rgba(0,0,0,0.8)) drop-shadow(0 0 60px rgba(37,99,235,0.15));
+}
+
+@keyframes phone-float {
+  0%,100% { transform: rotateY(-28deg) rotateX(8deg) rotateZ(4deg) translateY(0px); }
+  50%      { transform: rotateY(-28deg) rotateX(8deg) rotateZ(4deg) translateY(-14px); }
+}
+
+/* Phone body */
+.phone-body {
+  width: 100%; height: 100%;
+  border-radius: 52px;
+  position: relative;
+  background: linear-gradient(160deg, #2a2a30 0%, #18181c 40%, #0e0e12 100%);
+  border: 1px solid rgba(255,255,255,0.18);
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.15),
+    inset 0 -1px 0 rgba(0,0,0,0.5),
+    0 0 0 0.5px rgba(255,255,255,0.05);
+}
+
+/* Titanium frame shine */
+.phone-body::before {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg,
+    rgba(255,255,255,0.12) 0%,
+    rgba(255,255,255,0.04) 30%,
+    rgba(255,255,255,0) 60%,
+    rgba(255,255,255,0.06) 100%
+  );
+  z-index: 20; pointer-events: none;
+}
+
+/* Screen area */
+.phone-screen {
+  position: absolute;
+  top: 12px; left: 12px; right: 12px; bottom: 12px;
+  border-radius: 42px;
+  overflow: hidden;
+  background: #060810;
+}
+
+/* Screen glow */
+.phone-screen::after {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 60px rgba(37,99,235,0.12), inset 0 0 20px rgba(34,197,94,0.06);
+  z-index: 30; pointer-events: none;
+}
+
+/* Dynamic Island */
+.dynamic-island {
+  position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+  width: 100px; height: 30px;
+  background: #000;
+  border-radius: 100px;
+  z-index: 25;
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.06);
+}
+
+/* Screen content */
+.screen-content {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  overflow: hidden;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* Side buttons */
+.phone-btn-right {
+  position: absolute; right: -3px; top: 160px;
+  width: 4px; height: 80px;
+  background: linear-gradient(to bottom, #3a3a40, #28282e);
+  border-radius: 0 4px 4px 0;
+}
+.phone-btn-left-1 {
+  position: absolute; left: -3px; top: 140px;
+  width: 4px; height: 40px;
+  background: linear-gradient(to bottom, #3a3a40, #28282e);
+  border-radius: 4px 0 0 4px;
+}
+.phone-btn-left-2 {
+  position: absolute; left: -3px; top: 195px;
+  width: 4px; height: 65px;
+  background: linear-gradient(to bottom, #3a3a40, #28282e);
+  border-radius: 4px 0 0 4px;
+}
+.phone-btn-left-3 {
+  position: absolute; left: -3px; top: 275px;
+  width: 4px; height: 65px;
+  background: linear-gradient(to bottom, #3a3a40, #28282e);
+  border-radius: 4px 0 0 4px;
+}
+
+/* ─── AMBIENT GLOW ORBS ─── */
+.orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(100px); pointer-events: none;
+}
+
+/* ─── FAQ ─── */
+.faq-content { max-height:0; overflow:hidden; transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), padding 0.3s ease; }
+.faq-item.active .faq-content { max-height:400px; padding-bottom:1.25rem; }
+.faq-icon { transition: transform 0.3s ease; }
+.faq-item.active .faq-icon { transform: rotate(180deg); }
+
+/* ─── TICKER ─── */
+@keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+.ticker-inner { animation: ticker 28s linear infinite; display:flex; width:max-content; }
+.ticker-inner:hover { animation-play-state:paused; }
+
+/* ─── SCROLLING LOGOS ─── */
+@keyframes logos { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+.logos-inner { animation: logos 30s linear infinite; display:flex; width:max-content; }
+.logos-inner:hover { animation-play-state:paused; }
+
+/* ─── VIDEO SCROLL ─── */
+@keyframes vidscroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+.vid-inner { animation: vidscroll 38s linear infinite; display:flex; width:max-content; }
+.vid-inner:hover { animation-play-state:paused; }
+
+/* ─── TESLA GIVEAWAY (UNTOUCHED) ─── */
+@keyframes tesla-pulse { 0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.4)} 50%{box-shadow:0 0 0 20px rgba(239,68,68,0)} }
+.tesla-pulse { animation: tesla-pulse 2.5s ease-in-out infinite; }
+
+/* ─── MODALS ─── */
+#waitlist-modal { display:none; -webkit-backdrop-filter:blur(24px); backdrop-filter:blur(24px); }
+#waitlist-modal.active { display:flex; }
+
+/* ─── REVIEWS ─── */
+#extra-reviews { display:none; }
+#extra-reviews.show { display:grid; }
+
+/* ─── CHART BAR ─── */
+.chart-bar { transition: height 0.5s cubic-bezier(0.4,0,0.2,1); }
+
+/* ─── RANGE INPUT ─── */
+input[type="range"] { -webkit-appearance:none; appearance:none; background:rgba(255,255,255,0.1); height:4px; border-radius:99px; }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance:none; width:20px; height:20px; background:white; border-radius:50%; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.4); transition:transform 0.15s; }
+input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
+
+/* ─── LIVE TICKER COUNTER ─── */
+@keyframes counter-up { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:translateY(0); } }
+.count-anim { animation: counter-up 0.4s ease; }
+
+/* ─── FEATURE ICON ─── */
+.feature-icon {
+  width:56px; height:56px; border-radius:16px;
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:20px;
+}
+
+/* ─── SECTION FADE IN ─── */
+.fade-up { opacity:0; transform:translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-up.visible { opacity:1; transform:translateY(0); }
+
+/* ─── TP ─── */
+.tp-star { color:#00b67a; fill:#00b67a; }
+.tp-bg { background:#00b67a; }
+
+/* SCROLL BAR */
+
+/* ── FOUNDER PLACEHOLDER ── */
+.founder-placeholder {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 12px;
+  background: linear-gradient(135deg, rgba(37,99,235,0.08) 0%, rgba(15,23,42,0.6) 100%);
+}
+
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.1); border-radius:99px; }
+</style>
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════════
+     NAV
+═══════════════════════════════════════════ -->
+<nav class="fixed top-0 inset-x-0 z-50 border-b border-white/[0.06]" style="background:rgba(6,6,8,0.82);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px)">
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-2.5 cursor-pointer" onclick="scrollTo({top:0,behavior:'smooth'})">
+      <div class="w-8 h-8 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#2563EB,#1d4ed8)">
+        <i data-lucide="activity" class="w-4 h-4 text-white"></i>
+      </div>
+      <span class="font-bold text-base tracking-tight" style="font-family:'Bricolage Grotesque',sans-serif">EQUIFLOW <span style="color:#60A5FA">AI</span></span>
+    </div>
+    <div class="hidden md:flex items-center gap-8" style="color:var(--muted-light); font-size:14px; font-weight:500">
+      <a href="#how-it-works" class="hover:text-white transition-colors">How it Works</a>
+      <a href="#performance" class="hover:text-white transition-colors">Performance</a>
+      <a href="#giveaway" class="hover:text-white transition-colors">Giveaway</a>
+      <a href="#reviews" class="hover:text-white transition-colors">Reviews</a>
+      <a href="#support" class="hover:text-white transition-colors">Support</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <button onclick="openWaitlist()" class="btn-primary hidden sm:inline-flex" style="font-size:13px;padding:10px 20px">
+        <i data-lucide="bell" class="w-3.5 h-3.5"></i> Join Waitlist
+      </button>
+      <button id="mobile-menu-btn" class="md:hidden p-2 text-white"><i data-lucide="menu" class="w-5 h-5"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div id="mobile-menu" class="fixed inset-0 top-16 z-40 hidden flex-col gap-6 p-8 border-t border-white/[0.06]" style="background:rgba(6,6,8,0.97);-webkit-backdrop-filter:blur(32px);backdrop-filter:blur(32px)">
+  <a href="#how-it-works" class="text-xl font-semibold text-white mobile-link">How it Works</a>
+  <a href="#performance" class="text-xl font-semibold text-white mobile-link">Performance</a>
+  <a href="#giveaway" class="text-xl font-semibold text-white mobile-link">Giveaway</a>
+  <a href="#reviews" class="text-xl font-semibold text-white mobile-link">Reviews</a>
+  <a href="#support" class="text-xl font-semibold text-white mobile-link">Support</a>
+  <button onclick="openWaitlist()" class="btn-primary justify-center" style="height:52px">Join Waitlist <i data-lucide="chevron-right" class="w-4 h-4"></i></button>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<section class="relative min-h-screen flex flex-col justify-center overflow-hidden pt-16">
+
+  <!-- Background gradient -->
+  <div class="absolute inset-0 z-0" style="background:radial-gradient(ellipse 80% 60% at 50% -10%, rgba(37,99,235,0.18) 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 80% 80%, rgba(16,185,129,0.08) 0%, transparent 60%), var(--bg)"></div>
+
+  <!-- Orb left -->
+  <div class="orb w-[500px] h-[500px] -left-40 top-20 z-0" style="background:rgba(37,99,235,0.12)"></div>
+  <!-- Orb right -->
+  <div class="orb w-[400px] h-[400px] -right-20 bottom-10 z-0" style="background:rgba(16,185,129,0.07)"></div>
+
+  <div class="max-w-7xl mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-16 items-center py-20">
+
+    <!-- LEFT -->
+    <div class="space-y-8 fade-up">
+
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-semibold tracking-wider uppercase" style="background:rgba(37,99,235,0.1);border-color:rgba(37,99,235,0.25);color:var(--blue-light)">
+        <span class="relative flex h-1.5 w-1.5">
+          <span class="animate-ping absolute inset-0 rounded-full opacity-75" style="background:var(--blue-light)"></span>
+          <span class="relative rounded-full h-1.5 w-1.5" style="background:var(--blue-light)"></span>
+        </span>
+        AI-Powered Portfolio Growth
+      </div>
+
+      <h1 class="display text-white">
+        Your money.<br>
+        <span style="background:linear-gradient(135deg,#60A5FA 0%,#34D399 60%,#A78BFA 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent">
+        Working 24/7.
+        </span>
+      </h1>
+
+      <p style="font-size:18px;line-height:1.7;color:var(--muted-light);max-width:480px">
+        Equiflow uses institutional-grade AI to intelligently manage crypto and stock portfolios. Emotion-free. Risk-aware. Continuously optimised.
+      </p>
+
+      <div class="flex flex-wrap gap-3 pt-2">
+        <button onclick="openWaitlist()" class="btn-primary" style="font-size:16px">
+          Get Early Access <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+        <a href="#how-it-works" class="btn-ghost" style="font-size:16px">See How It Works</a>
+      </div>
+
+      <!-- Trust row -->
+      <div class="flex flex-wrap items-center gap-5 pt-2">
+        <div class="flex -space-x-2">
+          <div class="w-9 h-9 rounded-full border-2 border-[#060608] overflow-hidden" style="background:#1e293b"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=21" alt=""></div>
+          <div class="w-9 h-9 rounded-full border-2 border-[#060608] overflow-hidden" style="background:#1e293b"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=22" alt=""></div>
+          <div class="w-9 h-9 rounded-full border-2 border-[#060608] overflow-hidden" style="background:#1e293b"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=23" alt=""></div>
+          <div class="w-9 h-9 rounded-full border-2 border-[#060608] overflow-hidden" style="background:#1e293b"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=24" alt=""></div>
+          <div class="w-9 h-9 rounded-full border-2 border-[#060608] flex items-center justify-center text-xs font-bold text-white" style="background:#2563EB">+</div>
+        </div>
+        <p style="font-size:13px;color:var(--muted-light)"><span class="text-white font-semibold">1400+</span> investors growing daily</p>
+        <div class="h-4 w-px" style="background:var(--border)"></div>
+        <div class="flex items-center gap-1.5">
+          <div class="w-2 h-2 rounded-full" style="background:var(--green)"></div>
+          <span style="font-size:13px;color:var(--muted-light)"><span class="text-white font-semibold">$42M+</span> under management</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT — PHONE MOCKUP -->
+    <div class="phone-wrap h-[680px] fade-up" style="animation-delay:0.15s">
+
+      <!-- Ambient glow behind phone -->
+      <div class="absolute w-80 h-80 rounded-full z-0" style="background:rgba(37,99,235,0.18);filter:blur(80px);top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+      <div class="absolute w-60 h-60 rounded-full z-0" style="background:rgba(34,197,94,0.1);filter:blur(60px);top:40%;left:55%;transform:translate(-50%,-50%)"></div>
+
+      <!-- The Phone -->
+      <div class="phone z-10">
+        <div class="phone-body">
+          <!-- Buttons -->
+          <div class="phone-btn-right"></div>
+          <div class="phone-btn-left-1"></div>
+          <div class="phone-btn-left-2"></div>
+          <div class="phone-btn-left-3"></div>
+
+          <!-- Screen -->
+          <div class="phone-screen">
+            <div class="dynamic-island"></div>
+
+            <!-- DASHBOARD UI inside phone -->
+            <div class="screen-content" style="background:#07090f; padding-top:54px; font-size:9px; overflow:hidden">
+
+              <!-- Nav bar -->
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:0 14px 8px;border-bottom:1px solid rgba(255,255,255,0.06)">
+                <div style="display:flex;align-items:center;gap:6px">
+                  <div style="width:18px;height:18px;background:linear-gradient(135deg,#2563EB,#1d4ed8);border-radius:6px;display:flex;align-items:center;justify-content:center">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                  </div>
+                  <span style="font-weight:700;color:white;font-family:'Bricolage Grotesque';font-size:9px;letter-spacing:-0.02em">EQUIFLOW</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="font-weight:600;font-size:7px;color:white;border-bottom:1px solid #3B82F6;padding-bottom:1px">Dashboard</span>
+                  <span style="font-size:7px;color:rgba(255,255,255,0.4)">Portfolio</span>
+                  <span style="font-size:7px;color:#60A5FA">Raffle</span>
+                  <div style="width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#3B82F6,#8B5CF6);border:1.5px solid rgba(255,255,255,0.2)"></div>
+                </div>
+              </div>
+
+              <!-- Portfolio value card -->
+              <div style="margin:10px 10px 8px;background:linear-gradient(135deg,rgba(37,99,235,0.3) 0%,rgba(15,23,42,0.9) 100%);border:1px solid rgba(37,99,235,0.25);border-radius:16px;padding:12px">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+                  <div>
+                    <div style="display:flex;align-items:center;gap:4px;margin-bottom:3px">
+                      <span style="color:rgba(255,255,255,0.45);font-size:6.5px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase">PORTFOLIO VALUE</span>
+                      <span style="background:rgba(34,197,94,0.2);border:1px solid rgba(34,197,94,0.4);border-radius:100px;padding:1px 5px;color:#4ADE80;font-weight:700;font-size:6px;letter-spacing:0.04em">● LIVE & GROWING</span>
+                    </div>
+                    <div style="font-size:24px;font-weight:900;color:white;letter-spacing:-0.04em;font-family:'Bricolage Grotesque'">$5,262.26</div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+                    <span style="color:#4ADE80;font-weight:700;font-size:8px">↗ +5.7%/d</span>
+                  </div>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
+                  <div style="background:rgba(255,255,255,0.05);border-radius:8px;padding:5px 6px">
+                    <div style="color:rgba(255,255,255,0.4);font-size:6px;margin-bottom:2px">Initial</div>
+                    <div style="color:white;font-weight:700;font-size:8px">$5,000</div>
+                  </div>
+                  <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:5px 6px">
+                    <div style="color:rgba(34,197,94,0.7);font-size:6px;margin-bottom:2px">Profit</div>
+                    <div style="color:#4ADE80;font-weight:700;font-size:8px">+$262</div>
+                  </div>
+                  <div style="background:rgba(255,255,255,0.05);border-radius:8px;padding:5px 6px">
+                    <div style="color:rgba(255,255,255,0.4);font-size:6px;margin-bottom:2px">Tier</div>
+                    <div style="color:#60A5FA;font-weight:700;font-size:8px">Tier 1</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Ticker bar — prices updated by fetchIndexTicker() -->
+              <div style="overflow:hidden;padding:5px 10px;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);margin-bottom:8px">
+                <div id="phone-ticker" style="display:flex;gap:14px;white-space:nowrap;animation:ticker 10s linear infinite">
+                  <span style="color:rgba(255,255,255,0.5)">BTC <span id="pt-btc" style="color:#4ADE80">…</span></span>
+                  <span style="color:rgba(255,255,255,0.5)">ETH <span id="pt-eth" style="color:#4ADE80">…</span></span>
+                  <span style="color:rgba(255,255,255,0.5)">SOL <span id="pt-sol" style="color:#4ADE80">…</span></span>
+                  <span style="color:rgba(255,255,255,0.5)">BNB <span id="pt-bnb" style="color:#4ADE80">…</span></span>
+                </div>
+              </div>
+
+              <!-- Stats row -->
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:0 10px;margin-bottom:8px">
+                <div style="background:rgba(15,17,25,0.8);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:8px">
+                  <div style="display:flex;align-items:center;gap:3px;margin-bottom:5px">
+                    <div style="width:14px;height:14px;background:rgba(139,92,246,0.25);border-radius:5px;display:flex;align-items:center;justify-content:center">
+                      <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h.01M15 9h.01M9 15h.01M15 15h.01M12 12h.01"/></svg>
+                    </div>
+                    <div style="color:rgba(255,255,255,0.5);font-size:6px;font-weight:600">Neural Engine</div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:3px;margin-bottom:3px">
+                    <div style="width:5px;height:5px;border-radius:50%;background:#4ADE80;box-shadow:0 0 4px #4ADE80"></div>
+                    <div style="color:#4ADE80;font-weight:700;font-size:7.5px">Online</div>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;margin-top:3px">
+                    <div style="color:rgba(255,255,255,0.35);font-size:5.5px">Signals Today</div>
+                    <div style="color:white;font-size:5.5px;font-weight:700">853</div>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;margin-top:2px">
+                    <div style="color:rgba(255,255,255,0.35);font-size:5.5px">Last Rebal.</div>
+                    <div style="color:#60A5FA;font-size:5.5px;font-weight:700">23s ago</div>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;margin-top:2px">
+                    <div style="color:rgba(255,255,255,0.35);font-size:5.5px">Next Cycle</div>
+                    <div style="color:#FCD34D;font-size:5.5px;font-weight:700">3m 37s</div>
+                  </div>
+                </div>
+                <div style="background:rgba(15,17,25,0.8);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:8px">
+                  <div style="color:rgba(255,255,255,0.4);font-size:5.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px">Live Now</div>
+                  <div style="color:#4ADE80;font-weight:800;font-size:11px;letter-spacing:-0.03em">1,249</div>
+                  <div style="color:rgba(255,255,255,0.4);font-size:6px">investors</div>
+                </div>
+                <div style="background:rgba(15,17,25,0.8);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:8px">
+                  <div style="color:rgba(255,255,255,0.4);font-size:5.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px">Your Rank</div>
+                  <div style="color:#F59E0B;font-weight:800;font-size:11px;letter-spacing:-0.03em">Top 6%</div>
+                  <div style="color:rgba(255,255,255,0.4);font-size:6px">vs all</div>
+                </div>
+              </div>
+
+              <!-- Mini chart -->
+              <div style="margin:0 10px;background:rgba(15,17,25,0.9);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:10px">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                  <div style="color:rgba(255,255,255,0.6);font-size:7px;font-weight:600">Today's Gains</div>
+                  <div style="color:#4ADE80;font-size:7px;font-weight:700">+$262.26</div>
+                </div>
+                <div style="font-size:13px;font-weight:900;color:white;letter-spacing:-0.03em;margin-bottom:6px;font-family:'Bricolage Grotesque'">$262.26</div>
+                <div style="font-size:6px;color:#60A5FA;margin-bottom:6px">● Accumulating live</div>
+                <div style="display:flex;align-items:flex-end;gap:2px;height:28px">
+                  <div style="flex:1;background:rgba(37,99,235,0.3);border-radius:2px 2px 0 0;height:40%"></div>
+                  <div style="flex:1;background:rgba(37,99,235,0.35);border-radius:2px 2px 0 0;height:35%"></div>
+                  <div style="flex:1;background:rgba(37,99,235,0.4);border-radius:2px 2px 0 0;height:55%"></div>
+                  <div style="flex:1;background:rgba(37,99,235,0.5);border-radius:2px 2px 0 0;height:50%"></div>
+                  <div style="flex:1;background:rgba(37,99,235,0.55);border-radius:2px 2px 0 0;height:70%"></div>
+                  <div style="flex:1;background:rgba(37,99,235,0.7);border-radius:2px 2px 0 0;height:65%"></div>
+                  <div style="flex:1;background:#3B82F6;border-radius:2px 2px 0 0;height:85%"></div>
+                  <div style="flex:1;background:#2563EB;border-radius:2px 2px 0 0;height:95%;box-shadow:0 0 8px rgba(37,99,235,0.5)"></div>
+                </div>
+              </div>
+
+              <!-- Bottom buttons -->
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:8px 10px 0">
+                <button style="background:rgba(37,99,235,0.2);border:1px solid rgba(37,99,235,0.3);border-radius:10px;padding:7px;color:#60A5FA;font-size:7px;font-weight:700;text-align:center">Deposit</button>
+                <button style="background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.25);border-radius:10px;padding:7px;color:#FCA5A5;font-size:7px;font-weight:700;text-align:center">↗ Withdraw</button>
+              </div>
+
+            </div><!-- /screen-content -->
+          </div><!-- /phone-screen -->
+        </div><!-- /phone-body -->
+      </div><!-- /phone -->
+
+      <!-- Floating cards around phone -->
+      <div class="absolute glass rounded-2xl px-4 py-3 z-20" style="top:15%;right:-10%;transform:rotate(4deg);min-width:140px;border-color:rgba(34,197,94,0.2);box-shadow:0 16px 40px rgba(0,0,0,0.5)">
+        <div class="label mb-1" style="font-size:9px">Daily Yield</div>
+        <div class="font-black text-2xl" style="font-family:'Bricolage Grotesque';color:#4ADE80;letter-spacing:-0.04em">Live</div>
+        <div style="font-size:10px;color:var(--muted-light)">853 signals today</div>
+      </div>
+
+      <div class="absolute glass rounded-2xl px-4 py-3 z-20" style="bottom:22%;left:-8%;transform:rotate(-3deg);min-width:150px;border-color:rgba(37,99,235,0.2);box-shadow:0 16px 40px rgba(0,0,0,0.5)">
+        <div class="flex items-center gap-2 mb-1">
+          <div class="w-2 h-2 rounded-full animate-pulse" style="background:var(--green)"></div>
+          <div class="label" style="font-size:9px">AI Engine</div>
+        </div>
+        <div class="font-bold text-white" style="font-size:12px">Neural Active</div>
+        <div style="font-size:10px;color:var(--muted-light)">853 signals / day</div>
+      </div>
+
+    </div><!-- /phone-wrap -->
+  </div>
+
+  <!-- Ticker below hero — populated by fetchIndexTicker() on load -->
+  <div class="relative z-10 border-t border-white/[0.06] overflow-hidden py-3" style="background:rgba(0,0,0,0.3)">
+    <div id="index-ticker-inner" class="ticker-inner" style="gap:40px;padding:0 20px">
+      <!-- Populated by JS with live prices -->
+      <span style="color:var(--muted-light);font-size:13px;white-space:nowrap">Loading live prices…</span>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     STATS BAR
+═══════════════════════════════════════════ -->
+<section id="performance" class="py-14 border-y border-white/[0.06]" style="background:rgba(255,255,255,0.015)">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center fade-up">
+    <div>
+      <div style="font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;letter-spacing:-0.04em;color:white;font-family:'Bricolage Grotesque'">$42M+</div>
+      <div class="label mt-1">Assets Under Management</div>
+    </div>
+    <div>
+      <div style="font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;letter-spacing:-0.04em;color:white;font-family:'Bricolage Grotesque'">1.2K+</div>
+      <div class="label mt-1">Active Investors</div>
+    </div>
+    <div>
+      <div style="font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;letter-spacing:-0.04em;font-family:'Bricolage Grotesque'" class="text-green-400">140+</div>
+      <div class="label mt-1">AI Market Signals</div>
+    </div>
+    <div>
+      <div style="font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;letter-spacing:-0.04em;color:white;font-family:'Bricolage Grotesque'">24/7</div>
+      <div class="label mt-1">Neural Engine Runtime</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     HOW IT WORKS
+═══════════════════════════════════════════ -->
+<section id="how-it-works" class="py-32 px-6 max-w-7xl mx-auto">
+  <div class="text-center mb-20 fade-up">
+    <div class="label label-blue mb-4">The Platform</div>
+    <h2 class="headline text-white">Built like Wall Street.<br><span style="color:var(--muted-light)">Priced for everyone.</span></h2>
+    <p style="margin-top:16px;font-size:18px;color:var(--muted-light);max-width:520px;margin-left:auto;margin-right:auto;line-height:1.7">We took institutional trading systems and made them accessible to any investor, anywhere in the world.</p>
+  </div>
+
+  <!-- Feature grid -->
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 fade-up">
+
+    <div class="card p-8 hover:border-blue-500/20">
+      <div class="feature-icon" style="background:rgba(37,99,235,0.12);border:1px solid rgba(37,99,235,0.2)">
+        <i data-lucide="brain-circuit" class="w-6 h-6" style="color:var(--blue-light)"></i>
+      </div>
+      <h3 style="font-size:18px;font-weight:700;color:white;margin-bottom:8px;font-family:'Bricolage Grotesque'">Neural Engine</h3>
+      <p style="font-size:14px;color:var(--muted-light);line-height:1.7">Processes 140+ global market signals every second. Rebalances automatically, 24 hours a day.</p>
+    </div>
+
+    <div class="card p-8 hover:border-green-500/20">
+      <div class="feature-icon" style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.18)">
+        <i data-lucide="trending-up" class="w-6 h-6" style="color:var(--green-light)"></i>
+      </div>
+      <h3 style="font-size:18px;font-weight:700;color:white;margin-bottom:8px;font-family:'Bricolage Grotesque'">Compounding Daily</h3>
+      <p style="font-size:14px;color:var(--muted-light);line-height:1.7">Profits reinvest automatically. Every dollar earned immediately starts working harder for you.</p>
+    </div>
+
+    <div class="card p-8 hover:border-purple-500/20">
+      <div class="feature-icon" style="background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.18)">
+        <i data-lucide="shield-check" class="w-6 h-6" style="color:#A78BFA"></i>
+      </div>
+      <h3 style="font-size:18px;font-weight:700;color:white;margin-bottom:8px;font-family:'Bricolage Grotesque'">Non-Custodial</h3>
+      <p style="font-size:14px;color:var(--muted-light);line-height:1.7">Your keys. Your assets. We never hold your crypto — you always stay in control.</p>
+    </div>
+
+    <div class="card p-8 hover:border-amber-500/20">
+      <div class="feature-icon" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.18)">
+        <i data-lucide="zap" class="w-6 h-6" style="color:#FCD34D"></i>
+      </div>
+      <h3 style="font-size:18px;font-weight:700;color:white;margin-bottom:8px;font-family:'Bricolage Grotesque'">Instant Withdrawals</h3>
+      <p style="font-size:14px;color:var(--muted-light);line-height:1.7">Request a withdrawal anytime. Funds hit your wallet in under 5 minutes, no questions asked.</p>
+    </div>
+
+    <div class="card p-8 hover:border-cyan-500/20">
+      <div class="feature-icon" style="background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.18)">
+        <i data-lucide="bar-chart-3" class="w-6 h-6" style="color:#67E8F9"></i>
+      </div>
+      <h3 style="font-size:18px;font-weight:700;color:white;margin-bottom:8px;font-family:'Bricolage Grotesque'">Full Transparency</h3>
+      <p style="font-size:14px;color:var(--muted-light);line-height:1.7">On-chain audit trails. Every trade, every rebalance — all verifiable on Etherscan in real time.</p>
+    </div>
+
+    <div class="card p-8 hover:border-rose-500/20">
+      <div class="feature-icon" style="background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.18)">
+        <i data-lucide="infinity" class="w-6 h-6" style="color:#FDA4AF"></i>
+      </div>
+      <h3 style="font-size:18px;font-weight:700;color:white;margin-bottom:8px;font-family:'Bricolage Grotesque'">Emotion-Free</h3>
+      <p style="font-size:14px;color:var(--muted-light);line-height:1.7">No panic selling. No FOMO buying. Pure mathematical precision executing your strategy 24/7.</p>
+    </div>
+
+  </div>
+
+  <!-- Steps -->
+  <div class="mt-24 fade-up">
+    <div class="text-center mb-16">
+      <div class="label label-blue mb-4">Getting Started</div>
+      <h2 class="headline text-white">Three steps to<br><span style="color:var(--muted-light)">passive income.</span></h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8 relative">
+      <!-- Connecting line (desktop) -->
+      <div class="hidden md:block absolute top-10 left-1/3 right-1/3 h-px" style="background:linear-gradient(to right,transparent,rgba(37,99,235,0.4),transparent);z-index:0"></div>
+
+      <div class="text-center space-y-4 relative z-10">
+        <div class="w-20 h-20 rounded-[24px] mx-auto flex items-center justify-center" style="background:linear-gradient(135deg,rgba(37,99,235,0.2),rgba(37,99,235,0.05));border:1px solid rgba(37,99,235,0.3)">
+          <span style="font-size:28px;font-weight:900;color:var(--blue-light);font-family:'Bricolage Grotesque'">1</span>
+        </div>
+        <h3 style="font-size:18px;font-weight:700;color:white;font-family:'Bricolage Grotesque'">Join the Waitlist</h3>
+        <p style="font-size:14px;color:var(--muted-light);line-height:1.7">Secure your spot. Early access members get priority onboarding and locked-in tier pricing.</p>
+      </div>
+
+      <div class="text-center space-y-4 relative z-10">
+        <div class="w-20 h-20 rounded-[24px] mx-auto flex items-center justify-center" style="background:linear-gradient(135deg,rgba(37,99,235,0.3),rgba(37,99,235,0.08));border:1px solid rgba(37,99,235,0.4)">
+          <span style="font-size:28px;font-weight:900;color:var(--blue-light);font-family:'Bricolage Grotesque'">2</span>
+        </div>
+        <h3 style="font-size:18px;font-weight:700;color:white;font-family:'Bricolage Grotesque'">Choose Your Tier</h3>
+        <p style="font-size:14px;color:var(--muted-light);line-height:1.7">Pick a portfolio tier from $5K to $50K. Connect your wallet. The AI starts optimising immediately.</p>
+      </div>
+
+      <div class="text-center space-y-4 relative z-10">
+        <div class="w-20 h-20 rounded-[24px] mx-auto flex items-center justify-center" style="background:linear-gradient(135deg,rgba(34,197,94,0.2),rgba(34,197,94,0.05));border:1px solid rgba(34,197,94,0.3)">
+          <span style="font-size:28px;font-weight:900;color:var(--green-light);font-family:'Bricolage Grotesque'">3</span>
+        </div>
+        <h3 style="font-size:18px;font-weight:700;color:white;font-family:'Bricolage Grotesque'">Watch It Grow</h3>
+        <p style="font-size:14px;color:var(--muted-light);line-height:1.7">Track gains in real time. Withdraw anytime. Compound to accelerate returns.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     GROWTH CALCULATOR
+═══════════════════════════════════════════ -->
+<section class="py-32 px-6 border-t border-white/[0.06]" style="background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(37,99,235,0.07) 0%,transparent 70%)">
+  <div class="max-w-5xl mx-auto fade-up">
+    <div class="text-center mb-16">
+      <div class="label label-blue mb-4">Projection Tool</div>
+      <h2 class="headline text-white">Explore what's<br><span style="color:var(--muted-light)">possible with AI.</span></h2>
+    </div>
+
+    <div class="glass rounded-[32px] p-10 border-white/[0.08]" style="box-shadow:0 40px 80px rgba(0,0,0,0.4)">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-8">
+          <div class="flex justify-between items-end">
+            <div>
+              <div class="label mb-2">Investment Amount</div>
+              <div style="font-size:3rem;font-weight:900;letter-spacing:-0.04em;color:var(--blue-light);font-family:'Bricolage Grotesque'" id="calc-val-display">$5,000</div>
+            </div>
+            <div class="text-right">
+              <div class="label mb-2">Daily Profit</div>
+              <div style="font-size:1.25rem;font-weight:700;color:var(--green-light)" id="daily-profit-display">$285.00</div>
+            </div>
+          </div>
+
+          <div>
+            <input type="range" id="roi-slider-input" min="0" max="3" step="1" value="0" class="w-full cursor-pointer">
+            <div id="slider-labels" class="flex justify-between mt-4" style="font-size:11px;font-weight:600;color:var(--muted)"></div>
+          </div>
+
+          <div class="p-6 rounded-2xl" style="background:rgba(34,197,94,0.07);border:1px solid rgba(34,197,94,0.15)">
+            <div class="label mb-2">Illustrative 30-Day Projection</div>
+            <div style="font-size:2.5rem;font-weight:900;letter-spacing:-0.04em;color:white;font-family:'Bricolage Grotesque'" id="projected-monthly-display">$26,380</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:6px">Based on current AI performance data · Results vary</div>
+          </div>
+
+          <button onclick="openWaitlist()" class="btn-primary w-full justify-center" style="font-size:16px;padding:16px">
+            Start Growing <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <div>
+          <div class="label mb-4">30-Day Growth Projection</div>
+          <div id="roi-chart-container" class="h-56 flex items-end gap-1.5 w-full overflow-hidden rounded-2xl" style="background:rgba(255,255,255,0.02);padding:16px;border:1px solid rgba(255,255,255,0.05)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     AI SECTION — VISUAL EXPLAINER
+═══════════════════════════════════════════ -->
+<section class="py-32 px-6 border-t border-white/[0.06]">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid lg:grid-cols-2 gap-20 items-center fade-up">
+
+      <!-- Left: copy -->
+      <div class="space-y-8">
+        <div class="label label-blue">Powered by AI</div>
+        <h2 class="headline text-white">Not a trading bot.<br><span style="color:var(--muted-light)">A financial brain.</span></h2>
+        <p style="font-size:17px;color:var(--muted-light);line-height:1.8">Equiflow's neural engine was built by Dr. Sarah Vance — seven years of PhD research in non-linear predictive modeling, now running for you around the clock.</p>
+
+        <div class="space-y-4">
+          <div class="flex items-start gap-4 p-5 card rounded-[18px] hover:border-blue-500/20">
+            <div class="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 mt-0.5" style="background:rgba(37,99,235,0.15)">
+              <i data-lucide="cpu" class="w-4 h-4" style="color:var(--blue-light)"></i>
+            </div>
+            <div>
+              <div style="font-weight:600;color:white;margin-bottom:4px">140+ Market Signals</div>
+              <div style="font-size:13px;color:var(--muted-light)">Cross-asset correlation, sentiment analysis, on-chain metrics, and macro indicators — all processed simultaneously.</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 p-5 card rounded-[18px] hover:border-green-500/20">
+            <div class="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 mt-0.5" style="background:rgba(34,197,94,0.12)">
+              <i data-lucide="refresh-cw" class="w-4 h-4" style="color:var(--green-light)"></i>
+            </div>
+            <div>
+              <div style="font-weight:600;color:white;margin-bottom:4px">Auto-Rebalances Every 4 Hours</div>
+              <div style="font-size:13px;color:var(--muted-light)">Portfolio weights are continuously optimized to maximize returns while managing downside exposure.</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 p-5 card rounded-[18px] hover:border-amber-500/20">
+            <div class="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 mt-0.5" style="background:rgba(245,158,11,0.12)">
+              <i data-lucide="graduation-cap" class="w-4 h-4" style="color:#FCD34D"></i>
+            </div>
+            <div>
+              <div style="font-weight:600;color:white;margin-bottom:4px">Research-Driven AI Architecture</div>
+              <div style="font-size:13px;color:var(--muted-light)">Built on a decade of AI research and neural network design — rigorous, tested, and transparent. Institutional-grade intelligence now available to everyone.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: AI diagram -->
+      <div class="relative glass rounded-[40px] p-12 border-white/[0.08] overflow-hidden min-h-[420px] flex items-center justify-center">
+        <div class="absolute inset-0 opacity-[0.05]" style="background-image:radial-gradient(circle at 2px 2px,rgba(255,255,255,0.8) 1px,transparent 0);background-size:24px 24px"></div>
+        <div class="orb w-64 h-64 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="background:rgba(37,99,235,0.1);filter:blur(60px)"></div>
+
+        <div class="relative z-10 w-full max-w-xs space-y-6">
+          <!-- Input signals -->
+          <div class="grid grid-cols-3 gap-2">
+            <div class="p-3 glass rounded-xl text-center border-white/[0.06]">
+              <i data-lucide="line-chart" class="w-4 h-4 mx-auto mb-1" style="color:var(--blue-light)"></i>
+              <div style="font-size:9px;font-weight:600;color:var(--muted-light)">Markets</div>
+            </div>
+            <div class="p-3 glass rounded-xl text-center border-white/[0.06]">
+              <i data-lucide="activity" class="w-4 h-4 mx-auto mb-1" style="color:var(--green-light)"></i>
+              <div style="font-size:9px;font-weight:600;color:var(--muted-light)">On-Chain</div>
+            </div>
+            <div class="p-3 glass rounded-xl text-center border-white/[0.06]">
+              <i data-lucide="globe" class="w-4 h-4 mx-auto mb-1" style="color:#A78BFA"></i>
+              <div style="font-size:9px;font-weight:600;color:var(--muted-light)">Macro</div>
+            </div>
+          </div>
+
+          <!-- Arrow down -->
+          <div class="flex justify-center">
+            <i data-lucide="chevrons-down" class="w-5 h-5 animate-bounce" style="color:var(--blue-light)"></i>
+          </div>
+
+          <!-- AI Engine center -->
+          <div class="mx-auto w-28 h-28 rounded-3xl flex items-center justify-center relative" style="background:linear-gradient(135deg,#2563EB,#1d4ed8);box-shadow:0 0 60px rgba(37,99,235,0.4)">
+            <i data-lucide="zap" class="w-10 h-10 text-white"></i>
+            <div class="absolute -inset-3 rounded-[36px] border border-blue-500/20 animate-[spin_8s_linear_infinite]"></div>
+          </div>
+
+          <!-- Arrow down -->
+          <div class="flex justify-center">
+            <i data-lucide="chevrons-down" class="w-5 h-5 animate-bounce" style="color:var(--green-light);animation-delay:0.2s"></i>
+          </div>
+
+          <!-- Outputs -->
+          <div class="grid grid-cols-2 gap-2">
+            <div class="p-3 glass rounded-xl border-white/[0.06]">
+              <div style="font-size:9px;font-weight:600;color:var(--muted-light);margin-bottom:3px">Rebalanced</div>
+              <div style="font-size:12px;font-weight:700;color:white">Every 4 hrs</div>
+            </div>
+            <div class="p-3 glass rounded-xl border-white/[0.06]">
+              <div style="font-size:9px;font-weight:600;color:var(--muted-light);margin-bottom:3px">AI Signals</div>
+              <div style="font-size:12px;font-weight:700;color:var(--green-light)">140+ Live</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     FOUNDER SECTION
+══════════════════════════════════ -->
+<section class="py-32 px-6 border-t border-white/[0.06]">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid lg:grid-cols-2 gap-20 items-center fade-up">
+      <div class="relative group">
+        <div class="absolute -inset-4 rounded-[2.5rem] blur-3xl opacity-15" style="background:linear-gradient(135deg,var(--blue),var(--green))"></div>
+        <div class="relative glass rounded-[2.5rem] overflow-hidden border-white/[0.07]" style="aspect-ratio:4/5">
+          <img src="/images/founder.png" alt="Founder" style="width:100%;height:100%;object-fit:cover;object-position:center top;"> 
+          <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,rgba(37,99,235,.06),rgba(34,197,94,.04))">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            <p style="color:rgba(255,255,255,.25);font-size:13px;font-weight:600;text-align:center;padding:0 20px">Founder Photo<br><span style="font-size:11px;font-weight:400">Recommended: 600×750px portrait</span></p>
+          </div>
+          <div class="absolute bottom-7 left-7 right-7 glass p-5 rounded-[18px] border-white/[0.08]">
+            <h4 class="text-base font-bold text-white mb-0.5 tracking-tight" style="font-family:'Bricolage Grotesque'">Christian Szegedy</h4>
+            <p class="label label-blue" style="font-size:10px">Founder · xAI Researcher · Quant</p>
+          </div>
+        </div>
+      </div>
+      <div class="space-y-8">
+        <div class="label label-blue mb-2">The Architect</div>
+        <h2 class="headline text-white">The mind behind<br><span style="color:var(--muted-light)">the machine.</span></h2>
+        <p style="font-size:17px;font-style:italic;color:var(--muted-light);line-height:1.8">"I’ve spent my career exploring AI—from building deep learning architectures at Google Brain to co-founding xAI, studying the limits of neural networks, and running quantitative strategies for institutional desks. Equiflow embodies the system I’ve always wanted the same intelligence and rigor that the largest firms rely on, now accessible to everyone."</p>
+        <p style="font-size:15px;color:var(--muted-light);line-height:1.8">Christian brings deep expertise from xAI's research division and years running live quantitative strategies across crypto and equities. He built Equiflow's neural engine from scratch — processing 140+ live market signals with sub-second rebalancing precision that was previously only available to institutional desks.</p>
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div class="flex items-center gap-3 p-4 card rounded-[14px] border-white/[0.07]">
+            <i data-lucide="building-2" class="w-4 h-4 shrink-0" style="color:var(--blue-light)"></i>
+            <span style="font-size:12px;font-weight:600;color:white">xAI Researcher</span>
+          </div>
+          <div class="flex items-center gap-3 p-4 card rounded-[14px] border-white/[0.07]">
+            <i data-lucide="line-chart" class="w-4 h-4 shrink-0" style="color:var(--green-light)"></i>
+            <span style="font-size:12px;font-weight:600;color:white">Quant Trading · 10+ Years</span>
+          </div>
+          <div class="flex items-center gap-3 p-4 card rounded-[14px] border-white/[0.07]">
+            <i data-lucide="graduation-cap" class="w-4 h-4 shrink-0" style="color:#A78BFA"></i>
+            <span style="font-size:12px;font-weight:600;color:white">PhD Computational Finance</span>
+          </div>
+          <div class="flex items-center gap-3 p-4 card rounded-[14px] border-white/[0.07]">
+            <i data-lucide="brain" class="w-4 h-4 shrink-0" style="color:#FCD34D"></i>
+            <span style="font-size:12px;font-weight:600;color:white">Neural Market Modeling</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     TESLA GIVEAWAY — ORIGINAL, UNTOUCHED
+═══════════════════════════════════════════ -->
+<section id="giveaway" class="py-20 px-4 md:px-6 max-w-7xl mx-auto fade-up">
+    <div class="relative rounded-[32px] md:rounded-[48px] overflow-hidden"
+         style="background:linear-gradient(135deg,#0e0608,#180a0a,#0a0a14);
+                border:1px solid rgba(239,68,68,.2)">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-56 rounded-full pointer-events-none" style="background:rgba(239,68,68,.07);filter:blur(80px)"></div>
+        <div class="absolute bottom-0 right-0 w-72 h-60 rounded-full pointer-events-none" style="background:rgba(99,102,241,.06);filter:blur(80px)"></div>
+        <div class="relative z-10 p-6 md:p-10 lg:p-16">
+            <div class="flex justify-center mb-8 md:mb-10">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-black tracking-[0.2em] uppercase" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#f87171">
+                    <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style="background:#f87171"></span><span class="relative inline-flex rounded-full h-2 w-2" style="background:#ef4444"></span></span>
+                    Monthly Giveaway — Active Investors Only
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+                <div class="space-y-6">
+                    <div>
+                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.05] mb-4">Win a <span class="text-red-400">Tesla</span><br>Model.</h2>
+                        <p class="text-gray-400 text-base md:text-lg leading-relaxed">Every active investor with a confirmed deposit is <strong class="text-white">automatically entered</strong> every month. No tickets, no extra steps — just invest and you're in.</p>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-4 p-4 glass rounded-2xl" style="border-color:rgba(255,255,255,.06)">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-black shrink-0" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#f87171">1</div>
+                            <div><p class="text-white font-bold text-sm">Deposit &amp; Activate</p><p class="text-gray-500 text-xs mt-0.5">Any tier qualifies — $5,000 to $50,000</p></div>
+                            <i data-lucide="wallet" class="text-red-400 w-5 h-5 ml-auto shrink-0"></i>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 glass rounded-2xl" style="border-color:rgba(255,255,255,.06)">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-black shrink-0" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#f87171">2</div>
+                            <div><p class="text-white font-bold text-sm">You're Entered Automatically</p><p class="text-gray-500 text-xs mt-0.5">Every active investor is entered each month — no extra steps</p></div>
+                            <i data-lucide="check-circle" class="text-emerald-400 w-5 h-5 ml-auto shrink-0"></i>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 glass rounded-2xl" style="border-color:rgba(255,255,255,.06)">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-black shrink-0" style="background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);color:#34d399">3</div>
+                            <div><p class="text-white font-bold text-sm">Monthly Live Draw</p><p class="text-gray-500 text-xs mt-0.5">Winners will be notified privately via Telegram.</p></div>
+                            <i data-lucide="trophy" class="text-emerald-400 w-5 h-5 ml-auto shrink-0"></i>
+                        </div>
+                    </div>
+                    <button onclick="openWaitlist()" class="tesla-pulse w-full sm:w-auto flex items-center justify-center gap-3 text-white font-bold px-8 py-4 rounded-xl text-base transition-all" style="background:#dc2626;box-shadow:0 8px 24px rgba(220,38,38,.35)">
+                        <i data-lucide="ticket" class="w-5 h-5"></i> Join Waitlist to Enter
+                    </button>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <div class="relative rounded-2xl overflow-hidden" style="border:1px solid rgba(239,68,68,.15);background:#0e0608">
+                       <img src="/images/Teslav.png" alt="Tesla" class="w-full object-cover" style="height:200px;mix-blend-mode:luminosity;opacity:0.9" loading="lazy"> 
+                        <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(14,6,8,.9) 0%,transparent 55%)"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <p class="text-2xl font-black text-white tracking-tight leading-none">Tesla Models</p>
+                            <p class="text-gray-400 text-xs mt-1">Est. value <span class="text-green-400 font-bold">$40,000 - $114,000</span> · 2025 Edition</p>
+                        </div>
+                        <div class="absolute top-3 right-3 text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-widest" style="background:rgba(239,68,68,.2);color:#fca5a5;border:1px solid rgba(239,68,68,.3)">Grand Prize</div>
+                    </div>
+                    <div class="glass p-5 rounded-2xl space-y-4" style="border-color:rgba(239,68,68,.15)">
+                        <div class="flex items-start gap-3 p-3 rounded-xl" style="background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.15)">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-green-400 shrink-0 mt-0.5"></i>
+                            <p class="text-xs text-green-300 leading-relaxed"><strong>Open to all active investors.</strong> Any confirmed deposit — Tier 1 through Tier 4 — automatically enters you in every monthly draw.</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-3">Monthly Draw</p>
+                            <div class="flex items-center gap-3 p-3 rounded-xl" style="background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.15)">
+                              <span class="relative flex h-2 w-2 shrink-0">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style="background:#f87171"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2" style="background:#ef4444"></span>
+                              </span>
+                              <p class="text-xs text-white font-semibold">Draw held at the end of every month</p>
+                            </div>
+                            <p class="text-[10px] text-gray-500 mt-2 leading-relaxed">Winners notified privately. Stay active and refer friends for extra entries.</p>
+                        </div>
+                        <div class="flex items-center gap-3 pt-1">
+                            <div class="w-9 h-9 rounded-full flex items-center justify-center shrink-0 text-white font-bold text-xs"
+                                 style="background:linear-gradient(135deg,#16a34a,#15803d);border:2px solid rgba(52,211,153,.35)">JM</div>
+                            <div class="flex-1 min-w-0"><p class="text-white text-xs font-bold truncate">🏆 Previous Winner: <span class="text-emerald-400">Jordan M.</span></p><p class="text-gray-500 text-[10px] mt-0.5">Received Tesla Model S · Jan 2026</p></div>
+                            <i data-lucide="check-circle" class="text-emerald-400 w-4 h-4 shrink-0"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     REVIEWS
+═══════════════════════════════════════════ -->
+<section id="reviews" class="py-32 px-6 max-w-7xl mx-auto border-t border-white/[0.06]">
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 fade-up">
+    <div class="space-y-3">
+      <div class="flex items-center gap-2">
+        <i data-lucide="star" class="tp-star w-7 h-7"></i>
+        <span style="font-size:22px;font-weight:700;font-family:'Bricolage Grotesque'">Investor Reviews</span>
+      </div>
+      <h2 class="headline text-white">Rated Excellent <span style="color:var(--blue-light)">4.5/5</span></h2>
+      <p style="color:var(--muted-light)">Over 400+ independent investor reviews verified globally.</p>
+    </div>
+    <div class="flex items-center gap-1">
+      <div class="tp-bg p-1 rounded-sm"><i data-lucide="star" class="w-4 h-4 text-white fill-white"></i></div>
+      <div class="tp-bg p-1 rounded-sm"><i data-lucide="star" class="w-4 h-4 text-white fill-white"></i></div>
+      <div class="tp-bg p-1 rounded-sm"><i data-lucide="star" class="w-4 h-4 text-white fill-white"></i></div>
+      <div class="tp-bg p-1 rounded-sm"><i data-lucide="star" class="w-4 h-4 text-white fill-white"></i></div>
+      <div class="bg-gray-700 p-1 rounded-sm"><i data-lucide="star" class="w-4 h-4 text-white fill-white"></i></div>
+      <span class="text-white font-semibold text-sm ml-2">4.5</span>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 fade-up">
+    <div class="card p-6 space-y-4 hover:border-green-500/15"><div class="flex justify-between"><div class="flex gap-0.5"><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i></div><span class="label" style="font-size:9px">Today</span></div><h5 style="font-weight:700;color:white">The AI actually works.</h5><p style="font-size:13px;color:var(--muted-light);line-height:1.6">Started with $5,000 tier. The compounding rebalancing is visible in the dashboard daily. Incredible.</p><div class="pt-4 border-t border-white/[0.06] flex items-center gap-3"><div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style="background:rgba(37,99,235,0.15);color:var(--blue-light)">MG</div><div><p style="font-size:12px;font-weight:600;color:white">Marcus G.</p><p style="font-size:10px;color:var(--green-light);display:flex;align-items:center;gap:4px;margin-top:2px"><i data-lucide="check-circle" class="w-3 h-3"></i> Verified</p></div></div></div>
+    <div class="card p-6 space-y-4 hover:border-green-500/15"><div class="flex justify-between"><div class="flex gap-0.5"><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 text-gray-700 fill-gray-700"></i></div><span class="label" style="font-size:9px">Yesterday</span></div><h5 style="font-weight:700;color:white">Institutional Math.</h5><p style="font-size:13px;color:var(--muted-light);line-height:1.6">Christian Szegedy background gave me confidence to move to the $25k tier. Performance is steady.</p><div class="pt-4 border-t border-white/[0.06] flex items-center gap-3"><div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style="background:rgba(139,92,246,0.15);color:#A78BFA">EF</div><div><p style="font-size:12px;font-weight:600;color:white">Dr. Elias F.</p><p style="font-size:10px;color:var(--green-light);display:flex;align-items:center;gap:4px;margin-top:2px"><i data-lucide="check-circle" class="w-3 h-3"></i> Verified</p></div></div></div>
+    <div class="card p-6 space-y-4 hover:border-green-500/15"><div class="flex justify-between"><div class="flex gap-0.5"><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i></div><span class="label" style="font-size:9px">2 days ago</span></div><h5 style="font-weight:700;color:white">Excellent long term.</h5><p style="font-size:13px;color:var(--muted-light);line-height:1.6">Started with the $10K tier. Already seeing the power of compounding logic after 1 month.</p><div class="pt-4 border-t border-white/[0.06] flex items-center gap-3"><div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style="background:rgba(6,182,212,0.15);color:#67E8F9">SW</div><div><p style="font-size:12px;font-weight:600;color:white">Sophie W.</p><p style="font-size:10px;color:var(--green-light);display:flex;align-items:center;gap:4px;margin-top:2px"><i data-lucide="check-circle" class="w-3 h-3"></i> Verified</p></div></div></div>
+    <div class="card p-6 space-y-4"><div class="flex gap-0.5 mb-1"><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i></div><h5 style="font-size:14px;font-weight:700;color:white">Institutional level tools.</h5><p style="font-size:13px;color:var(--muted-light)">The neural flow diagram helped me understand the logic. Refreshing to see AI that manages risk properly.</p><p style="font-size:11px;color:white;font-weight:600;margin-top:8px">— James W.</p></div>
+    <div class="card p-6 space-y-4"><div class="flex gap-0.5 mb-1"><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 text-gray-700 fill-gray-700"></i></div><h5 style="font-size:14px;font-weight:700;color:white">Solid in bear market.</h5><p style="font-size:13px;color:var(--muted-light)">Was worried about the recent crash, but the AI moved a portion of my portfolio to stablecoins automatically.</p><p style="font-size:11px;color:white;font-weight:600;margin-top:8px">— Elena R.</p></div>
+    <div class="card p-6 space-y-4"><div class="flex gap-0.5 mb-1"><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i></div><h5 style="font-size:14px;font-weight:700;color:white">Great passive income.</h5><p style="font-size:13px;color:var(--muted-light)">I use the $25k strategy for long-term savings. The compounding effect is actually visible in the dashboard.</p><p style="font-size:11px;color:white;font-weight:600;margin-top:8px">— Arvinder S.</p></div>
+  </div>
+
+  <div id="extra-reviews" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+    <div class="card p-6"><p style="font-size:13px;color:var(--muted-light)">"The $50k tier support is institutional grade. 10/10."</p><p style="font-size:11px;color:white;font-weight:600;margin-top:8px">— James R.</p></div>
+    <div class="card p-6"><p style="font-size:13px;color:var(--muted-light)">"Transparent rebalancing logs on-chain. Finally a project with integrity."</p><p style="font-size:11px;color:white;font-weight:600;margin-top:8px">— Chloe M.</p></div>
+    <div class="card p-6"><p style="font-size:13px;color:var(--muted-light)">"Compounding logic works perfectly. My $10k grew to $24k fast."</p><p style="font-size:11px;color:white;font-weight:600;margin-top:8px">— Liam N.</p></div>
+    <div class="card p-6"><p style="font-size:13px;color:var(--muted-light)">"Best risk management during recent BTC volatility."</p><p style="font-size:11px;color:white;font-weight:600;margin-top:8px">— Elias F.</p></div>
+    <div class="card p-6"><p style="font-size:13px;color:var(--muted-light)">"Mind-blowing rebalancing speed. Caught the ETH bounce perfectly."</p><p style="font-size:11px;color:white;font-weight:600;margin-top:8px">— Yuki T.</p></div>
+    <div class="card p-6"><p style="font-size:13px;color:var(--muted-light)">"Best user interface in crypto finance right now."</p><p style="font-size:11px;color:white;font-weight:600;margin-top:8px">— Ethan F.</p></div>
+  </div>
+  <div class="text-center">
+    <button id="toggle-reviews-btn" class="btn-ghost">
+      <span>View All Reviews</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-300"></i>
+    </button>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     VIDEO TESTIMONIALS
+═══════════════════════════════════════════ -->
+<style>
+.vid-card .play-overlay { transition: opacity 0.25s ease; }
+.vid-card video::-webkit-media-controls { display: none !important; }
+.vid-card video { display: block; }
+</style>
+
+<section class="py-24 border-t border-white/[0.06] overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 mb-12">
+    <div class="label label-blue mb-3">Testimonials</div>
+    <h2 style="font-size:clamp(1.8rem,3vw,2.5rem);font-weight:800;color:white;letter-spacing:-0.03em;font-family:'Bricolage Grotesque'">Trusted by hundreds of investors</h2>
+  </div>
+  <div class="relative flex overflow-x-hidden">
+    <div class="vid-inner" id="vid-track">
+
+      <!-- Card 1: Alex -->
+      <div class="card vid-card rounded-[22px] overflow-hidden flex flex-col shrink-0 mr-5" style="width:300px">
+        <div class="relative cursor-pointer" style="height:340px;background:#0a0a10;" onclick="toggleVid(this)">
+          <video class="w-full h-full object-cover" src="../videos/compressed-alexvid.mp4" preload="metadata" playsinline></video>
+          <div class="play-overlay absolute inset-0 flex items-center justify-center" style="background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.1) 100%)">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);backdrop-filter:blur(8px)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="p-5">
+          <h4 style="font-weight:700;color:white">Alex Rivera Ar</h4>
+          <p style="font-size:14px;font-weight:600;color:var(--green-light);margin-top:6px">Beta Investor</p>
+          <p class="label mt-3">Tier 2 Investor</p>
+        </div>
+      </div>
+
+      <!-- Card 2: Matt -->
+      <div class="card vid-card rounded-[22px] overflow-hidden flex flex-col shrink-0 mr-5" style="width:300px">
+        <div class="relative cursor-pointer" style="height:340px;background:#0a0a10;" onclick="toggleVid(this)">
+          <video class="w-full h-full object-cover" src="../videos/compressed-mattvid.mp4" preload="metadata" playsinline></video>
+          <div class="play-overlay absolute inset-0 flex items-center justify-center" style="background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.1) 100%)">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);backdrop-filter:blur(8px)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="p-5">
+          <h4 style="font-weight:700;color:white">Matt Johnson Us</h4>
+          <p style="font-size:14px;font-weight:600;color:var(--green-light);margin-top:6px">Beta Investor</p>
+          <p class="label mt-3">Tier 2 Investor</p>
+        </div>
+      </div>
+
+      <!-- Card 3: Mike -->
+      <div class="card vid-card rounded-[22px] overflow-hidden flex flex-col shrink-0 mr-5" style="width:300px">
+        <div class="relative cursor-pointer" style="height:340px;background:#0a0a10;" onclick="toggleVid(this)">
+          <video class="w-full h-full object-cover" src="../videos/compressed-mikevid.mp4" preload="metadata" playsinline></video>
+          <div class="play-overlay absolute inset-0 flex items-center justify-center" style="background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.1) 100%)">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);backdrop-filter:blur(8px)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="p-5">
+          <h4 style="font-weight:700;color:white">Mike Torres Us</h4>
+          <p style="font-size:14px;font-weight:600;color:var(--green-light);margin-top:6px">Beta Investor</p>
+          <p class="label mt-3">Tier 2 Investor</p>
+        </div>
+      </div>
+
+      <!-- Card 4: Carlos -->
+      <div class="card vid-card rounded-[22px] overflow-hidden flex flex-col shrink-0 mr-5" style="width:300px">
+        <div class="relative cursor-pointer" style="height:340px;background:#0a0a10;" onclick="toggleVid(this)">
+          <video class="w-full h-full object-cover" src="../videos/compressed-carlosvid.mp4" preload="metadata" playsinline></video>
+          <div class="play-overlay absolute inset-0 flex items-center justify-center" style="background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.1) 100%)">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);backdrop-filter:blur(8px)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="p-5">
+          <h4 style="font-weight:700;color:white">Carlos Silva 🇧🇷</h4>
+          <p style="font-size:14px;font-weight:600;color:var(--green-light);margin-top:6px">Beta Investor</p>
+          <p class="label mt-3">Tier 1 Investor</p>
+        </div>
+      </div>
+
+      <!-- Card 5: Emma -->
+      <div class="card vid-card rounded-[22px] overflow-hidden flex flex-col shrink-0 mr-5" style="width:300px">
+        <div class="relative cursor-pointer" style="height:340px;background:#0a0a10;" onclick="toggleVid(this)">
+          <video class="w-full h-full object-cover" src="../videos/compressed-emmavid.mp4" preload="metadata" playsinline></video>
+          <div class="play-overlay absolute inset-0 flex items-center justify-center" style="background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.1) 100%)">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);backdrop-filter:blur(8px)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="p-5">
+          <h4 style="font-weight:700;color:white">Emma Williams Rm</h4>
+          <p style="font-size:14px;font-weight:600;color:var(--green-light);margin-top:6px">Beta Investor</p>
+          <p class="label mt-3">Tier 3 Investor</p>
+        </div>
+      </div>
+
+      <!-- Clones for seamless loop -->
+      <div class="card vid-card rounded-[22px] overflow-hidden flex flex-col shrink-0 mr-5" style="width:300px">
+        <div class="relative cursor-pointer" style="height:340px;background:#0a0a10;" onclick="toggleVid(this)">
+          <video class="w-full h-full object-cover" src="../videos/compressed-alexvid.mp4" preload="metadata" playsinline></video>
+          <div class="play-overlay absolute inset-0 flex items-center justify-center" style="background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.1) 100%)">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);backdrop-filter:blur(8px)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="p-5"><h4 style="font-weight:700;color:white">Alex Rivera Ag</h4><p style="font-size:14px;font-weight:600;color:var(--green-light);margin-top:6px">Beta Investor</p><p class="label mt-3">Tier 2 Investor</p></div>
+      </div>
+      <div class="card vid-card rounded-[22px] overflow-hidden flex flex-col shrink-0 mr-5" style="width:300px">
+        <div class="relative cursor-pointer" style="height:340px;background:#0a0a10;" onclick="toggleVid(this)">
+          <video class="w-full h-full object-cover" src="../videos/compressed-mattvid.mp4" preload="metadata" playsinline></video>
+          <div class="play-overlay absolute inset-0 flex items-center justify-center" style="background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.1) 100%)">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);backdrop-filter:blur(8px)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="p-5"><h4 style="font-weight:700;color:white">Matt Johnson 🇺🇸</h4><p style="font-size:14px;font-weight:600;color:var(--green-light);margin-top:6px">Beta Investor</p><p class="label mt-3">Tier 2 Investor</p></div>
+      </div>
+      <div class="card vid-card rounded-[22px] overflow-hidden flex flex-col shrink-0 mr-5" style="width:300px">
+        <div class="relative cursor-pointer" style="height:340px;background:#0a0a10;" onclick="toggleVid(this)">
+          <video class="w-full h-full object-cover" src="../videos/compressed-mikevid.mp4" preload="metadata" playsinline></video>
+          <div class="play-overlay absolute inset-0 flex items-center justify-center" style="background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.1) 100%)">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);backdrop-filter:blur(8px)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="p-5"><h4 style="font-weight:700;color:white">Mike Torres Us</h4><p style="font-size:14px;font-weight:600;color:var(--green-light);margin-top:6px">Beta Investor</p><p class="label mt-3">Tier 2 Investor</p></div>
+      </div>
+      <div class="card vid-card rounded-[22px] overflow-hidden flex flex-col shrink-0 mr-5" style="width:300px">
+        <div class="relative cursor-pointer" style="height:340px;background:#0a0a10;" onclick="toggleVid(this)">
+          <video class="w-full h-full object-cover" src="../videos/compressed-carlosvid.mp4" preload="metadata" playsinline></video>
+          <div class="play-overlay absolute inset-0 flex items-center justify-center" style="background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.1) 100%)">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);backdrop-filter:blur(8px)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="p-5"><h4 style="font-weight:700;color:white">Carlos Silva 🇧🇷</h4><p style="font-size:14px;font-weight:600;color:var(--green-light);margin-top:6px">Beta Investor</p><p class="label mt-3">Tier 1 Investor</p></div>
+      </div>
+      <div class="card vid-card rounded-[22px] overflow-hidden flex flex-col shrink-0 mr-5" style="width:300px">
+        <div class="relative cursor-pointer" style="height:340px;background:#0a0a10;" onclick="toggleVid(this)">
+          <video class="w-full h-full object-cover" src="../videos/compressed-emmavid.mp4" preload="metadata" playsinline></video>
+          <div class="play-overlay absolute inset-0 flex items-center justify-center" style="background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.1) 100%)">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);backdrop-filter:blur(8px)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="p-5"><h4 style="font-weight:700;color:white">Emma Williams Rm</h4><p style="font-size:14px;font-weight:600;color:var(--green-light);margin-top:6px">Beta Investor</p><p class="label mt-3">Tier 3 Investor</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO LIGHTBOX MODAL -->
+<div id="vid-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.92);align-items:center;justify-content:center;padding:20px;" onclick="closeVidModal(event)">
+  <div style="position:relative;width:100%;max-width:480px;border-radius:20px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,0.8);">
+    <video id="vid-modal-player" style="width:100%;display:block;max-height:85vh;background:#000;" controls playsinline></video>
+    <button onclick="closeVidModal(null)" style="position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.2);color:white;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;">✕</button>
+  </div>
+</div>
+
+<script>
+function toggleVid(wrapper) {
+  const video = wrapper.querySelector('video');
+  const modal = document.getElementById('vid-modal');
+  const modalPlayer = document.getElementById('vid-modal-player');
+  const track = document.getElementById('vid-track');
+
+  // Pause all card videos
+  document.querySelectorAll('.vid-card video').forEach(v => v.pause());
+
+  // Set modal video source and play
+  modalPlayer.src = video.src;
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  if (track) track.style.animationPlayState = 'paused';
+  modalPlayer.play();
+}
+
+function closeVidModal(e) {
+  if (e && e.target !== document.getElementById('vid-modal')) return;
+  const modal = document.getElementById('vid-modal');
+  const modalPlayer = document.getElementById('vid-modal-player');
+  const track = document.getElementById('vid-track');
+  modalPlayer.pause();
+  modalPlayer.src = '';
+  modal.style.display = 'none';
+  document.body.style.overflow = '';
+  if (track) track.style.animationPlayState = 'running';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVidModal(null); });
+</script>
+
+
+<!-- ═══════════════════════════════════════════
+     SUPPORT / FAQ
+═══════════════════════════════════════════ -->
+<section id="support" class="py-32 px-6 max-w-7xl mx-auto border-t border-white/[0.06]">
+  <div class="grid lg:grid-cols-2 gap-20">
+    <div class="space-y-8 fade-up">
+      <div>
+        <div class="label label-blue mb-4">FAQ</div>
+        <h2 class="headline text-white">Got questions?<br><span style="color:var(--muted-light)">We've got answers.</span></h2>
+      </div>
+      <div class="space-y-2">
+        <div class="faq-item card rounded-[18px] overflow-hidden cursor-pointer active" onclick="toggleFAQ(this)" style="border-radius:18px">
+          <div class="p-5 flex justify-between items-center"><h4 style="font-weight:600;color:white;font-size:15px">Is my capital locked?</h4><i data-lucide="chevron-down" class="faq-icon w-4 h-4" style="color:var(--blue-light)"></i></div>
+          <div class="faq-content px-5 text-sm leading-relaxed" style="color:var(--muted-light)" onclick="event.stopPropagation()">No. Equiflow is a non-custodial protocol. You maintain ownership and can withdraw at any time based on tier liquidity limits.</div>
+        </div>
+        <div class="faq-item card rounded-[18px] overflow-hidden cursor-pointer" onclick="toggleFAQ(this)">
+          <div class="p-5 flex justify-between items-center"><h4 style="font-weight:600;color:white;font-size:15px">How do I withdraw my profits?</h4><i data-lucide="chevron-down" class="faq-icon w-4 h-4" style="color:var(--blue-light)"></i></div>
+          <div class="faq-content px-5 text-sm leading-relaxed" style="color:var(--muted-light)" onclick="event.stopPropagation()">Withdraw directly to your connected Web3 wallet anytime. Processing takes under 5 minutes.</div>
+        </div>
+        <div class="faq-item card rounded-[18px] overflow-hidden cursor-pointer" onclick="toggleFAQ(this)">
+          <div class="p-5 flex justify-between items-center"><h4 style="font-weight:600;color:white;font-size:15px">What are the platform fees?</h4><i data-lucide="chevron-down" class="faq-icon w-4 h-4" style="color:var(--blue-light)"></i></div>
+          <div class="faq-content px-5 text-sm leading-relaxed" style="color:var(--muted-light)" onclick="event.stopPropagation()">Flat 1% annual management fee + 5% performance fee on profits only. If you don't earn, we don't earn.</div>
+        </div>
+        <div class="faq-item card rounded-[18px] overflow-hidden cursor-pointer" onclick="toggleFAQ(this)">
+          <div class="p-5 flex justify-between items-center"><h4 style="font-weight:600;color:white;font-size:15px">Is my personal data safe?</h4><i data-lucide="chevron-down" class="faq-icon w-4 h-4" style="color:var(--blue-light)"></i></div>
+          <div class="faq-content px-5 text-sm leading-relaxed" style="color:var(--muted-light)" onclick="event.stopPropagation()">Bank-grade encryption and decentralized architecture. We never access your private keys.</div>
+        </div>
+        <div class="faq-item card rounded-[18px] overflow-hidden cursor-pointer" onclick="toggleFAQ(this)">
+          <div class="p-5 flex justify-between items-center"><h4 style="font-weight:600;color:white;font-size:15px">Are returns guaranteed?</h4><i data-lucide="chevron-down" class="faq-icon w-4 h-4" style="color:var(--blue-light)"></i></div>
+          <div class="faq-content px-5 text-sm leading-relaxed" style="color:var(--muted-light)" onclick="event.stopPropagation()">No. All investing involves risk and past performance does not guarantee future results. Equiflow's AI is designed to optimise for growth while managing risk — but markets are unpredictable. Never invest more than you can afford to lose.</div>
+        </div>
+        <div class="faq-item card rounded-[18px] overflow-hidden cursor-pointer" onclick="toggleFAQ(this)">
+          <div class="p-5 flex justify-between items-center"><h4 style="font-weight:600;color:white;font-size:15px">How does the Tesla giveaway work?</h4><i data-lucide="chevron-down" class="faq-icon w-4 h-4" style="color:var(--blue-light)"></i></div>
+          <div class="faq-content px-5 text-sm leading-relaxed" style="color:var(--muted-light)" onclick="event.stopPropagation()">Every active investor with a confirmed deposit is automatically entered each month. No extra steps needed. Winner is selected randomly and announced live on our Telegram channel.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-10 fade-up" style="animation-delay:0.1s">
+      <div>
+        <div class="inline-flex px-3 py-1.5 rounded-full text-xs font-semibold mb-4" style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);color:var(--green-light)">24/7 Support</div>
+        <h3 style="font-size:clamp(1.5rem,2.5vw,2rem);font-weight:800;color:white;letter-spacing:-0.03em;font-family:'Bricolage Grotesque'">We've got your back.<br>Anytime. Anywhere.</h3>
+        <p style="margin-top:12px;color:var(--muted-light);line-height:1.7">Human support in 20+ languages. No bots. No waiting. Real answers from real people who understand investing.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <a href="https://t.me/equiflowai" target="_blank" class="card p-7 rounded-[20px] space-y-4 hover:border-blue-500/25 block transition-all">
+          <div class="w-10 h-10 rounded-2xl flex items-center justify-center" style="background:rgba(37,99,235,0.12)">
+            <i data-lucide="send" class="w-4 h-4" style="color:var(--blue-light)"></i>
+          </div>
+          <h4 style="font-weight:700;color:white">Telegram Support</h4>
+          <p style="font-size:13px;color:var(--muted-light)">Official 24/7 community help channel.</p>
+        </a>
+        <a href="#" class="card p-7 rounded-[20px] space-y-4 hover:border-green-500/25 block transition-all">
+          <div class="w-10 h-10 rounded-2xl flex items-center justify-center" style="background:rgba(34,197,94,0.1)">
+            <i data-lucide="mail" class="w-4 h-4" style="color:var(--green-light)"></i>
+          </div>
+          <h4 style="font-weight:700;color:white">Direct Email</h4>
+          <p style="font-size:13px;color:var(--muted-light)">High-priority VIP inquiries.</p>
+        </a>
+      </div>
+
+      <!-- Security badges -->
+      <div class="card p-6 rounded-[20px]">
+        <div class="label mb-4">Security &amp; Compliance</div>
+        <div class="space-y-3">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-xl flex items-center justify-center shrink-0" style="background:rgba(34,197,94,0.1)"><i data-lucide="shield-check" class="w-4 h-4" style="color:var(--green-light)"></i></div>
+            <span style="font-size:13px;font-weight:600;color:white">256-bit AES Encryption</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-xl flex items-center justify-center shrink-0" style="background:rgba(34,197,94,0.1)"><i data-lucide="check-circle-2" class="w-4 h-4" style="color:var(--green-light)"></i></div>
+            <span style="font-size:13px;font-weight:600;color:white">Fully Audited Smart Contract</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-xl flex items-center justify-center shrink-0" style="background:rgba(34,197,94,0.1)"><i data-lucide="search" class="w-4 h-4" style="color:var(--green-light)"></i></div>
+            <span style="font-size:13px;font-weight:600;color:white">On-Chain Transparent Audit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     MEDIA LOGOS
+═══════════════════════════════════════════ -->
+<section class="py-16 border-t border-white/[0.06] overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 mb-8 text-center">
+    <div class="label" style="font-size:10px;letter-spacing:0.12em">Industry Coverage &amp; Media Presence</div>
+  </div>
+  <div class="relative flex overflow-x-hidden">
+    <div class="logos-inner" style="padding:0 20px">
+      <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3;transition:opacity 0.2s" onmouseenter="this.style.opacity=0.8" onmouseleave="this.style.opacity=0.3"><span style="font-size:14px;font-weight:800;color:white;font-family:'Bricolage Grotesque'">COIN<span style="color:#f97316">TELEGRAPH</span></span></div>
+      <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3;transition:opacity 0.2s" onmouseenter="this.style.opacity=0.8" onmouseleave="this.style.opacity=0.3"><span style="font-size:14px;font-weight:700;color:white">Bitcoin.com</span></div>
+      <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3;transition:opacity 0.2s" onmouseenter="this.style.opacity=0.8" onmouseleave="this.style.opacity=0.3"><span style="font-size:14px;font-weight:800;color:white;letter-spacing:0.08em">DECRYPT</span></div>
+      <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3;transition:opacity 0.2s" onmouseenter="this.style.opacity=0.8" onmouseleave="this.style.opacity=0.3"><span style="font-size:14px;font-weight:700;color:white;letter-spacing:0.1em">THE BLOCK</span></div>
+      <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3;transition:opacity 0.2s" onmouseenter="this.style.opacity=0.8" onmouseleave="this.style.opacity=0.3"><span style="font-size:14px;font-weight:700;color:white">MESSARI</span></div>
+      <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3;transition:opacity 0.2s" onmouseenter="this.style.opacity=0.8" onmouseleave="this.style.opacity=0.3"><span style="font-size:14px;font-weight:800;color:black;background:#eab308;padding:2px 8px;border-radius:4px">CoinDesk</span></div>
+      <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3;transition:opacity 0.2s" onmouseenter="this.style.opacity=0.8" onmouseleave="this.style.opacity=0.3"><span style="font-size:14px;font-weight:300;color:white;letter-spacing:0.15em;text-transform:uppercase">Bankless</span></div>
+      <!-- clones -->
+      <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3" ><span style="font-size:14px;font-weight:800;color:white;font-family:'Bricolage Grotesque'">COIN<span style="color:#f97316">TELEGRAPH</span></span></div>
+      <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3"><span style="font-size:14px;font-weight:700;color:white">Bitcoin.com</span></div>
+      <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3"><span style="font-size:14px;font-weight:800;color:white;letter-spacing:0.08em">DECRYPT</span></div>
+      <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3"><span style="font-size:14px;font-weight:700;color:white;letter-spacing:0.1em">THE BLOCK</span></div>
+      <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3"><span style="font-size:14px;font-weight:700;color:white">MESSARI</span></div>
+      <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3"><span style="font-size:14px;font-weight:800;color:black;background:#eab308;padding:2px 8px;border-radius:4px">CoinDesk</span></div>
+      <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3"><span style="font-size:14px;font-weight:300;color:white;letter-spacing:0.15em;text-transform:uppercase">Bankless</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     CTA BANNER
+═══════════════════════════════════════════ -->
+<section class="py-24 px-6 max-w-7xl mx-auto fade-up">
+  <div class="relative rounded-[40px] overflow-hidden p-14 text-center" style="background:linear-gradient(135deg,#0f172a 0%,#0c1a3a 50%,#071330 100%);border:1px solid rgba(37,99,235,0.25)">
+    <div class="orb w-96 h-96 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="background:rgba(37,99,235,0.15)"></div>
+    <div class="relative z-10 space-y-6 max-w-2xl mx-auto">
+      <div class="label label-blue">Limited Early Access</div>
+      <h2 class="headline text-white">Ready to put your<br>money to work?</h2>
+      <p style="font-size:18px;color:var(--muted-light);line-height:1.7">Join 12,400+ investors already on the Equiflow waitlist. Early access spots are limited — secure yours now.</p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+        <button onclick="openWaitlist()" class="btn-primary" style="font-size:17px;padding:16px 36px">
+          Get Early Access <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+        <a href="#how-it-works" class="btn-ghost" style="font-size:17px;padding:16px 28px">Learn More</a>
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin-top:12px">Non-custodial · Withdraw anytime · No lock-in</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer class="py-20 px-6 border-t border-white/[0.06]" style="background:#030305">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-14" style="color:var(--muted-light);font-size:14px">
+    <div class="space-y-5">
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 rounded-[9px] flex items-center justify-center" style="background:var(--blue)"><i data-lucide="activity" class="text-white w-3.5 h-3.5"></i></div>
+        <span style="color:white;font-weight:700;font-family:'Bricolage Grotesque'">EQUIFLOW AI</span>
+      </div>
+      <p class="leading-relaxed">Democratizing institutional-grade AI investment strategies for global capital builders.</p>
+      <div class="flex gap-3">
+        <a href="#" class="w-9 h-9 glass rounded-xl flex items-center justify-center hover:text-white transition-colors border-white/[0.07]"><i data-lucide="twitter" class="w-3.5 h-3.5"></i></a>
+        <a href="#" class="w-9 h-9 glass rounded-xl flex items-center justify-center hover:text-white transition-colors border-white/[0.07]"><i data-lucide="github" class="w-3.5 h-3.5"></i></a>
+        <a href="#" class="w-9 h-9 glass rounded-xl flex items-center justify-center hover:text-white transition-colors border-white/[0.07]"><i data-lucide="linkedin" class="w-3.5 h-3.5"></i></a>
+      </div>
+    </div>
+    <div class="space-y-4"><h5 style="color:white;font-weight:600;font-size:12px;letter-spacing:0.08em;text-transform:uppercase">Platform</h5><ul class="space-y-3"><li><a href="#how-it-works" class="hover:text-white transition-colors">How it Works</a></li><li><a href="#features" class="hover:text-white transition-colors">Strategies</a></li><li><a href="#giveaway" class="hover:text-white transition-colors">Giveaway</a></li><li><a href="#calculator" class="hover:text-white transition-colors">Fee Structure</a></li></ul></div>
+    <div class="space-y-4"><h5 style="color:white;font-weight:600;font-size:12px;letter-spacing:0.08em;text-transform:uppercase">Resources</h5><ul class="space-y-3"><li><a href="#" onclick="openWaitlist();return false;" class="hover:text-white transition-colors">Early Access</a></li><li><a href="#reviews" class="hover:text-white transition-colors">Investor Reviews</a></li><li><a href="#faq" class="hover:text-white transition-colors">FAQ</a></li><li><a href="#giveaway" class="hover:text-white transition-colors">Risk Disclosure</a></li></ul></div>
+    <div class="space-y-4"><h5 style="color:white;font-weight:600;font-size:12px;letter-spacing:0.08em;text-transform:uppercase">Legal</h5><ul class="space-y-3"><li><a href="#" onclick="alert('Privacy Policy coming soon.');return false;" class="hover:text-white transition-colors">Privacy Policy</a></li><li><a href="#" onclick="alert('Terms of Service coming soon.');return false;" class="hover:text-white transition-colors">Terms of Service</a></li><li><a href="#faq" class="hover:text-white transition-colors">Cookie Policy</a></li></ul></div>
+  </div>
+  
+  <div class="max-w-7xl mx-auto mt-8 pt-8 border-t border-white/[0.05] flex flex-col gap-3" style="color:var(--muted);font-size:12px">
+    <p style="line-height:1.7"><strong style="color:rgba(255,255,255,.4)">Risk Disclaimer:</strong> All investment activity involves substantial risk of loss. Past performance is not indicative of future results. The returns referenced on this platform represent historical performance data and are not guaranteed. You should never invest more than you can afford to lose.</p>
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+      <p>© 2026 Equiflow AI. All rights reserved.</p>
+      <p>Capital at risk · Not financial advice · Past performance ≠ future results</p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════
+     WAITLIST MODAL
+═══════════════════════════════════════════ -->
+<div id="waitlist-modal" class="fixed inset-0 z-[100] items-center justify-center p-6" style="background:rgba(0,0,0,0.88)" role="dialog" aria-modal="true">
+  <div class="glass max-w-md w-full rounded-[28px] overflow-hidden border-white/[0.1]" style="box-shadow:0 40px 80px rgba(0,0,0,0.8)">
+    <div class="p-7 flex justify-between items-center border-b border-white/[0.07]">
+      <div class="flex items-center gap-3">
+        <i data-lucide="bell" style="color:var(--blue-light)" class="w-4 h-4"></i>
+        <h3 style="font-size:16px;font-weight:700;color:white;font-family:'Bricolage Grotesque'">Join the Waitlist</h3>
+      </div>
+      <button onclick="closeWaitlist()" style="color:rgba(255,255,255,0.4)" class="hover:text-white transition-colors"><i data-lucide="x" class="w-4 h-4"></i></button>
+    </div>
+    <div class="p-7 space-y-5">
+      <p style="font-size:14px;color:var(--muted-light);line-height:1.7">Secure early access. Every active investor is <span style="color:#fca5a5;font-weight:600">automatically entered</span> in the monthly Tesla Cybertruck draw 🚗</p>
+      <div id="waitlist-form" class="space-y-4">
+        <div>
+          <label class="label block mb-2">Email Address</label>
+          <input id="wl-email" type="email" placeholder="you@example.com" class="w-full rounded-[12px] px-4 py-3 text-white placeholder-gray-600 focus:outline-none text-sm transition-colors" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09)" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='rgba(255,255,255,0.09)'">
+        </div>
+        <button onclick="submitWaitlist()" class="btn-primary w-full justify-center">
+          <i data-lucide="bell" class="w-4 h-4"></i> Join Waitlist
+        </button>
+      </div>
+      <div id="waitlist-success" class="hidden text-center space-y-4 py-4">
+        <div class="w-14 h-14 rounded-full flex items-center justify-center mx-auto" style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25)">
+          <i data-lucide="check" style="color:var(--green-light)" class="w-6 h-6"></i>
+        </div>
+        <h4 style="font-size:18px;font-weight:700;color:white;font-family:'Bricolage Grotesque'">You're on the list! 🎉</h4>
+        <p style="font-size:14px;color:var(--muted-light)">We'll send you a personal invite when your spot is ready.</p>
+        <div class="rounded-xl px-4 py-3 text-xs font-medium" style="background:rgba(37,99,235,0.08);color:var(--blue-light);border:1px solid rgba(37,99,235,0.15)">Keep an eye on your inbox — invites are sent personally.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+/* ══ Supabase init ══ */
+const SUPABASE_URL = 'https://gffqtqvdljtuttkrrzcb.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdmZnF0cXZkbGp0dXR0a3JyemNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3MjM3MTcsImV4cCI6MjA4OTI5OTcxN30.joYEFbdtDvjSXMFedzd7y3EnICI3cAKo5Sm1ANmXcDw';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const TIERS = [
+  { value:5000, label:'$5K' },
+  { value:10000, label:'$10K' },
+  { value:25000, label:'$25K' },
+  { value:50000, label:'$50K' },
+];
+const DAILY_RATE = 0.057;
+const $ = id => document.getElementById(id);
+
+// Waitlist
+let _refCode = null; // referral code from URL ?ref=
+
+function openWaitlist() { $('waitlist-modal')?.classList.add('active'); }
+function closeWaitlist() {
+  $('waitlist-modal')?.classList.remove('active');
+  $('waitlist-form')?.classList.remove('hidden');
+  const s = $('waitlist-success'); if(s) s.classList.add('hidden');
+}
+$('waitlist-modal')?.addEventListener('click', e => { if(e.target === $('waitlist-modal')) closeWaitlist(); });
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeWaitlist(); });
+
+async function submitWaitlist() {
+  const email = $('wl-email')?.value.trim();
+  // Proper email validation — not just includes('@')
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email || '');
+  if(!email || !emailOk) { alert('Please enter a valid email address.'); return; }
+
+  const btn = document.querySelector('#waitlist-form .btn-primary');
+  if (btn) { btn.disabled = true; btn.innerHTML = '<span style="animation:spin .75s linear infinite;display:inline-block">⟳</span>&nbsp;Joining…'; }
+
+  const insertData = { email, status: 'WAITLIST' };
+  if (_refCode) insertData.referred_by = _refCode;
+
+  const { error } = await sb.from('waitlist').insert(insertData);
+
+  if (btn) { btn.disabled = false; btn.innerHTML = '<i data-lucide="bell" class="w-4 h-4"></i> Join Waitlist'; if(typeof lucide!=='undefined') lucide.createIcons(); }
+
+  if (error) {
+    if (error.code === '23505') { alert('You\'re already on the list!'); return; }
+    alert('Something went wrong. Please try again.');
+    return;
+  }
+  $('waitlist-form')?.classList.add('hidden');
+  $('waitlist-success')?.classList.remove('hidden');
+}
+
+// ROI Calculator
+function renderChart(principal) {
+  const container = $('roi-chart-container');
+  if(!container) return;
+  container.innerHTML = '';
+  const steps = 16;
+  const values = Array.from({length:steps}, (_,i) => principal * Math.pow(1+DAILY_RATE,(i+1)*2));
+  const max = Math.max(...values);
+  values.forEach((v,i) => {
+    const bar = document.createElement('div');
+    const h = Math.max(4, Math.round((v/max)*100));
+    const op = 0.2 + (i/steps)*0.8;
+    bar.className = 'flex-1 rounded-t-sm chart-bar';
+    bar.style.cssText = `height:${h}%;background:rgba(34,197,94,${op});transition:height 0.5s ease ${i*30}ms`;
+    container.appendChild(bar);
+  });
+}
+
+function updateROI() {
+  const slider = $('roi-slider-input');
+  if(!slider) return;
+  const principal = TIERS[parseInt(slider.value,10)].value;
+  const dailyProfit = principal * DAILY_RATE;
+  const monthly = principal * Math.pow(1+DAILY_RATE,30);
+  const fmt = n => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n);
+  const valEl = $('calc-val-display');
+  const dEl   = $('daily-profit-display');
+  const mEl   = $('projected-monthly-display');
+  if(valEl) valEl.textContent = `$${principal.toLocaleString()}`;
+  if(dEl)   dEl.textContent   = `$${dailyProfit.toFixed(2)}`;
+  if(mEl)   mEl.textContent   = fmt(monthly);
+  renderChart(principal);
+}
+
+// Reviews toggle
+$('toggle-reviews-btn')?.addEventListener('click', function() {
+  const extra = $('extra-reviews');
+  if(!extra) return;
+  const showing = extra.classList.toggle('show');
+  const span = this.querySelector('span');
+  const icon = this.querySelector('[data-lucide],svg');
+  if(span) span.textContent = showing ? 'Show Less' : 'View All Reviews';
+  if(icon) icon.style.transform = showing ? 'rotate(180deg)' : '';
+});
+
+// FAQ
+function toggleFAQ(el) {
+  document.querySelectorAll('.faq-item').forEach(i => { if(i!==el) i.classList.remove('active'); });
+  el.classList.toggle('active');
+}
+
+// Mobile menu
+const mBtn = $('mobile-menu-btn');
+const mMenu = $('mobile-menu');
+mBtn?.addEventListener('click', () => { mMenu.classList.toggle('hidden'); mMenu.classList.toggle('flex'); });
+document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => { mMenu?.classList.add('hidden'); mMenu?.classList.remove('flex'); }));
+
+// Intersection Observer for fade-up
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Live crypto ticker — CoinGecko free API (no key needed)
+async function fetchIndexTicker() {
+  const track = $('index-ticker-inner');
+  if (!track) return;
+  try {
+    const res = await fetch(
+      'https://api.coingecko.com/api/v3/simple/price' +
+      '?ids=bitcoin,ethereum,solana,binancecoin,avalanche-2,polkadot,cardano,matic-network' +
+      '&vs_currencies=usd&include_24hr_change=true',
+      { cache: 'no-store' }
+    );
+    if (!res.ok) throw new Error('CoinGecko ' + res.status);
+    const data = await res.json();
+
+    const coins = [
+      { sym:'BTC',   id:'bitcoin'       },
+      { sym:'ETH',   id:'ethereum'      },
+      { sym:'SOL',   id:'solana'        },
+      { sym:'BNB',   id:'binancecoin'   },
+      { sym:'AVAX',  id:'avalanche-2'   },
+      { sym:'DOT',   id:'polkadot'      },
+      { sym:'ADA',   id:'cardano'       },
+      { sym:'MATIC', id:'matic-network' },
+    ];
+
+    const items = coins.map(c => {
+      const coin  = data[c.id] || {};
+      const price = parseFloat(coin.usd || 0);
+      const chg   = parseFloat(coin.usd_24h_change || 0);
+      const up    = chg >= 0;
+      const pStr  = price >= 1000
+        ? price.toLocaleString('en-US', {maximumFractionDigits:0})
+        : price >= 1
+          ? price.toFixed(2)
+          : price.toFixed(3);
+      const col   = up ? 'var(--green)' : 'var(--red)';
+      const arrow = up ? '▲' : '▼';
+      return `<span style="color:var(--muted-light);font-size:13px;white-space:nowrap">
+        ${c.sym} <span class="text-white font-semibold">$${pStr}</span>
+        <span style="color:${col}">${arrow} ${Math.abs(chg).toFixed(1)}%</span>
+      </span>`;
+    });
+
+    // Update hero ticker bar
+    track.innerHTML = [...items, ...items].join('');
+
+    // Also update the phone mockup mini-ticker with live prices
+    const priceFmt = (p) => '$' + (p >= 1000
+      ? p.toLocaleString('en-US', {maximumFractionDigits:0})
+      : p >= 1 ? p.toFixed(2) : p.toFixed(3));
+    const phoneMap = [
+      ['pt-btc', 'bitcoin'],
+      ['pt-eth', 'ethereum'],
+      ['pt-sol', 'solana'],
+      ['pt-bnb', 'binancecoin'],
+    ];
+    phoneMap.forEach(([id, coinId]) => {
+      const el = $(id);
+      if (el && data[coinId]) {
+        const chg = parseFloat(data[coinId].usd_24h_change || 0);
+        el.textContent = priceFmt(parseFloat(data[coinId].usd || 0));
+        el.style.color  = chg >= 0 ? '#4ADE80' : '#F87171';
+      }
+    });
+
+  } catch(e) {
+    // Fallback — keep "Loading…" hidden, show static placeholder
+    track.innerHTML = '<span style="color:var(--muted-light);font-size:13px">Live prices unavailable</span>';
+  }
+}
+
+// Init
+function init() {
+  // Capture referral code from URL — e.g. index.html?ref=ABC12345
+  const _urlParams = new URLSearchParams(window.location.search);
+  _refCode = _urlParams.get('ref') || null;
+  // If someone arrived via a referral link, pre-open the waitlist modal
+  if (_refCode) {
+    setTimeout(() => openWaitlist(), 600);
+  }
+
+  const labelsEl = $('slider-labels');
+  if(labelsEl) labelsEl.innerHTML = TIERS.map(t=>`<span>${t.label}</span>`).join('');
+  $('roi-slider-input')?.addEventListener('input', updateROI);
+  updateROI();
+  fetchIndexTicker(); // load live crypto prices into hero ticker
+  if(typeof lucide !== 'undefined') lucide.createIcons();
+}
+document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', init) : init();
+</script>
+</body>

@@ -1,0 +1,30 @@
+EQUIFLOW AI — OG PREVIEW IMAGE INSTRUCTIONS
+============================================
+
+File needed: og-preview.jpg
+Upload to: /images/og-preview.jpg on your server
+
+This image appears when someone shares your link on:
+- WhatsApp
+- Telegram  
+- Twitter/X
+- Facebook
+- LinkedIn
+- Discord
+
+SPECIFICATIONS:
+- Size: 1200 x 630 pixels (required)
+- Format: JPG or PNG
+- Max file size: 1MB (under 300KB is ideal for speed)
+
+WHAT TO PUT IN IT:
+- Your logo / wordmark (EQUIFLOW AI)
+- A short tagline ("AI-Powered Investment Platform")
+- Dark background matching your site (#04050a or similar)
+- Optional: a subtle gradient or chart visual
+
+QUICK FREE TOOL TO CREATE IT:
+Go to canva.com → create custom size 1200x630 → dark background → add your logo and tagline → export as JPG
+
+Once uploaded, the meta tags in index.html will automatically
+use it for all social media link previews.
