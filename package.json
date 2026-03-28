@@ -4,8 +4,8 @@
   "description": "This is a static website project containing multiple HTML pages, images, and videos. It is deployed on Netlify and managed through GitHub.",
   "main": "index.js",
   "scripts": {
-    "dev": "tailwindcss -i ./style.css -o ./output.css --watch",
-    "build": "tailwindcss -i ./style.css -o ./output.css",
+    "dev": "npx tailwindcss -i ./style.css -o ./output.css --watch",
+    "build": "npx tailwindcss -i ./style.css -o ./output.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,6 +26,6 @@
     "tailwindcss": "^3.4.19"
   },
   "engines": {
-    "node": "18.x"
+    "node": "22.x"
   }
 }
