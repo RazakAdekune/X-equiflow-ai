@@ -1,0 +1,28 @@
+{
+  "name": "finalultimate",
+  "version": "1.0.0",
+  "description": "This is a static website project containing multiple HTML pages, images, and videos. It is deployed on Netlify and managed through GitHub.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tailwindcss -i ./style.css -o ./output.css --watch",
+    "build": "tailwindcss -i ./style.css -o ./output.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RazakAdekune/finalultimate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/RazakAdekune/finalultimate/issues"
+  },
+  "homepage": "https://github.com/RazakAdekune/finalultimate#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "postcss": "^8.4.0",
+    "autoprefixer": "^10.4.0"
+  }
+}

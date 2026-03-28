@@ -1,40 +1,42 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Equiflow AI — AI-Powered Investment Platform</title>
-<meta name="description" content="Equiflow AI uses institutional-grade artificial intelligence to manage and grow your portfolio. Invite-only access. Capital at risk — not financial advice.">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://equiflow.io/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equiflow AI — AI-Powered Investment Platform</title>
+  <meta name="description" content="Equiflow AI uses institutional-grade artificial intelligence to manage and grow your portfolio. Invite-only access. Capital at risk — not financial advice.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://equiflow.io/">
 
-<!-- Open Graph — controls how links look on WhatsApp, Telegram, Facebook, LinkedIn -->
-<meta property="og:type"        content="website">
-<meta property="og:url"         content="https://equiflow.io/">
-<meta property="og:title"       content="Equiflow AI — AI-Powered Investment Platform">
-<meta property="og:description" content="Institutional-grade AI investment. Invite-only. Capital at risk — not financial advice.">
-<meta property="og:image"       content="https://equiflow.io/images/og-preview.jpg">
-<meta property="og:site_name"   content="Equiflow AI">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://equiflow.io/">
+  <meta property="og:title" content="Equiflow AI — AI-Powered Investment Platform">
+  <meta property="og:description" content="Institutional-grade AI investment. Invite-only. Capital at risk — not financial advice.">
+  <meta property="og:image" content="https://equiflow.io/images/og-preview.jpg">
+  <meta property="og:site_name" content="Equiflow AI">
 
-<!-- Twitter / X card -->
-<meta name="twitter:card"        content="summary_large_image">
-<meta name="twitter:title"       content="Equiflow AI — AI-Powered Investment Platform">
-<meta name="twitter:description" content="Institutional-grade AI investment. Invite-only. Capital at risk.">
-<meta name="twitter:image"       content="https://equiflow.io/images/og-preview.jpg">
+  <!-- Twitter / X card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Equiflow AI — AI-Powered Investment Platform">
+  <meta name="twitter:description" content="Institutional-grade AI investment. Invite-only. Capital at risk.">
+  <meta name="twitter:image" content="https://equiflow.io/images/og-preview.jpg">
 
-<!-- Favicon -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%236366f1'/><polyline points='6,22 12,14 18,18 26,8' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%236366f1'/><polyline points='6,22 12,14 18,18 26,8' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>">
 
-<!-- Performance: preconnect to external origins used on this page -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdn.tailwindcss.com">
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
-<link rel="preconnect" href="https://api.coingecko.com">
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://unpkg.com/lucide@0.383.0/dist/umd/lucide.min.js" defer crossorigin="anonymous"></script>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+  <!-- Performance: preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://api.coingecko.com">
+
+  <!-- Local Tailwind build -->
+  <link href="output.css" rel="stylesheet">
+
+  <!-- Other scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://unpkg.com/lucide@0.383.0/dist/umd/lucide.min.js" defer crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+</head>
 
 <style>
 :root {
