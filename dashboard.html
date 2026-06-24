@@ -7,7 +7,7 @@
   <meta name="robots" content="noindex, nofollow">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%236366f1'/><polyline points='6,22 12,14 18,18 26,8' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231D9BF0'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='20' font-weight='bold' fill='white'>&#x1D54F;</text></svg>">
 
   <!-- Performance preconnects -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
@@ -28,13 +28,13 @@
 <style>
   *,*::before,*::after { box-sizing:border-box; scrollbar-width:none }
   *::-webkit-scrollbar  { display:none }
-  body { background:#04050a; color:#e2e4ed; font-family:'Inter',system-ui,sans-serif; min-height:100vh }
+  body { background:#060608; color:#e2e4ed; font-family:'Inter',system-ui,sans-serif; min-height:100vh }
 
   /* subtle scanline */
   body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:9999;
     background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.007) 2px,rgba(255,255,255,.007) 4px) }
 
-  .card      { background:#0c0e18; border:1px solid rgba(255,255,255,.07); border-radius:18px }
+  .card      { background:#0A0A0A; border:1px solid rgba(255,255,255,.07); border-radius:18px }
   .card-inner{ background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:12px }
 
   /* pills */
@@ -42,7 +42,7 @@
                  font-size:10px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; white-space:nowrap }
   .pill-green  { background:rgba(34,197,94,.1);  color:#22c55e; border:1px solid rgba(34,197,94,.2)  }
   .pill-amber  { background:rgba(245,158,11,.1); color:#f59e0b; border:1px solid rgba(245,158,11,.2) }
-  .pill-blue   { background:rgba(99,102,241,.1); color:#818cf8; border:1px solid rgba(99,102,241,.2) }
+  .pill-blue   { background:rgba(29,155,240,.1); color:#1D9BF0; border:1px solid rgba(29,155,240,.2) }
   .pill-red    { background:rgba(239,68,68,.1);  color:#f87171; border:1px solid rgba(239,68,68,.2)  }
   .pill-dot    { width:5px; height:5px; border-radius:50%; background:currentColor;
                  animation:blink 1.6s ease-in-out infinite }
@@ -51,10 +51,10 @@
   .inp { width:100%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09);
          border-radius:11px; padding:10px 14px; color:#e2e4ed; font-family:inherit;
          font-size:13px; outline:none; transition:border-color .15s }
-  .inp:focus   { border-color:#6366f1 }
+  .inp:focus   { border-color:#1D9BF0 }
   .inp::placeholder { color:#4b5563 }
 
-  .btn-pri { background:linear-gradient(135deg,#6366f1,#a855f7); color:#fff; border:none;
+  .btn-pri { background:linear-gradient(135deg,#1D9BF0,#1D9BF0); color:#fff; border:none;
              border-radius:12px; padding:11px 20px; font-family:inherit; font-weight:600;
              font-size:13px; cursor:pointer; transition:opacity .15s;
              display:inline-flex; align-items:center; justify-content:center; gap:8px }
@@ -79,18 +79,18 @@
   .tl-wrap { position:relative; height:7px; background:rgba(255,255,255,.07);
              border-radius:999px; overflow:visible }
   .tl-fill { height:100%; border-radius:999px;
-             background:linear-gradient(90deg,#6366f1,#a855f7); transition:width 1s ease }
+             background:linear-gradient(90deg,#1D9BF0,#1D9BF0); transition:width 1s ease }
   .tl-dot  { position:absolute; top:50%; transform:translateY(-50%);
-             width:13px; height:13px; border-radius:50%; background:#6366f1;
-             border:2px solid #04050a; box-shadow:0 0 8px rgba(99,102,241,.6);
+             width:13px; height:13px; border-radius:50%; background:#1D9BF0;
+             border:2px solid #060608; box-shadow:0 0 8px rgba(29,155,240,.6);
              transition:left 1s ease }
 
   /* chart bars */
-  .cbar { border-radius:3px 3px 0 0; background:rgba(99,102,241,.25); transition:background .15s }
-  .cbar:hover { background:rgba(99,102,241,.55) }
+  .cbar { border-radius:3px 3px 0 0; background:rgba(29,155,240,.25); transition:background .15s }
+  .cbar:hover { background:rgba(29,155,240,.55) }
 
   /* login overlay */
-  #login-screen { position:fixed; inset:0; z-index:500; background:#04050a;
+  #login-screen { position:fixed; inset:0; z-index:500; background:#060608;
                   display:flex; align-items:center; justify-content:center; padding:20px }
   #login-screen.gone { display:none }
 
@@ -100,6 +100,8 @@
                 backdrop-filter:blur(10px); display:none;
                 align-items:center; justify-content:center; padding:16px }
   #wd-overlay.open { display:flex }
+  #ri-overlay { display:none }
+  #ri-overlay.open { display:flex }
 
   /* fomo toast */
   #fomo-wrap { position:fixed; top:66px; right:16px; z-index:300; pointer-events:none }
@@ -173,13 +175,27 @@
   }
 
   /* AI engine pulse */
-  @keyframes eng-ping { 0%{box-shadow:0 0 0 0 rgba(99,102,241,.5)} 70%{box-shadow:0 0 0 8px rgba(99,102,241,0)} 100%{box-shadow:0 0 0 0 rgba(99,102,241,0)} }
+  @keyframes eng-ping { 0%{box-shadow:0 0 0 0 rgba(29,155,240,.5)} 70%{box-shadow:0 0 0 8px rgba(29,155,240,0)} 100%{box-shadow:0 0 0 0 rgba(29,155,240,0)} }
   .eng-ping { animation: eng-ping 2.2s ease-in-out infinite }
 
   /* live dot pulse */
   @keyframes live-ring { 0%{transform:scale(1);opacity:.8} 100%{transform:scale(2.2);opacity:0} }
   .live-ring { position:absolute; inset:0; border-radius:50%; background:currentColor;
                animation: live-ring 1.6s ease-out infinite }
+
+
+  .dash-tab { flex:none; padding:14px 20px; font-size:15px; font-weight:500; color:#71767B; background:transparent; border:none; cursor:pointer; position:relative; transition:color .15s; }
+  .dash-tab::after { content:''; position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:0; height:3px; border-radius:3px 3px 0 0; background:#1D9BF0; transition:width .2s ease; }
+  .dash-tab:hover { color:#E7E9EA; background:rgba(255,255,255,.04); }
+  .dash-tab.active { color:#E7E9EA; font-weight:700; }
+  .dash-tab.active::after { width:56px; }
+  /* all sections visible — tabs scroll to section */
+  .dash-section { display:block; scroll-margin-top:110px; }
+  @keyframes feed-slide-in { from{opacity:0;transform:translateY(-10px) scale(.97)} to{opacity:1;transform:translateY(0) scale(1)} }
+  .feed-item { animation:feed-slide-in .35s cubic-bezier(.22,.68,0,1.2) both; }
+  .feed-item:first-child { border-left:2px solid rgba(29,155,240,.5); padding-left:8px; }
+  .feed-scroll { max-height:300px; overflow-y:auto; scrollbar-width:none; }
+  .feed-scroll::-webkit-scrollbar { display:none; }
 
 </style>
 </head>
@@ -189,8 +205,8 @@
 <!-- ─── MILESTONE TOAST ─── -->
 <div id="milestone-toast">
   <div id="milestone-inner" class="flex items-center gap-3 px-5 py-3 rounded-2xl text-sm font-semibold"
-       style="background:#0c0e18;border:1px solid rgba(99,102,241,.35);
-              box-shadow:0 8px 32px rgba(0,0,0,.7),0 0 24px rgba(99,102,241,.15)">
+       style="background:#0A0A0A;border:1px solid rgba(29,155,240,.35);
+              box-shadow:0 8px 32px rgba(0,0,0,.7),0 0 24px rgba(29,155,240,.15)">
     <span id="milestone-icon" class="text-lg">🎉</span>
     <span id="milestone-msg" class="text-white"></span>
   </div>
@@ -201,7 +217,7 @@
   <div id="fomo-card" class="card flex items-center gap-3 p-3.5 w-64 shadow-2xl"
        style="display:none; border-color:rgba(255,255,255,.1)">
     <div class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
-         style="background:linear-gradient(135deg,#6366f1,#a855f7)">
+         style="background:linear-gradient(135deg,#1D9BF0,#1D9BF0)">
       <i data-lucide="zap" class="w-4 h-4 text-white" style="fill:white"></i>
     </div>
     <div>
@@ -214,8 +230,8 @@
 <!-- ─── REINVEST TIER SELECTION OVERLAY ─── -->
 <div id="ri-overlay" style="position:fixed;inset:0;z-index:410;background:rgba(0,0,0,.85);
      -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
-     display:none;align-items:center;justify-content:center;padding:16px">
-  <div class="card w-full max-w-lg p-6 anim-slideU" style="border-color:rgba(99,102,241,.25)">
+     align-items:center;justify-content:center;padding:16px">
+  <div class="card w-full max-w-lg p-6 anim-slideU" style="border-color:rgba(29,155,240,.25)">
     <div class="flex justify-between items-start mb-2">
       <div>
         <h3 class="text-base font-bold">Choose Your New Tier</h3>
@@ -283,11 +299,12 @@
 </div>
 
 <!-- ─── LOGIN ─── -->
-<div id="login-screen" class="gone">
+<canvas id="star-canvas" style="position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none"></canvas>
+<div id="login-screen" style="background:transparent" class="gone">
   <div class="w-full max-w-sm">
     <div class="text-center mb-6">
       <div class="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-3"
-           style="background:linear-gradient(135deg,#6366f1,#a855f7)">
+           style="background:linear-gradient(135deg,#1D9BF0,#1D9BF0)">
         <i data-lucide="trending-up" class="w-6 h-6 text-white"></i>
       </div>
       <h1 class="text-xl font-bold">Welcome Back</h1>
@@ -320,41 +337,31 @@
 <div id="dash" class="hidden min-h-screen">
 
   <!-- NAV -->
-  <nav class="sticky top-0 z-40 border-b"
-       style="background:rgba(4,5,10,.9);border-color:rgba(255,255,255,.07);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)">
-    <div class="max-w-5xl mx-auto px-5 h-14 flex items-center justify-between">
-      <div class="flex items-center gap-6">
-        <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
-          <div class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-               style="background:linear-gradient(135deg,#6366f1,#a855f7)">
-            <i data-lucide="trending-up" class="w-3.5 h-3.5 text-white"></i>
-          </div>
-          <span class="text-sm font-bold tracking-tight">EQUIFLOW</span>
-        </a>
-        <div class="hidden md:flex gap-5 text-xs font-medium text-gray-500">
-          <span class="text-white">Dashboard</span>
-          <span class="cursor-pointer hover:text-white transition-colors"
-                onclick="el('s-active')?.scrollIntoView({behavior:'smooth'})">Portfolio</span>
-          <span class="cursor-pointer hover:text-white transition-colors" style="color:#818cf8"
-                onclick="document.querySelector('.tesla-btn, #s-active .rounded-2xl')?.scrollIntoView({behavior:'smooth'})">Raffle</span>
+  <nav style="position:sticky;top:0;z-index:50;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);border-bottom:1px solid #2F3336">
+  <div class="max-w-5xl mx-auto px-4 md:px-5">
+    <!-- top row: logo + user -->
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style="background:#1D9BF0">
+          <svg width="14" height="14" viewBox="0 0 1200 1227" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.163 519.284ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.828Z" fill="white"/></svg>
         </div>
+        <span class="font-bold text-sm tracking-tight">X equiflow ai</span>
       </div>
       <div class="flex items-center gap-3">
-        <div id="nav-pill" class="pill pill-amber">
-          <span class="pill-dot"></span><span id="nav-pill-txt">INACTIVE</span>
-        </div>
-        <div id="nav-avatar"
-             class="w-7 h-7 rounded-full border flex items-center justify-center shrink-0 text-white font-bold"
-             style="border-color:#6366f1;background:linear-gradient(135deg,#6366f1,#a855f7);font-size:11px;letter-spacing:0.02em">
-          ?
-        </div>
-        <span id="nav-name" class="text-xs font-medium text-gray-400 hidden sm:block"></span>
-        <button id="logout-btn" class="btn-ghost py-1.5 px-3 text-xs">
-          <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
-        </button>
+        <div id="nav-pill" class="pill pill-green"><span class="pill-dot"></span><span id="nav-pill-txt">LIVE</span></div>
+        <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style="background:#1D9BF0" id="nav-avatar">?</div>
+        <span id="nav-name" class="text-sm font-medium hidden sm:inline text-gray-300"></span>
+        <button id="logout-btn" class="text-xs text-gray-500 hover:text-white transition-colors">Logout</button>
       </div>
     </div>
-  </nav>
+    <!-- tab row -->
+    <div id="dash-tab-row" class="flex border-t" style="border-color:#2F3336">
+      <button class="dash-tab active" data-tab="main" onclick="switchDashTab('main',this)">Dashboard</button>
+      <button class="dash-tab" data-tab="portfolio" onclick="switchDashTab('portfolio',this)">Portfolio</button>
+      <button class="dash-tab" data-tab="raffle" onclick="switchDashTab('raffle',this)">Raffle</button>
+    </div>
+  </div>
+</nav>
 
   <!-- CONTENT AREA — only one section visible at a time -->
   <div class="max-w-5xl mx-auto px-4 md:px-5 py-5 pb-24">
@@ -365,11 +372,11 @@
     <div id="s-deposit" class="hidden space-y-4 anim-fade">
 
       <div class="card p-6 md:p-8"
-           style="border-color:rgba(99,102,241,.2);background:linear-gradient(135deg,#0d0f20,#0a0c18)">
+           style="border-color:rgba(29,155,240,.2);background:linear-gradient(135deg,#0d0f20,#0a0c18)">
 
         <div class="flex items-start gap-4 mb-6">
           <div class="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0"
-               style="background:rgba(99,102,241,.15);border:1px solid rgba(99,102,241,.25)">
+               style="background:rgba(29,155,240,.15);border:1px solid rgba(29,155,240,.25)">
             <i data-lucide="wallet" class="w-6 h-6 text-indigo-400"></i>
           </div>
           <div>
@@ -398,25 +405,25 @@
 
         <!-- steps -->
         <div class="rounded-xl p-4 mb-5 space-y-3"
-             style="background:rgba(0,0,0,.3);border:1px solid rgba(99,102,241,.2)">
+             style="background:rgba(0,0,0,.3);border:1px solid rgba(29,155,240,.2)">
           <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">How to Deposit</p>
           <div class="flex items-start gap-3">
             <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
-                 style="background:rgba(99,102,241,.2);color:#818cf8">1</div>
+                 style="background:rgba(29,155,240,.2);color:#1D9BF0">1</div>
             <p class="text-sm text-gray-300">
               Send exactly <strong id="dep-amount-b" class="text-white"></strong> in Bitcoin to the vault address below.
             </p>
           </div>
           <div class="flex items-start gap-3">
             <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
-                 style="background:rgba(99,102,241,.2);color:#818cf8">2</div>
+                 style="background:rgba(29,155,240,.2);color:#1D9BF0">2</div>
             <p class="text-sm text-gray-300">
               Click <strong class="text-white">"I've Sent the Payment"</strong> — this notifies admin to verify.
             </p>
           </div>
           <div class="flex items-start gap-3">
             <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
-                 style="background:rgba(99,102,241,.2);color:#818cf8">3</div>
+                 style="background:rgba(29,155,240,.2);color:#1D9BF0">3</div>
             <p class="text-sm text-gray-300">
               Once confirmed by admin, your 30-day growth cycle starts automatically.
             </p>
@@ -428,7 +435,7 @@
           <p class="text-xs font-medium text-gray-500 mb-2">BTC Vault Address</p>
           <div id="vault-box" onclick="copyVault()"
                class="rounded-xl p-4 cursor-pointer font-mono text-xs text-indigo-300 break-all transition-all"
-               style="background:rgba(0,0,0,.4);border:1px solid rgba(99,102,241,.2)">
+               style="background:rgba(0,0,0,.4);border:1px solid rgba(29,155,240,.2)">
             <p id="vault-hint" class="text-xs text-gray-600 mb-1.5 font-sans">Click to copy</p>
             <span id="vault-address" class="text-indigo-300">Loading…</span>
           </div>
@@ -447,7 +454,7 @@
         <!-- shown after user clicks -->
         <div id="dep-wait-area" class="hidden text-center py-4">
           <div class="flex items-center justify-center gap-2 mb-2">
-            <span style="font-size:20px;color:#818cf8;animation:spin .75s linear infinite;display:inline-block">⟳</span>
+            <span style="font-size:20px;color:#1D9BF0;animation:spin .75s linear infinite;display:inline-block">⟳</span>
             <span class="text-sm font-semibold text-indigo-300">Awaiting Admin Confirmation</span>
           </div>
           <p class="text-xs text-gray-500">
@@ -464,6 +471,9 @@
          SECTION: ACTIVE
     ════════════════════════════════ -->
     <div id="s-active" class="hidden space-y-4 anim-fade">
+
+  <!-- ══ TAB: DASHBOARD ══ -->
+  <div id="tab-main" class="dash-section space-y-4">
 
       <!-- hero row -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -505,19 +515,19 @@
         <!-- gains card -->
         <div class="rounded-2xl p-5 flex flex-col justify-between"
              style="background:linear-gradient(140deg,#12152a,#0a0c1e);
-                    border:1px solid rgba(99,102,241,.18);
-                    box-shadow:0 0 36px rgba(99,102,241,.1)">
+                    border:1px solid rgba(29,155,240,.18);
+                    box-shadow:0 0 36px rgba(29,155,240,.1)">
           <div class="flex justify-between items-start mb-3">
             <p class="text-sm font-semibold leading-tight">Today's<br>Gains</p>
             <div class="w-8 h-8 rounded-lg flex items-center justify-center"
-                 style="background:rgba(99,102,241,.18)">
-              <i data-lucide="zap" class="w-4 h-4" style="color:#818cf8"></i>
+                 style="background:rgba(29,155,240,.18)">
+              <i data-lucide="zap" class="w-4 h-4" style="color:#1D9BF0"></i>
             </div>
           </div>
           <div>
             <p id="a-gains" class="num text-4xl font-black tracking-tight mb-1">$0.00</p>
             <p class="text-xs font-medium text-indigo-400 flex items-center gap-1.5 mb-4">
-              <span style="width:6px;height:6px;border-radius:50%;background:#6366f1;display:inline-block;animation:blink 1.6s ease-in-out infinite"></span>
+              <span style="width:6px;height:6px;border-radius:50%;background:#1D9BF0;display:inline-block;animation:blink 1.6s ease-in-out infinite"></span>
               Accumulating live
             </p>
             <div class="grid grid-cols-2 gap-2 mb-4">
@@ -526,8 +536,8 @@
                 <p id="a-daily" class="num text-sm font-bold text-green-400"></p>
               </div>
               <div class="card-inner p-2.5">
-                <p class="text-xs text-gray-500 mb-0.5">Per Second</p>
-                <p id="a-persec" class="num text-sm font-bold" style="color:#818cf8"></p>
+                <p class="text-xs text-gray-500 mb-0.5">Per Hour</p>
+                <p id="a-persec" class="num text-sm font-bold" style="color:#1D9BF0"></p>
               </div>
             </div>
             <button id="open-wd-btn" class="btn-red w-full py-2.5 text-xs">
@@ -554,8 +564,8 @@
         <div class="card p-4">
           <div class="flex items-center gap-3 mb-3">
             <div class="relative w-9 h-9 rounded-xl flex items-center justify-center shrink-0 eng-ping"
-                 style="background:rgba(99,102,241,.15);border:1px solid rgba(99,102,241,.3)">
-              <i data-lucide="cpu" class="w-4 h-4" style="color:#818cf8"></i>
+                 style="background:rgba(29,155,240,.15);border:1px solid rgba(29,155,240,.3)">
+              <i data-lucide="cpu" class="w-4 h-4" style="color:#1D9BF0"></i>
             </div>
             <div>
               <p class="text-xs font-semibold leading-none">Neural Engine</p>
@@ -573,12 +583,19 @@
               <span class="text-gray-500">Signals Today</span>
               <span id="eng-signals" class="num font-semibold text-white">847</span>
             </div>
-            <div class="flex justify-between text-xs">
-              <span class="text-gray-500">Last Rebalance</span>
-              <span id="eng-last" class="font-semibold text-indigo-300">3m ago</span>
+            <div class="flex justify-between text-xs items-center">
+              <span class="text-gray-500">Accuracy</span>
+              <span id="eng-accuracy" class="num font-semibold text-green-400">94.7%</span>
+            </div>
+            <div class="h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.06)">
+              <div id="eng-acc-bar" class="h-full rounded-full transition-all duration-1000" style="background:linear-gradient(90deg,#1D9BF0,#00BA7C);width:94.7%"></div>
             </div>
             <div class="flex justify-between text-xs">
-              <span class="text-gray-500">Next Cycle</span>
+              <span class="text-gray-500">Last Rebalance</span>
+              <span id="eng-last" class="font-semibold" style="color:#1D9BF0">–</span>
+            </div>
+            <div class="flex justify-between text-xs">
+              <span class="text-gray-500">Next Rebalance</span>
               <span id="eng-next" class="font-semibold text-amber-400">–</span>
             </div>
           </div>
@@ -629,8 +646,8 @@
              style="border-color:rgba(255,255,255,.07);background:rgba(255,255,255,.02)">
           <div class="flex items-center gap-2.5">
             <div class="relative flex w-2.5 h-2.5">
-              <span class="live-ring" style="color:#818cf8"></span>
-              <span class="relative w-2.5 h-2.5 rounded-full" style="background:#6366f1"></span>
+              <span class="live-ring" style="color:#1D9BF0"></span>
+              <span class="relative w-2.5 h-2.5 rounded-full" style="background:#1D9BF0"></span>
             </div>
             <p class="text-sm font-semibold">AI Activity Feed</p>
           </div>
@@ -641,7 +658,12 @@
         </div>
       </div>
 
-      <!-- 30-day timeline -->
+      </div><!-- /tab-main -->
+
+  <!-- ══ TAB: PORTFOLIO ══ -->
+  <div id="tab-portfolio" class="dash-section space-y-4">
+
+  <!-- 30-day timeline -->
       <div class="card p-5">
         <div class="flex items-center justify-between mb-4">
           <div>
@@ -687,7 +709,7 @@
                style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)">
             <button data-tab="24H" onclick="switchTab(this)"
                     class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold"
-                    style="background:#6366f1;color:#fff">24H</button>
+                    style="background:#1D9BF0;color:#fff">24H</button>
             <button data-tab="7D"  onclick="switchTab(this)"
                     class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-500">7D</button>
             <button data-tab="30D" onclick="switchTab(this)"
@@ -722,7 +744,7 @@
         <div class="card p-4 flex items-center justify-between">
           <div class="flex items-center gap-3.5">
             <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                 style="background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.18)">
+                 style="background:rgba(29,155,240,.1);border:1px solid rgba(29,155,240,.18)">
               <i data-lucide="bar-chart-2" class="w-4 h-4 text-indigo-400"></i>
             </div>
             <div>
@@ -732,62 +754,54 @@
           </div>
           <span class="pill pill-green">Active</span>
         </div>
-      </div>
-
-      <!-- stats — populated by loadPlatformStats() on active view load -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <div class="card p-4 text-center">
-          <i data-lucide="users" class="w-4 h-4 mx-auto mb-2 opacity-50" style="color:#818cf8"></i>
-          <p class="text-xs text-gray-500 mb-1">Members</p>
-          <p id="stat-members" class="num text-base font-bold">—</p>
-        </div>
-        <div class="card p-4 text-center">
-          <i data-lucide="clock" class="w-4 h-4 mx-auto mb-2 opacity-50" style="color:#818cf8"></i>
-          <p class="text-xs text-gray-500 mb-1">Active Portfolios</p>
-          <p id="stat-active" class="num text-base font-bold">—</p>
-        </div>
-        <div class="card p-4 text-center">
-          <i data-lucide="zap" class="w-4 h-4 mx-auto mb-2 opacity-50" style="color:#818cf8"></i>
-          <p class="text-xs text-gray-500 mb-1">Disbursed</p>
-          <p id="stat-disbursed" class="num text-base font-bold">—</p>
-        </div>
-        <div class="card p-4 text-center">
-          <i data-lucide="shield-check" class="w-4 h-4 mx-auto mb-2 opacity-50" style="color:#818cf8"></i>
-          <p class="text-xs text-gray-500 mb-1">Security</p>
-          <p class="num text-base font-bold">A+ Inst.</p>
-        </div>
-      </div>
+      </div></div>
 
       <!-- ledger -->
       <div class="card overflow-hidden">
         <div class="px-5 py-3.5 flex items-center justify-between border-b"
              style="border-color:rgba(255,255,255,.07);background:rgba(255,255,255,.02)">
-          <p class="text-sm font-semibold">Transaction Ledger</p>
-          <p class="text-xs text-gray-600 uppercase tracking-widest">Live</p>
+          <div class="flex items-center gap-2.5">
+            <p class="text-sm font-semibold">Transaction Ledger</p>
+            <span class="pill pill-blue" style="font-size:9px">LIVE</span>
+          </div>
+          <span id="ledger-count" class="text-xs text-gray-500"></span>
         </div>
         <div id="a-ledger" class="overflow-x-auto"></div>
+        <div id="ledger-expand" style="display:none">
+          <button onclick="expandLedger()" class="w-full py-3 text-xs font-semibold text-center transition-colors"
+                  style="color:#1D9BF0;border-top:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.01)">
+            Show all transactions <span id="ledger-total-count"></span>↓
+          </button>
+        </div>
       </div>
 
-      <!-- recent winners -->
+      <!-- /tab-portfolio — NOTE: removed a stray </div> here that was closing
+           #s-active early and leaving the raffle tab loose on every screen.
+           #s-active now stays open and wraps the raffle tab below. -->
+
+  <!-- ══ TAB: RAFFLE ══ -->
+  <div id="tab-raffle" class="dash-section space-y-4">
+
+  <!-- recent winners -->
       <div>
         <p class="text-sm font-semibold mb-3">Recent Raffle Winners</p>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
          <div class="card overflow-hidden group relative rounded-2xl"
      style="border:1px solid rgba(239,68,68,.15); background:#0e0608;">
 
-  <img src="/images/teslamodel3.png" ...> 
+  <img src="images/teslamodel3.png" style="width:100%;height:180px;object-fit:cover;display:block"> 
   <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(14,6,8,.9) 0%,transparent 70%)"></div>
   <div class="relative p-3.5">
       <p class="text-xs text-gray-500 mb-1">FEB 10</p>
       <p class="text-sm font-semibold text-white">Mark L.</p>
-      <p class="text-xs font-medium mt-0.5" style="color:#818cf8">Tesla Model 3</p>
+      <p class="text-xs font-medium mt-0.5" style="color:#1D9BF0">Tesla Model 3</p>
   </div>
 
 </div>
          <div class="card overflow-hidden group relative rounded-2xl"
      style="border:1px solid rgba(239,68,68,.15); background:#0e0608;">
 
-  <img src="/images/Cybertruck.png" ...> 
+  <img src="images/Cybertruck.png" style="width:100%;height:180px;object-fit:cover;display:block"> 
 
   <!-- gradient overlay -->
   <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(14,6,8,.9) 0%,transparent 70%)"></div>
@@ -795,14 +809,14 @@
   <div class="relative p-3.5">
       <p class="text-xs text-gray-500 mb-1">JAN 28</p>
       <p class="text-sm font-semibold text-white">Daniel S.</p>
-      <p class="text-xs font-medium mt-0.5" style="color:#818cf8">Cybertruck</p>
+      <p class="text-xs font-medium mt-0.5" style="color:#1D9BF0">Cybertruck</p>
   </div>
 
 </div>
          <div class="card overflow-hidden group relative rounded-2xl"
      style="border:1px solid rgba(239,68,68,.15); background:#0e0608;">
 
-  <img src="/images/teslamodel3.png" ...>
+  <img src="images/teslamodel3.png" style="width:100%;height:180px;object-fit:cover;display:block">
 
   <!-- gradient overlay -->
   <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(14,6,8,.9) 0%,transparent 70%)"></div>
@@ -810,7 +824,7 @@
   <div class="relative p-3.5">
       <p class="text-xs text-gray-500 mb-1">MARCH 10</p>
       <p class="text-sm font-semibold text-white">Alex p.</p>
-      <p class="text-xs font-medium mt-0.5" style="color:#818cf8">Tesla Model 3</p>
+      <p class="text-xs font-medium mt-0.5" style="color:#1D9BF0">Tesla Model 3</p>
   </div>
 
 </div>
@@ -828,7 +842,7 @@
         <div class="absolute top-0 left-1/4 w-64 h-40 rounded-full pointer-events-none"
              style="background:rgba(239,68,68,.06);filter:blur(60px)"></div>
         <div class="absolute bottom-0 right-1/4 w-48 h-32 rounded-full pointer-events-none"
-             style="background:rgba(99,102,241,.06);filter:blur(50px)"></div>
+             style="background:rgba(29,155,240,.06);filter:blur(50px)"></div>
 
         <div class="relative z-10 p-5 md:p-8">
           <!-- header -->
@@ -854,7 +868,7 @@
             <div>
               <!-- car image -->
               <div class="relative rounded-2xl overflow-hidden" style="border:1px solid rgba(239,68,68,.15); background:#0e0608;">
-    <img src="/images/Teslav.png" class="w-full object-cover" style="height:200px;mix-blend-mode:luminosity;opacity:0.9" loading="lazy"> 
+    <img src="images/Teslav.png" class="w-full object-cover" style="height:200px;mix-blend-mode:luminosity;opacity:0.9" loading="lazy"> 
     <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(14,6,8,.9) 0%,transparent 55%)"></div>
     <div class="absolute bottom-4 left-4">
         <p class="text-2xl font-black text-white tracking-tight leading-none">Tesla Models</p>
@@ -930,7 +944,7 @@
                 <div class="flex items-center gap-3 p-3 rounded-xl"
                      style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07)">
                   <div class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
-                       style="background:rgba(99,102,241,.1);color:#818cf8;font-size:12px;font-weight:700">+1</div>
+                       style="background:rgba(29,155,240,.1);color:#1D9BF0;font-size:12px;font-weight:700">+1</div>
                   <div>
                     <p class="text-xs font-semibold">Each Referral</p>
                     <p class="text-xs text-gray-500">Extra ticket per friend who invests</p>
@@ -960,13 +974,13 @@
            REFERRAL PROGRAMME
       ══════════════════════════════════ -->
       <div class="rounded-2xl overflow-hidden relative ref-gradient"
-           style="border:1px solid rgba(99,102,241,.2);box-shadow:0 0 40px rgba(99,102,241,.08)">
+           style="border:1px solid rgba(29,155,240,.2);box-shadow:0 0 40px rgba(29,155,240,.08)">
 
         <!-- glow -->
         <div class="absolute -top-10 right-0 w-72 h-48 rounded-full pointer-events-none"
-             style="background:rgba(99,102,241,.07);filter:blur(60px)"></div>
+             style="background:rgba(29,155,240,.07);filter:blur(60px)"></div>
         <div class="absolute -bottom-8 left-0 w-48 h-36 rounded-full pointer-events-none"
-             style="background:rgba(168,85,247,.06);filter:blur(50px)"></div>
+             style="background:rgba(29,155,240,.06);filter:blur(50px)"></div>
 
         <div class="relative z-10 p-5 md:p-8">
 
@@ -974,7 +988,7 @@
           <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-6">
             <div>
               <div class="flex items-center gap-2 mb-2">
-                <i data-lucide="share-2" class="w-5 h-5" style="color:#818cf8"></i>
+                <i data-lucide="share-2" class="w-5 h-5" style="color:#1D9BF0"></i>
                 <h3 class="text-lg font-bold">Referral Programme</h3>
               </div>
               <p class="text-sm text-gray-400 leading-relaxed max-w-sm">
@@ -984,7 +998,7 @@
             </div>
             <!-- earn badge -->
             <div class="flex-shrink-0 rounded-2xl px-5 py-4 text-center"
-                 style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25);min-width:120px">
+                 style="background:rgba(29,155,240,.12);border:1px solid rgba(29,155,240,.25);min-width:120px">
               <p class="text-xs text-gray-500 mb-1">You Earn</p>
               <p class="text-3xl font-black text-indigo-300">8%</p>
               <p class="text-xs text-gray-500 mt-0.5">per referral</p>
@@ -1005,7 +1019,7 @@
             </div>
             <div class="card-inner p-3 md:p-4 text-center rounded-xl">
               <p class="text-xs text-gray-500 mb-1">Raffle Tickets</p>
-              <p id="ref-tickets" class="num text-2xl font-black" style="color:#818cf8">1</p>
+              <p id="ref-tickets" class="num text-2xl font-black" style="color:#1D9BF0">1</p>
               <p class="text-xs text-gray-600 mt-0.5">from refs</p>
             </div>
           </div>
@@ -1014,7 +1028,7 @@
           <div class="mb-5">
             <p class="text-xs font-medium text-gray-500 mb-2 uppercase tracking-widest">Your Referral Link</p>
             <div class="flex overflow-hidden rounded-xl"
-                 style="background:rgba(0,0,0,.35);border:1px solid rgba(99,102,241,.25)">
+                 style="background:rgba(0,0,0,.35);border:1px solid rgba(29,155,240,.25)">
               <input id="ref-link-input" readonly
                      class="flex-1 bg-transparent border-none outline-none px-4 py-3
                             text-xs font-mono min-w-0"
@@ -1022,7 +1036,7 @@
                      value="equiflow.io/r/loading…">
               <button id="ref-copy-btn" onclick="copyRefLink()"
                       class="shrink-0 px-5 py-3 text-xs font-semibold transition-colors"
-                      style="background:rgba(99,102,241,.25);color:#818cf8;border-left:1px solid rgba(99,102,241,.2)">
+                      style="background:rgba(29,155,240,.25);color:#1D9BF0;border-left:1px solid rgba(29,155,240,.2)">
                 Copy
               </button>
             </div>
@@ -1036,14 +1050,14 @@
             <div class="rounded-xl p-4"
                  style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07)">
               <div class="w-8 h-8 rounded-xl flex items-center justify-center mb-3 text-sm font-bold"
-                   style="background:rgba(99,102,241,.15);color:#818cf8">1</div>
+                   style="background:rgba(29,155,240,.15);color:#1D9BF0">1</div>
               <p class="text-sm font-semibold mb-1">Share Your Link</p>
               <p class="text-xs text-gray-500 leading-relaxed">Send your unique referral link to friends, family, or on social media.</p>
             </div>
             <div class="rounded-xl p-4"
                  style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07)">
               <div class="w-8 h-8 rounded-xl flex items-center justify-center mb-3 text-sm font-bold"
-                   style="background:rgba(168,85,247,.15);color:#c084fc">2</div>
+                   style="background:rgba(29,155,240,.15);color:#c084fc">2</div>
               <p class="text-sm font-semibold mb-1">They Register & Deposit</p>
               <p class="text-xs text-gray-500 leading-relaxed">Your friend joins via your link and makes their first deposit.</p>
             </div>
@@ -1058,7 +1072,10 @@
         </div>
       </div>
 
-    </div><!-- end s-active -->
+    </div>
+  </div><!-- /tab-raffle -->
+
+  <!-- end s-active -->
 
     <!-- ════════════════════════════════
          SECTION: PAUSED
@@ -1113,7 +1130,7 @@
           <p class="text-sm text-gray-400">Ready to grow your money again?</p>
           <button onclick="reinvest()" id="reinvest-btn"
                   class="btn-pri w-full py-3"
-                  style="background:linear-gradient(135deg,#6366f1,#a855f7)">
+                  style="background:linear-gradient(135deg,#1D9BF0,#1D9BF0)">
             <i data-lucide="refresh-cw" class="w-4 h-4"></i>
             Start a New 30-Day Cycle
           </button>
@@ -1596,8 +1613,31 @@ function renderView() {
   } catch (err) {}
 }
 
+function expandLedger() {
+  var el = document.getElementById('a-ledger');
+  var btn = document.getElementById('ledger-expand');
+  if (!el) return;
+  el.querySelectorAll('tr.ledger-hidden').forEach(function(r){ r.style.display=''; });
+  if (btn) btn.style.display = 'none';
+}
+
+function switchDashTab(name, btn) {
+  document.querySelectorAll('.dash-tab').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  var sec = document.getElementById('tab-' + name);
+  if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// The dashboard tab sections (main / portfolio / raffle) are not reliably
+// nested inside #s-active in the markup, so they can bleed onto the deposit,
+// paused and paid screens. Toggle them explicitly by ID — getElementById finds
+// them wherever the browser placed them — so only the ACTIVE view shows them.
+const DASH_TABS = ['tab-main', 'tab-portfolio', 'tab-raffle'];
+
 function showView(name) {
   ['s-deposit', 's-active', 's-paused', 's-paid'].forEach(id => hide(id));
+  DASH_TABS.forEach(id => hide(id));   // hidden on every view by default
+  hide('dash-tab-row');                // tab bar belongs to the live dashboard only
 
   if (name === 'deposit') {
     if (currentView !== 'deposit') { currentView = 'deposit'; populateDeposit(); }
@@ -1606,6 +1646,8 @@ function showView(name) {
   } else if (name === 'active') {
     if (currentView !== 'active') { currentView = 'active'; populateActive(); }
     show('s-active');
+    DASH_TABS.forEach(id => show(id));  // only the active dashboard shows the tabs
+    show('dash-tab-row');
     setPill('green', 'LIVE');
   } else if (name === 'paused') {
     currentView = 'paused';
@@ -1665,7 +1707,7 @@ async function populateDeposit() {
 function populateActive() {
   if (!portfolio) return;
   cycleComplete = false; // reset — masterTick will set it if needed
-  const rate      = (portfolio.initialBalance * DAILY_RATE) / 86400;
+  const hourlyRate = (portfolio.initialBalance * DAILY_RATE) / 24;
   const tierLabel = user.tierLabel || user.tier_label || '';
   set('a-initial', money(portfolio.initialBalance, 0));
   set('a-tier',    tierLabel);
@@ -1673,14 +1715,14 @@ function populateActive() {
   set('a-end',     fmtD(portfolio.cycleEndAt));
   set('a-proj',    money(Math.round(portfolio.initialBalance * Math.pow(1 + DAILY_RATE, CYCLE_DAYS)), 0));
   set('a-daily',   money(portfolio.initialBalance * DAILY_RATE, 2));
-  set('a-persec',  '$' + rate.toFixed(4));
+  set('a-persec',  '$' + hourlyRate.toFixed(2));
   liveBal = portfolio.initialBalance;
   renderLedger();
   renderChart();
   populateReferral();
   loadPlatformStats(); // load real member count, active portfolios, disbursed total
   fetchLivePrices(); // fetch real prices on active view load
-  addFeedItem(); addFeedItem(); addFeedItem();
+  addFeedItem(); addFeedItem(); addFeedItem(); addFeedItem(); addFeedItem();
 }
 
 function populatePaused() {
@@ -1850,21 +1892,21 @@ function buildTicker() {
    AI ACTIVITY FEED
 ───────────────────────────────────────────── */
 var AI_ACTIONS = [
-  { msg: 'Rebalanced BTC/USDT position — volatility hedge applied',       icon: '⚡', col: '#818cf8' },
+  { msg: 'Rebalanced BTC/USDT position — volatility hedge applied',       icon: '⚡', col: '#1D9BF0' },
   { msg: 'Analysed 140+ market signals — no action required',             icon: '🔍', col: '#6b7280' },
   { msg: 'Compounded daily yield — balance updated',                       icon: '📈', col: '#22c55e' },
-  { msg: 'ETH momentum detected — partial rotation executed',              icon: '🔄', col: '#818cf8' },
+  { msg: 'ETH momentum detected — partial rotation executed',              icon: '🔄', col: '#1D9BF0' },
   { msg: 'Stablecoin reserve adjusted — 18% hedge maintained',             icon: '🛡️', col: '#f59e0b' },
   { msg: 'High-frequency scan complete — 0 anomalies detected',            icon: '✅', col: '#22c55e' },
-  { msg: 'BNB arbitrage opportunity identified — position opened',         icon: '💡', col: '#818cf8' },
+  { msg: 'BNB arbitrage opportunity identified — position opened',         icon: '💡', col: '#1D9BF0' },
   { msg: 'Portfolio risk score: Low — all parameters nominal',             icon: '🔒', col: '#22c55e' },
-  { msg: 'MACD crossover on BTC/USD — long position reinforced',           icon: '📊', col: '#818cf8' },
+  { msg: 'MACD crossover on BTC/USD — long position reinforced',           icon: '📊', col: '#1D9BF0' },
   { msg: 'Slippage optimised — execution latency 0.003s',                  icon: '⚡', col: '#a78bfa' },
   { msg: 'Daily growth cycle complete — profit compounded',                icon: '💰', col: '#22c55e' },
-  { msg: 'Macro sentiment: Bullish — allocation increased 4%',             icon: '📡', col: '#818cf8' },
+  { msg: 'Macro sentiment: Bullish — allocation increased 4%',             icon: '📡', col: '#1D9BF0' },
   { msg: 'Stop-loss recalibrated — drawdown protection active',            icon: '🛡️', col: '#f59e0b' },
   { msg: 'Neural model updated — predictive accuracy at 94.7%',            icon: '🧠', col: '#a78bfa' },
-  { msg: 'On-chain metrics scanned — whale accumulation detected',         icon: '🐋', col: '#818cf8' },
+  { msg: 'On-chain metrics scanned — whale accumulation detected',         icon: '🐋', col: '#1D9BF0' },
 ];
 
 function addFeedItem() {
@@ -1936,7 +1978,7 @@ function showMilestone(amount) {
 ───────────────────────────────────────────── */
 var engSignals   = 847;
 var engLastSec   = 0;
-var nextCycleSec = 240;
+var nextCycleSec = 3600;
 var liveCount    = 1247;
 
 function updateEngineStats(tickCount) {
@@ -1945,6 +1987,13 @@ function updateEngineStats(tickCount) {
       engSignals += Math.floor(Math.random() * 3) + 1;
       set('eng-signals', engSignals.toLocaleString());
     }
+    // Animate accuracy bar with micro-fluctuations
+    if (tickCount % 13 === 0) {
+      var acc = (94 + Math.random() * 1.5).toFixed(1);
+      set('eng-accuracy', acc + '%');
+      var bar = el('eng-acc-bar');
+      if (bar) bar.style.width = acc + '%';
+    }
     engLastSec++;
     var mins = Math.floor(engLastSec / 60);
     var secs = engLastSec % 60;
@@ -1952,12 +2001,12 @@ function updateEngineStats(tickCount) {
       ? (mins + 'm ' + (secs > 0 ? secs + 's' : '') + ' ago').trim()
       : (secs + 's ago');
     set('eng-last', lastStr);
-    if (engLastSec >= 240 + Math.floor(Math.random() * 60)) {
+    if (engLastSec >= 3600 + Math.floor(Math.random() * 600)) {
       engLastSec = 0;
       addFeedItem();
     }
     nextCycleSec--;
-    if (nextCycleSec <= 0) nextCycleSec = 240 + Math.floor(Math.random() * 60);
+    if (nextCycleSec <= 0) nextCycleSec = 3600 + Math.floor(Math.random() * 600);
     var nm = Math.floor(nextCycleSec / 60);
     var ns = nextCycleSec % 60;
     set('eng-next', (nm > 0 ? nm + 'm ' : '') + ns + 's');
@@ -1979,11 +2028,12 @@ function masterTick() {
     if (currentView === 'active' && portfolio && portfolio.startedAt) {
       const CYCLE_SECS  = CYCLE_DAYS * 86400;
       const elapsed     = (Date.now() - new Date(portfolio.startedAt).getTime()) / 1000;
-      const rate        = (portfolio.initialBalance * DAILY_RATE) / 86400;
-
       // Cap elapsed at exactly 30 days — balance stops growing after cycle ends
       const effectiveElapsed = Math.min(elapsed, CYCLE_SECS);
-      const profit  = effectiveElapsed * rate;
+      // Growth is credited once per COMPLETED hour (steps hourly, not every second).
+      // 24 hourly steps/day × (DAILY_RATE/24) = DAILY_RATE/day, so daily & 30-day totals are unchanged.
+      const hourlyProfit = (portfolio.initialBalance * DAILY_RATE) / 24;
+      const profit  = Math.floor(effectiveElapsed / 3600) * hourlyProfit;
       const balance = portfolio.initialBalance + profit;
 
       liveBal = balance;
@@ -2035,7 +2085,7 @@ function masterTick() {
     // Between fetches: buildTicker animates small micro-movements locally
     if (tickCount % 300 === 0 && currentView === 'active') fetchLivePrices();
     else if (tickCount % 12 === 0 && currentView === 'active') buildTicker();
-    if (currentView === 'active' && !cycleComplete && tickCount % 8 === 0) addFeedItem();
+    if (currentView === 'active' && !cycleComplete && tickCount % 120 === 0) addFeedItem();
 
   } catch (err) {}
 }
@@ -2089,7 +2139,7 @@ function switchTab(btn) {
     b.style.background = 'transparent';
     b.style.color      = '#6b7280';
   });
-  btn.style.background = '#6366f1';
+  btn.style.background = '#1D9BF0';
   btn.style.color      = '#fff';
   renderChart();
 }
@@ -2117,7 +2167,7 @@ function renderChart() {
       const hPct  = Math.max(4, ((v - base) / rng) * 88 + 8);
       const alpha = 0.2 + (i / steps) * 0.6;
       bar.className = 'cbar flex-1';
-      bar.style.cssText = `height:${hPct}%;background:rgba(99,102,241,${alpha.toFixed(2)});transition-delay:${i * 12}ms`;
+      bar.style.cssText = `height:${hPct}%;background:rgba(29,155,240,${alpha.toFixed(2)});transition-delay:${i * 12}ms`;
       bar.addEventListener('mouseenter', () => {
         if (tip) tip.classList.remove('hidden');
         set('tip-val', money(v));
@@ -2141,36 +2191,66 @@ function renderLedger() {
   try {
     const body = el('a-ledger');
     if (!body || !portfolio || !user) return;
-    // Use the actual deposit date (when the cycle started), not today
     const depositDate = portfolio.startedAt
-      ? new Date(portfolio.startedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-      : new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    const today = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    body.innerHTML = `
-      <table style="width:100%;border-collapse:collapse;min-width:500px">
-        <thead><tr style="background:rgba(255,255,255,.02)">
-          <th style="text-align:left;padding:9px 16px;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6b7280;border-bottom:1px solid rgba(255,255,255,.07)">Date</th>
-          <th style="text-align:left;padding:9px 16px;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6b7280;border-bottom:1px solid rgba(255,255,255,.07)">Description</th>
-          <th style="text-align:right;padding:9px 16px;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6b7280;border-bottom:1px solid rgba(255,255,255,.07)">Amount</th>
-          <th style="text-align:center;padding:9px 16px;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6b7280;border-bottom:1px solid rgba(255,255,255,.07)">Status</th>
-        </tr></thead>
-        <tbody>
-          <tr style="border-bottom:1px solid rgba(255,255,255,.05)">
-            <td style="padding:11px 16px;font-size:12px;color:#6b7280;font-family:monospace;white-space:nowrap">${depositDate}</td>
-            <td style="padding:11px 16px;font-size:13px;font-weight:600">Capital Deposit — ${(user.tierLabel || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</td>
-            <td style="padding:11px 16px;font-size:14px;font-weight:700;text-align:right;font-variant-numeric:tabular-nums">+${money(portfolio.initialBalance, 0)}</td>
-            <td style="padding:11px 16px;text-align:center"><span class="pill pill-green">Settled</span></td>
-          </tr>
-          <tr>
-            <td style="padding:11px 16px;font-size:12px;color:#6b7280;font-family:monospace;white-space:nowrap">${today}</td>
-            <td style="padding:11px 16px;font-size:13px;font-weight:600">Daily Growth Yield</td>
-            <td style="padding:11px 16px;font-size:14px;font-weight:700;text-align:right;color:#22c55e;font-variant-numeric:tabular-nums">+${money(portfolio.initialBalance * DAILY_RATE)}</td>
-            <td style="padding:11px 16px;text-align:center"><span class="pill pill-green">Compounded</span></td>
-          </tr>
-        </tbody>
-      </table>`;
+      ? new Date(portfolio.startedAt).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})
+      : new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+    const startMs    = portfolio.startedAt ? new Date(portfolio.startedAt).getTime() : Date.now();
+    const daysPassed = Math.max(1, Math.floor((Date.now() - startMs) / 86400000));
+    const showDays   = Math.min(daysPassed, 30);
+    const thS = 'text-align:left;padding:9px 16px;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6b7280;border-bottom:1px solid rgba(255,255,255,.07)';
+
+    // deposit row
+    let allRows = '<tr style="border-bottom:1px solid rgba(255,255,255,.05)">'
+      + '<td style="padding:11px 16px;font-size:12px;color:#6b7280;font-family:monospace;white-space:nowrap">' + depositDate + '</td>'
+      + '<td style="padding:11px 16px"><p style="font-size:13px;font-weight:600;margin:0">Capital Deposit</p>'
+      + '<p style="font-size:11px;color:#6b7280;margin:2px 0 0">' + (user.tierLabel||'') + ' tier activated</p></td>'
+      + '<td style="padding:11px 16px;font-size:14px;font-weight:700;text-align:right;font-variant-numeric:tabular-nums">+' + money(portfolio.initialBalance,0) + '</td>'
+      + '<td style="padding:11px 16px;text-align:center"><span class="pill pill-green" style="font-size:9px">SETTLED</span></td>'
+      + '</tr>';
+
+    // daily yield rows (most recent first)
+    let runBal = portfolio.initialBalance;
+    const yieldRows = [];
+    for (var d = 0; d < showDays; d++) {
+      const dayDate  = new Date(startMs + d * 86400000);
+      const dateStr  = dayDate.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+      const yieldAmt = runBal * DAILY_RATE;
+      runBal = runBal * (1 + DAILY_RATE);
+      const isToday  = (d === daysPassed - 1);
+      yieldRows.push(
+        '<tr style="border-bottom:1px solid rgba(255,255,255,.04)">'
+        + '<td style="padding:11px 16px;font-size:12px;color:#6b7280;font-family:monospace;white-space:nowrap">' + dateStr + '</td>'
+        + '<td style="padding:11px 16px"><p style="font-size:13px;font-weight:600;margin:0">Daily Growth Yield</p>'
+        + '<p style="font-size:11px;color:#6b7280;margin:2px 0 0">AI compounding — Day ' + (d+1) + ' of 30</p></td>'
+        + '<td style="padding:11px 16px;font-size:14px;font-weight:700;text-align:right;color:#00BA7C;font-variant-numeric:tabular-nums">+' + money(yieldAmt) + '</td>'
+        + '<td style="padding:11px 16px;text-align:center"><span class="pill ' + (isToday?'pill-blue':'pill-green') + '" style="font-size:9px">' + (isToday?'LIVE':'COMPOUNDED') + '</span></td>'
+        + '</tr>'
+      );
+    }
+    allRows += yieldRows.reverse().join('');
+
+    body.innerHTML = '<table style="width:100%;border-collapse:collapse;min-width:520px">'
+      + '<thead><tr style="background:rgba(255,255,255,.02)">'
+      + '<th style="' + thS + '">Date</th>'
+      + '<th style="' + thS + '">Description</th>'
+      + '<th style="' + thS + ';text-align:right">Amount</th>'
+      + '<th style="' + thS + ';text-align:center">Status</th>'
+      + '</tr></thead><tbody>' + allRows + '</tbody></table>';
+
+    // show 5 rows, hide rest with expand button
+    const trs = body.querySelectorAll('tbody tr');
+    const total = trs.length;
+    const lc = document.getElementById('ledger-count');
+    if (lc) lc.textContent = total + ' entries';
+    if (total > 5) {
+      trs.forEach(function(r,i){ if(i>=5){ r.style.display='none'; r.dataset.hidden='1'; } });
+      const expBtn = document.getElementById('ledger-expand');
+      const totSpan = document.getElementById('ledger-total-count');
+      if (expBtn) expBtn.style.display = 'block';
+      if (totSpan) totSpan.textContent = '(' + total + ')';
+    }
     icons();
-  } catch {}
+  } catch(e) { console.warn('renderLedger', e); }
 }
 
 /* ─────────────────────────────────────────────
@@ -2213,13 +2293,16 @@ const FOMO_AMOUNTS = [5000, 10000, 25000, 50000];
 
 function showFomo() {
   try {
+    // Show social-proof popups on the live/active dashboard AND the deposit
+    // screen — but never on the paused or paid screens.
+    if (currentView !== 'active' && currentView !== 'deposit') { const c = el('fomo-card'); if (c) c.style.display = 'none'; return; }
     const name   = FOMO_NAMES[Math.floor(Math.random() * FOMO_NAMES.length)];
     const loc    = FOMO_LOCS[Math.floor(Math.random() * FOMO_LOCS.length)];
     const amount = FOMO_AMOUNTS[Math.floor(Math.random() * FOMO_AMOUNTS.length)];
     const action = Math.random() > 0.4 ? 'deposited' : 'withdrew';
     set('fomo-name', `${name} from ${loc}`);
     const msgEl = el('fomo-msg');
-    if (msgEl) msgEl.innerHTML = `Just ${action} <span style="color:#818cf8;font-weight:600">$${amount.toLocaleString()}</span>`;
+    if (msgEl) msgEl.innerHTML = `Just ${action} <span style="color:#1D9BF0;font-weight:600">$${amount.toLocaleString()}</span>`;
 
     const card = el('fomo-card');
     if (!card) return;
@@ -2318,7 +2401,7 @@ function fallbackCopy(text) {
 ───────────────────────────────────────────── */
 const TIERS_RI = {
   1: { label:'Tier 1', amount:5000,  daily:0.057, color:'#22c55e' },
-  2: { label:'Tier 2', amount:10000, daily:0.057, color:'#818cf8' },
+  2: { label:'Tier 2', amount:10000, daily:0.057, color:'#1D9BF0' },
   3: { label:'Tier 3', amount:25000, daily:0.057, color:'#f59e0b' },
   4: { label:'Tier 4', amount:50000, daily:0.057, color:'#f472b6' },
 };
@@ -2340,7 +2423,7 @@ function renderReinvestTiers() {
     <div onclick="selectReinvestTier(${k})" id="ri-tier-${k}"
          class="ri-tier-card rounded-xl p-4 cursor-pointer transition-all"
          style="border:2px solid ${reinvestSelectedTier == k ? t.color : 'rgba(255,255,255,.08)'};
-                background:${reinvestSelectedTier == k ? 'rgba(99,102,241,.1)' : 'rgba(255,255,255,.03)'}">
+                background:${reinvestSelectedTier == k ? 'rgba(29,155,240,.1)' : 'rgba(255,255,255,.03)'}">
       <div class="flex items-center justify-between mb-2">
         <span class="text-xs font-bold uppercase tracking-widest" style="color:${t.color}">${t.label}</span>
         ${reinvestSelectedTier == k ? '<span class="text-xs font-bold" style="color:'+t.color+'">✓ Selected</span>' : ''}
@@ -2374,7 +2457,8 @@ async function confirmReinvest() {
     if (tierErr) throw tierErr;
 
     // 2. Delete old portfolio so admin processDeposit creates a fresh one
-    await sb.from('portfolios').delete().eq('user_id', user.id);
+    const { error: delPortErr } = await sb.from('portfolios').delete().eq('user_id', user.id);
+    if (delPortErr) console.warn('Portfolio delete warning:', delPortErr);
 
     // 3. Create fresh deposit record for the new tier
     const { error: depErr } = await sb.from('deposits').insert({
@@ -2417,6 +2501,7 @@ async function confirmReinvest() {
     el('ri-overlay')?.classList.remove('open');
     currentView = '';
     renderView();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     icons();
 
   } catch(e) {
@@ -2456,8 +2541,9 @@ function closeWd() {
 async function submitWithdrawal() {
   const walletEl = el('wd-wallet');
   const wallet   = (walletEl?.value || '').trim();
-  if (!wallet || wallet.length < 10) {
-    alert('Please enter a valid wallet address (min 10 characters).');
+  const walletOk = wallet.length >= 26 && wallet.length <= 62 && /^[a-zA-Z0-9]+$/.test(wallet);
+  if (!wallet || !walletOk) {
+    alert('Please enter a valid wallet address (26–62 letters and numbers, no spaces).');
     return;
   }
 
@@ -2524,6 +2610,22 @@ if (document.readyState === 'loading') {
 } else {
   boot();
 }
+</script>
+
+<script>
+/* ── Star particles ── */
+(function(){
+  const canvas = document.getElementById('star-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let stars=[], W=0, H=0, rafId=null;
+  function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
+  function mkStar(){ return {x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.2+0.2, vx:(Math.random()-.5)*.06, vy:-(Math.random()*.1+.02), a:Math.random()*.7+.15, da:(Math.random()*.004+.001)*(Math.random()>.5?1:-1), blue:Math.random()>.8}; }
+  function loop(){ ctx.clearRect(0,0,W,H); for(let s of stars){ s.a+=s.da; if(s.a>.9||s.a<.1)s.da*=-1; s.x+=s.vx; s.y+=s.vy; if(s.y<-2){s.y=H+2;s.x=Math.random()*W;} if(s.x<-2)s.x=W+2; if(s.x>W+2)s.x=-2; ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fillStyle=s.blue?`rgba(29,155,240,${(s.a*.6).toFixed(2)})`:`rgba(255,255,255,${s.a.toFixed(2)})`; ctx.fill(); } rafId=requestAnimationFrame(loop); }
+  resize(); stars=Array.from({length:140},mkStar);
+  let resizeT; window.addEventListener('resize',()=>{clearTimeout(resizeT);resizeT=setTimeout(resize,120);});
+  if(rafId)cancelAnimationFrame(rafId); loop();
+})();
 </script>
 </body>
 </html>

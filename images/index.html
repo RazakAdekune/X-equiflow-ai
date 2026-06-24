@@ -21,7 +21,7 @@
   <meta name="twitter:image" content="https://equiflowai.netlify.app/images/og-preview.jpg">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231D9BF0'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='20' font-weight='bold' fill='white'>&#x1D54F;</text></svg>"><rect width='32' height='32' rx='8' fill='%236366f1'/><polyline points='6,22 12,14 18,18 26,8' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%236366f1'/><polyline points='6,22 12,14 18,18 26,8' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>">
 
   <!-- Performance: preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,10 +43,10 @@
   --bg: #060608;
   --surface: rgba(255,255,255,0.045);
   --border: rgba(255,255,255,0.08);
-  --blue: #1D9BF0;
-  --blue-light: #1D9BF0;
-  --green: #00BA7C;
-  --green-light: #00BA7C;
+  --blue: #2563EB;
+  --blue-light: #60A5FA;
+  --green: #22C55E;
+  --green-light: #4ADE80;
   --amber: #F59E0B;
   --red: #EF4444;
   --text: #F8FAFC;
@@ -65,7 +65,7 @@ body {
   overflow-x: hidden;
 }
 
-h1,h2,h3,h4,h5 { font-family: 'Inter', sans-serif; }
+h1,h2,h3,h4,h5 { font-family: 'Bricolage Grotesque', sans-serif; }
 
 /* ─── NOISE LAYER ─── */
 body::before {
@@ -102,10 +102,8 @@ body::before {
   transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
   border: none; cursor: pointer;
 }
-.btn-primary:hover { background: #1D9BF0; transform: translateY(-1px); box-shadow: 0 8px 32px rgba(29,155,240,0.4); }
+.btn-primary:hover { background: #3B82F6; transform: translateY(-1px); box-shadow: 0 8px 32px rgba(37,99,235,0.4); }
 .btn-primary:active { transform: translateY(0); }
-/* Hide the navbar Join Waitlist button on mobile (id + !important beats .btn-primary's display). Menu button stays. */
-@media (max-width: 767px) { #nav-join-btn { display: none !important; } }
 
 .btn-ghost {
   display: inline-flex; align-items: center; gap: 8px;
@@ -140,7 +138,7 @@ body::before {
   transform: rotateY(-28deg) rotateX(8deg) rotateZ(4deg);
   transform-style: preserve-3d;
   animation: phone-float 8s ease-in-out infinite;
-  filter: drop-shadow(-40px 60px 80px rgba(0,0,0,0.8)) drop-shadow(0 0 60px rgba(29,155,240,0.15));
+  filter: drop-shadow(-40px 60px 80px rgba(0,0,0,0.8)) drop-shadow(0 0 60px rgba(37,99,235,0.15));
 }
 
 @keyframes phone-float {
@@ -190,7 +188,7 @@ body::before {
   content: '';
   position: absolute; inset: 0;
   border-radius: inherit;
-  box-shadow: inset 0 0 60px rgba(29,155,240,0.12), inset 0 0 20px rgba(0,186,124,0.06);
+  box-shadow: inset 0 0 60px rgba(37,99,235,0.12), inset 0 0 20px rgba(34,197,94,0.06);
   z-index: 30; pointer-events: none;
 }
 
@@ -311,7 +309,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
   width: 100%; height: 100%;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center; gap: 12px;
-  background: linear-gradient(135deg, rgba(29,155,240,0.08) 0%, rgba(15,23,42,0.6) 100%);
+  background: linear-gradient(135deg, rgba(37,99,235,0.08) 0%, rgba(15,23,42,0.6) 100%);
 }
 
 ::-webkit-scrollbar { width:4px; }
@@ -328,10 +326,10 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
 <nav class="fixed top-0 inset-x-0 z-50 border-b border-white/[0.06]" style="background:rgba(6,6,8,0.82);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px)">
   <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
     <div class="flex items-center gap-2.5 cursor-pointer" onclick="scrollTo({top:0,behavior:'smooth'})">
-      <div class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style="background:#1D9BF0">
-        <svg width="14" height="14" viewBox="0 0 1200 1227" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.163 519.284ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.828Z" fill="white"/></svg>
+      <div class="w-8 h-8 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#2563EB,#1d4ed8)">
+        <i data-lucide="activity" class="w-4 h-4 text-white"></i>
       </div>
-      <span class="font-bold text-base tracking-tight whitespace-nowrap" style="font-family:'Inter',sans-serif;letter-spacing:-0.02em">X <span style="color:#E7E9EA">equiflow</span> <span style="color:#1D9BF0">ai</span></span>
+      <span class="font-bold text-base tracking-tight" style="font-family:'Bricolage Grotesque',sans-serif">EQUIFLOW <span style="color:#60A5FA">AI</span></span>
     </div>
     <div class="hidden md:flex items-center gap-8" style="color:var(--muted-light); font-size:14px; font-weight:500">
       <a href="#how-it-works" class="hover:text-white transition-colors">How it Works</a>
@@ -341,8 +339,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
       <a href="#support" class="hover:text-white transition-colors">Support</a>
     </div>
     <div class="flex items-center gap-3">
-      <a href="dashboard.html" class="hidden md:flex items-center" style="padding:8px 18px;border-radius:9999px;border:1px solid rgba(255,255,255,.15);font-size:14px;font-weight:600;color:#E7E9EA;text-decoration:none">Sign In</a>
-      <button onclick="openWaitlist()" id="nav-join-btn" class="btn-primary hidden md:flex" style="font-size:13px;padding:10px 20px">
+      <button onclick="openWaitlist()" class="btn-primary hidden sm:inline-flex" style="font-size:13px;padding:10px 20px">
         <i data-lucide="bell" class="w-3.5 h-3.5"></i> Join Waitlist
       </button>
       <button id="mobile-menu-btn" class="md:hidden p-2 text-white"><i data-lucide="menu" class="w-5 h-5"></i></button>
@@ -357,7 +354,6 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
   <a href="#giveaway" class="text-xl font-semibold text-white mobile-link">Giveaway</a>
   <a href="#reviews" class="text-xl font-semibold text-white mobile-link">Reviews</a>
   <a href="#support" class="text-xl font-semibold text-white mobile-link">Support</a>
-  <a href="dashboard.html" class="text-xl font-semibold text-white mobile-link" style="border-top:1px solid rgba(255,255,255,.08);padding-top:24px">Sign In</a>
   <button onclick="openWaitlist()" class="btn-primary justify-center" style="height:52px">Join Waitlist <i data-lucide="chevron-right" class="w-4 h-4"></i></button>
 </div>
 
@@ -368,10 +364,10 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
 <section class="relative min-h-screen flex flex-col justify-center overflow-hidden pt-16">
 
   <!-- Background gradient -->
-  <div class="absolute inset-0 z-0" style="background:radial-gradient(ellipse 80% 60% at 50% -10%, rgba(29,155,240,0.18) 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 80% 80%, rgba(16,185,129,0.08) 0%, transparent 60%), var(--bg)"></div>
+  <div class="absolute inset-0 z-0" style="background:radial-gradient(ellipse 80% 60% at 50% -10%, rgba(37,99,235,0.18) 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 80% 80%, rgba(16,185,129,0.08) 0%, transparent 60%), var(--bg)"></div>
 
   <!-- Orb left -->
-  <div class="orb w-[500px] h-[500px] -left-40 top-20 z-0" style="background:rgba(29,155,240,0.12)"></div>
+  <div class="orb w-[500px] h-[500px] -left-40 top-20 z-0" style="background:rgba(37,99,235,0.12)"></div>
   <!-- Orb right -->
   <div class="orb w-[400px] h-[400px] -right-20 bottom-10 z-0" style="background:rgba(16,185,129,0.07)"></div>
 
@@ -380,7 +376,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
     <!-- LEFT -->
     <div class="space-y-8 fade-up">
 
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-semibold tracking-wider uppercase" style="background:rgba(29,155,240,0.1);border-color:rgba(29,155,240,0.25);color:var(--blue-light)">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-semibold tracking-wider uppercase" style="background:rgba(37,99,235,0.1);border-color:rgba(37,99,235,0.25);color:var(--blue-light)">
         <span class="relative flex h-1.5 w-1.5">
           <span class="animate-ping absolute inset-0 rounded-full opacity-75" style="background:var(--blue-light)"></span>
           <span class="relative rounded-full h-1.5 w-1.5" style="background:var(--blue-light)"></span>
@@ -389,12 +385,14 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
       </div>
 
       <h1 class="display text-white">
-       Capital deserves <br>
-        better decisions.
+        Your money.<br>
+        <span style="background:linear-gradient(135deg,#60A5FA 0%,#34D399 60%,#A78BFA 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent">
+        Working 24/7.
+        </span>
       </h1>
 
       <p style="font-size:18px;line-height:1.7;color:var(--muted-light);max-width:480px">
-       Equiflow deploys institutional grade AI to dynamically allocate capital across stocks, crypto, and emerging opportunities continuously analysing markets, managing risk, and executing with precision beyond human limitations.
+        Equiflow uses institutional-grade AI to intelligently manage crypto and stock portfolios. Emotion-free. Risk-aware. Continuously optimised.
       </p>
 
       <div class="flex flex-wrap gap-3 pt-2">
@@ -411,7 +409,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
           <div class="w-9 h-9 rounded-full border-2 border-[#060608] overflow-hidden" style="background:#1e293b"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=22" alt=""></div>
           <div class="w-9 h-9 rounded-full border-2 border-[#060608] overflow-hidden" style="background:#1e293b"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=23" alt=""></div>
           <div class="w-9 h-9 rounded-full border-2 border-[#060608] overflow-hidden" style="background:#1e293b"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=24" alt=""></div>
-          <div class="w-9 h-9 rounded-full border-2 border-[#060608] flex items-center justify-center text-xs font-bold text-white" style="background:#1D9BF0">+</div>
+          <div class="w-9 h-9 rounded-full border-2 border-[#060608] flex items-center justify-center text-xs font-bold text-white" style="background:#2563EB">+</div>
         </div>
         <p style="font-size:13px;color:var(--muted-light)"><span class="text-white font-semibold">1400+</span> investors growing daily</p>
         <div class="h-4 w-px" style="background:var(--border)"></div>
@@ -426,8 +424,8 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
     <div class="phone-wrap h-[680px] fade-up" style="animation-delay:0.15s">
 
       <!-- Ambient glow behind phone -->
-      <div class="absolute w-80 h-80 rounded-full z-0" style="background:rgba(29,155,240,0.18);filter:blur(80px);top:50%;left:50%;transform:translate(-50%,-50%)"></div>
-      <div class="absolute w-60 h-60 rounded-full z-0" style="background:rgba(0,186,124,0.1);filter:blur(60px);top:40%;left:55%;transform:translate(-50%,-50%)"></div>
+      <div class="absolute w-80 h-80 rounded-full z-0" style="background:rgba(37,99,235,0.18);filter:blur(80px);top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+      <div class="absolute w-60 h-60 rounded-full z-0" style="background:rgba(34,197,94,0.1);filter:blur(60px);top:40%;left:55%;transform:translate(-50%,-50%)"></div>
 
       <!-- The Phone -->
       <div class="phone z-10">
@@ -448,31 +446,31 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
               <!-- Nav bar -->
               <div style="display:flex;align-items:center;justify-content:space-between;padding:0 14px 8px;border-bottom:1px solid rgba(255,255,255,0.06)">
                 <div style="display:flex;align-items:center;gap:6px">
-                  <div style="width:18px;height:18px;background:linear-gradient(135deg,#1D9BF0,#1d4ed8);border-radius:6px;display:flex;align-items:center;justify-content:center">
+                  <div style="width:18px;height:18px;background:linear-gradient(135deg,#2563EB,#1d4ed8);border-radius:6px;display:flex;align-items:center;justify-content:center">
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                   </div>
-                  <span style="font-weight:700;color:white;font-family:'Inter';font-size:9px;letter-spacing:-0.02em">EQUIFLOW</span>
+                  <span style="font-weight:700;color:white;font-family:'Bricolage Grotesque';font-size:9px;letter-spacing:-0.02em">EQUIFLOW</span>
                 </div>
                 <div style="display:flex;align-items:center;gap:8px">
-                  <span style="font-weight:600;font-size:7px;color:white;border-bottom:1px solid #1D9BF0;padding-bottom:1px">Dashboard</span>
+                  <span style="font-weight:600;font-size:7px;color:white;border-bottom:1px solid #3B82F6;padding-bottom:1px">Dashboard</span>
                   <span style="font-size:7px;color:rgba(255,255,255,0.4)">Portfolio</span>
-                  <span style="font-size:7px;color:#1D9BF0">Raffle</span>
-                  <div style="width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#1D9BF0,#8B5CF6);border:1.5px solid rgba(255,255,255,0.2)"></div>
+                  <span style="font-size:7px;color:#60A5FA">Raffle</span>
+                  <div style="width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#3B82F6,#8B5CF6);border:1.5px solid rgba(255,255,255,0.2)"></div>
                 </div>
               </div>
 
               <!-- Portfolio value card -->
-              <div style="margin:10px 10px 8px;background:linear-gradient(135deg,rgba(29,155,240,0.3) 0%,rgba(15,23,42,0.9) 100%);border:1px solid rgba(29,155,240,0.25);border-radius:16px;padding:12px">
+              <div style="margin:10px 10px 8px;background:linear-gradient(135deg,rgba(37,99,235,0.3) 0%,rgba(15,23,42,0.9) 100%);border:1px solid rgba(37,99,235,0.25);border-radius:16px;padding:12px">
                 <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
                   <div>
                     <div style="display:flex;align-items:center;gap:4px;margin-bottom:3px">
                       <span style="color:rgba(255,255,255,0.45);font-size:6.5px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase">PORTFOLIO VALUE</span>
-                      <span style="background:rgba(0,186,124,0.2);border:1px solid rgba(0,186,124,0.4);border-radius:100px;padding:1px 5px;color:#00BA7C;font-weight:700;font-size:6px;letter-spacing:0.04em">● LIVE & GROWING</span>
+                      <span style="background:rgba(34,197,94,0.2);border:1px solid rgba(34,197,94,0.4);border-radius:100px;padding:1px 5px;color:#4ADE80;font-weight:700;font-size:6px;letter-spacing:0.04em">● LIVE & GROWING</span>
                     </div>
-                    <div style="font-size:24px;font-weight:900;color:white;letter-spacing:-0.04em;font-family:'Inter'">$5,262.26</div>
+                    <div style="font-size:24px;font-weight:900;color:white;letter-spacing:-0.04em;font-family:'Bricolage Grotesque'">$5,262.26</div>
                   </div>
                   <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
-                    <span style="color:#00BA7C;font-weight:700;font-size:8px">↗ +5.7%/d</span>
+                    <span style="color:#4ADE80;font-weight:700;font-size:8px">↗ +5.7%/d</span>
                   </div>
                 </div>
                 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
@@ -480,13 +478,13 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
                     <div style="color:rgba(255,255,255,0.4);font-size:6px;margin-bottom:2px">Initial</div>
                     <div style="color:white;font-weight:700;font-size:8px">$5,000</div>
                   </div>
-                  <div style="background:rgba(0,186,124,0.1);border:1px solid rgba(0,186,124,0.2);border-radius:8px;padding:5px 6px">
-                    <div style="color:rgba(0,186,124,0.7);font-size:6px;margin-bottom:2px">Profit</div>
-                    <div style="color:#00BA7C;font-weight:700;font-size:8px">+$262</div>
+                  <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:5px 6px">
+                    <div style="color:rgba(34,197,94,0.7);font-size:6px;margin-bottom:2px">Profit</div>
+                    <div style="color:#4ADE80;font-weight:700;font-size:8px">+$262</div>
                   </div>
                   <div style="background:rgba(255,255,255,0.05);border-radius:8px;padding:5px 6px">
                     <div style="color:rgba(255,255,255,0.4);font-size:6px;margin-bottom:2px">Tier</div>
-                    <div style="color:#1D9BF0;font-weight:700;font-size:8px">Tier 1</div>
+                    <div style="color:#60A5FA;font-weight:700;font-size:8px">Tier 1</div>
                   </div>
                 </div>
               </div>
@@ -494,10 +492,10 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
               <!-- Ticker bar — prices updated by fetchIndexTicker() -->
               <div style="overflow:hidden;padding:5px 10px;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);margin-bottom:8px">
                 <div id="phone-ticker" style="display:flex;gap:14px;white-space:nowrap;animation:ticker 10s linear infinite">
-                  <span style="color:rgba(255,255,255,0.5)">BTC <span id="pt-btc" style="color:#00BA7C">…</span></span>
-                  <span style="color:rgba(255,255,255,0.5)">ETH <span id="pt-eth" style="color:#00BA7C">…</span></span>
-                  <span style="color:rgba(255,255,255,0.5)">SOL <span id="pt-sol" style="color:#00BA7C">…</span></span>
-                  <span style="color:rgba(255,255,255,0.5)">BNB <span id="pt-bnb" style="color:#00BA7C">…</span></span>
+                  <span style="color:rgba(255,255,255,0.5)">BTC <span id="pt-btc" style="color:#4ADE80">…</span></span>
+                  <span style="color:rgba(255,255,255,0.5)">ETH <span id="pt-eth" style="color:#4ADE80">…</span></span>
+                  <span style="color:rgba(255,255,255,0.5)">SOL <span id="pt-sol" style="color:#4ADE80">…</span></span>
+                  <span style="color:rgba(255,255,255,0.5)">BNB <span id="pt-bnb" style="color:#4ADE80">…</span></span>
                 </div>
               </div>
 
@@ -511,8 +509,8 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
                     <div style="color:rgba(255,255,255,0.5);font-size:6px;font-weight:600">Neural Engine</div>
                   </div>
                   <div style="display:flex;align-items:center;gap:3px;margin-bottom:3px">
-                    <div style="width:5px;height:5px;border-radius:50%;background:#00BA7C;box-shadow:0 0 4px #00BA7C"></div>
-                    <div style="color:#00BA7C;font-weight:700;font-size:7.5px">Online</div>
+                    <div style="width:5px;height:5px;border-radius:50%;background:#4ADE80;box-shadow:0 0 4px #4ADE80"></div>
+                    <div style="color:#4ADE80;font-weight:700;font-size:7.5px">Online</div>
                   </div>
                   <div style="display:flex;justify-content:space-between;margin-top:3px">
                     <div style="color:rgba(255,255,255,0.35);font-size:5.5px">Signals Today</div>
@@ -520,7 +518,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
                   </div>
                   <div style="display:flex;justify-content:space-between;margin-top:2px">
                     <div style="color:rgba(255,255,255,0.35);font-size:5.5px">Last Rebal.</div>
-                    <div style="color:#1D9BF0;font-size:5.5px;font-weight:700">23s ago</div>
+                    <div style="color:#60A5FA;font-size:5.5px;font-weight:700">23s ago</div>
                   </div>
                   <div style="display:flex;justify-content:space-between;margin-top:2px">
                     <div style="color:rgba(255,255,255,0.35);font-size:5.5px">Next Cycle</div>
@@ -529,7 +527,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
                 </div>
                 <div style="background:rgba(15,17,25,0.8);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:8px">
                   <div style="color:rgba(255,255,255,0.4);font-size:5.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px">Live Now</div>
-                  <div style="color:#00BA7C;font-weight:800;font-size:11px;letter-spacing:-0.03em">1,249</div>
+                  <div style="color:#4ADE80;font-weight:800;font-size:11px;letter-spacing:-0.03em">1,249</div>
                   <div style="color:rgba(255,255,255,0.4);font-size:6px">investors</div>
                 </div>
                 <div style="background:rgba(15,17,25,0.8);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:8px">
@@ -543,25 +541,25 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
               <div style="margin:0 10px;background:rgba(15,17,25,0.9);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:10px">
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
                   <div style="color:rgba(255,255,255,0.6);font-size:7px;font-weight:600">Today's Gains</div>
-                  <div style="color:#00BA7C;font-size:7px;font-weight:700">+$262.26</div>
+                  <div style="color:#4ADE80;font-size:7px;font-weight:700">+$262.26</div>
                 </div>
-                <div style="font-size:13px;font-weight:900;color:white;letter-spacing:-0.03em;margin-bottom:6px;font-family:'Inter'">$262.26</div>
-                <div style="font-size:6px;color:#1D9BF0;margin-bottom:6px">● Accumulating live</div>
+                <div style="font-size:13px;font-weight:900;color:white;letter-spacing:-0.03em;margin-bottom:6px;font-family:'Bricolage Grotesque'">$262.26</div>
+                <div style="font-size:6px;color:#60A5FA;margin-bottom:6px">● Accumulating live</div>
                 <div style="display:flex;align-items:flex-end;gap:2px;height:28px">
-                  <div style="flex:1;background:rgba(29,155,240,0.3);border-radius:2px 2px 0 0;height:40%"></div>
-                  <div style="flex:1;background:rgba(29,155,240,0.35);border-radius:2px 2px 0 0;height:35%"></div>
-                  <div style="flex:1;background:rgba(29,155,240,0.4);border-radius:2px 2px 0 0;height:55%"></div>
-                  <div style="flex:1;background:rgba(29,155,240,0.5);border-radius:2px 2px 0 0;height:50%"></div>
-                  <div style="flex:1;background:rgba(29,155,240,0.55);border-radius:2px 2px 0 0;height:70%"></div>
-                  <div style="flex:1;background:rgba(29,155,240,0.7);border-radius:2px 2px 0 0;height:65%"></div>
-                  <div style="flex:1;background:#1D9BF0;border-radius:2px 2px 0 0;height:85%"></div>
-                  <div style="flex:1;background:#1D9BF0;border-radius:2px 2px 0 0;height:95%;box-shadow:0 0 8px rgba(29,155,240,0.5)"></div>
+                  <div style="flex:1;background:rgba(37,99,235,0.3);border-radius:2px 2px 0 0;height:40%"></div>
+                  <div style="flex:1;background:rgba(37,99,235,0.35);border-radius:2px 2px 0 0;height:35%"></div>
+                  <div style="flex:1;background:rgba(37,99,235,0.4);border-radius:2px 2px 0 0;height:55%"></div>
+                  <div style="flex:1;background:rgba(37,99,235,0.5);border-radius:2px 2px 0 0;height:50%"></div>
+                  <div style="flex:1;background:rgba(37,99,235,0.55);border-radius:2px 2px 0 0;height:70%"></div>
+                  <div style="flex:1;background:rgba(37,99,235,0.7);border-radius:2px 2px 0 0;height:65%"></div>
+                  <div style="flex:1;background:#3B82F6;border-radius:2px 2px 0 0;height:85%"></div>
+                  <div style="flex:1;background:#2563EB;border-radius:2px 2px 0 0;height:95%;box-shadow:0 0 8px rgba(37,99,235,0.5)"></div>
                 </div>
               </div>
 
               <!-- Bottom buttons -->
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:8px 10px 0">
-                <button style="background:rgba(29,155,240,0.2);border:1px solid rgba(29,155,240,0.3);border-radius:10px;padding:7px;color:#1D9BF0;font-size:7px;font-weight:700;text-align:center">Deposit</button>
+                <button style="background:rgba(37,99,235,0.2);border:1px solid rgba(37,99,235,0.3);border-radius:10px;padding:7px;color:#60A5FA;font-size:7px;font-weight:700;text-align:center">Deposit</button>
                 <button style="background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.25);border-radius:10px;padding:7px;color:#FCA5A5;font-size:7px;font-weight:700;text-align:center">↗ Withdraw</button>
               </div>
 
@@ -571,13 +569,13 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
       </div><!-- /phone -->
 
       <!-- Floating cards around phone -->
-      <div class="absolute glass rounded-2xl px-4 py-3 z-20" style="top:15%;right:-10%;transform:rotate(4deg);min-width:140px;border-color:rgba(0,186,124,0.2);box-shadow:0 16px 40px rgba(0,0,0,0.5)">
+      <div class="absolute glass rounded-2xl px-4 py-3 z-20" style="top:15%;right:-10%;transform:rotate(4deg);min-width:140px;border-color:rgba(34,197,94,0.2);box-shadow:0 16px 40px rgba(0,0,0,0.5)">
         <div class="label mb-1" style="font-size:9px">Daily Yield</div>
-        <div class="font-black text-2xl" style="font-family:'Inter';color:#00BA7C;letter-spacing:-0.04em">Live</div>
+        <div class="font-black text-2xl" style="font-family:'Bricolage Grotesque';color:#4ADE80;letter-spacing:-0.04em">Live</div>
         <div style="font-size:10px;color:var(--muted-light)">853 signals today</div>
       </div>
 
-      <div class="absolute glass rounded-2xl px-4 py-3 z-20" style="bottom:22%;left:-8%;transform:rotate(-3deg);min-width:150px;border-color:rgba(29,155,240,0.2);box-shadow:0 16px 40px rgba(0,0,0,0.5)">
+      <div class="absolute glass rounded-2xl px-4 py-3 z-20" style="bottom:22%;left:-8%;transform:rotate(-3deg);min-width:150px;border-color:rgba(37,99,235,0.2);box-shadow:0 16px 40px rgba(0,0,0,0.5)">
         <div class="flex items-center gap-2 mb-1">
           <div class="w-2 h-2 rounded-full animate-pulse" style="background:var(--green)"></div>
           <div class="label" style="font-size:9px">AI Engine</div>
@@ -606,19 +604,19 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
 <section id="performance" class="py-14 border-y border-white/[0.06]" style="background:rgba(255,255,255,0.015)">
   <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center fade-up">
     <div>
-      <div style="font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;letter-spacing:-0.04em;color:white;font-family:'Inter'">$42M+</div>
+      <div style="font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;letter-spacing:-0.04em;color:white;font-family:'Bricolage Grotesque'">$42M+</div>
       <div class="label mt-1">Assets Under Management</div>
     </div>
     <div>
-      <div style="font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;letter-spacing:-0.04em;color:white;font-family:'Inter'">1.2K+</div>
+      <div style="font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;letter-spacing:-0.04em;color:white;font-family:'Bricolage Grotesque'">1.2K+</div>
       <div class="label mt-1">Active Investors</div>
     </div>
     <div>
-      <div style="font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;letter-spacing:-0.04em;font-family:'Inter'" class="text-green-400">140+</div>
+      <div style="font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;letter-spacing:-0.04em;font-family:'Bricolage Grotesque'" class="text-green-400">140+</div>
       <div class="label mt-1">AI Market Signals</div>
     </div>
     <div>
-      <div style="font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;letter-spacing:-0.04em;color:white;font-family:'Inter'">24/7</div>
+      <div style="font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;letter-spacing:-0.04em;color:white;font-family:'Bricolage Grotesque'">24/7</div>
       <div class="label mt-1">Neural Engine Runtime</div>
     </div>
   </div>
@@ -639,18 +637,18 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
   <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 fade-up">
 
     <div class="card p-8 hover:border-blue-500/20">
-      <div class="feature-icon" style="background:rgba(29,155,240,0.12);border:1px solid rgba(29,155,240,0.2)">
+      <div class="feature-icon" style="background:rgba(37,99,235,0.12);border:1px solid rgba(37,99,235,0.2)">
         <i data-lucide="brain-circuit" class="w-6 h-6" style="color:var(--blue-light)"></i>
       </div>
-      <h3 style="font-size:18px;font-weight:700;color:white;margin-bottom:8px;font-family:'Inter'">Neural Engine</h3>
+      <h3 style="font-size:18px;font-weight:700;color:white;margin-bottom:8px;font-family:'Bricolage Grotesque'">Neural Engine</h3>
       <p style="font-size:14px;color:var(--muted-light);line-height:1.7">Processes 140+ global market signals every second. Rebalances automatically, 24 hours a day.</p>
     </div>
 
     <div class="card p-8 hover:border-green-500/20">
-      <div class="feature-icon" style="background:rgba(0,186,124,0.1);border:1px solid rgba(0,186,124,0.18)">
+      <div class="feature-icon" style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.18)">
         <i data-lucide="trending-up" class="w-6 h-6" style="color:var(--green-light)"></i>
       </div>
-      <h3 style="font-size:18px;font-weight:700;color:white;margin-bottom:8px;font-family:'Inter'">Compounding Daily</h3>
+      <h3 style="font-size:18px;font-weight:700;color:white;margin-bottom:8px;font-family:'Bricolage Grotesque'">Compounding Daily</h3>
       <p style="font-size:14px;color:var(--muted-light);line-height:1.7">Profits reinvest automatically. Every dollar earned immediately starts working harder for you.</p>
     </div>
 
@@ -658,15 +656,15 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
       <div class="feature-icon" style="background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.18)">
         <i data-lucide="shield-check" class="w-6 h-6" style="color:#A78BFA"></i>
       </div>
-      <h3 style="font-size:18px;font-weight:700;color:white;margin-bottom:8px;font-family:'Inter'">Non-Custodial</h3>
-      <p style="font-size:14px;color:var(--muted-light);line-height:1.7">Your keys. Your assets. We never hold your crypto you always stay in control.</p>
+      <h3 style="font-size:18px;font-weight:700;color:white;margin-bottom:8px;font-family:'Bricolage Grotesque'">Non-Custodial</h3>
+      <p style="font-size:14px;color:var(--muted-light);line-height:1.7">Your keys. Your assets. We never hold your crypto — you always stay in control.</p>
     </div>
 
     <div class="card p-8 hover:border-amber-500/20">
       <div class="feature-icon" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.18)">
         <i data-lucide="zap" class="w-6 h-6" style="color:#FCD34D"></i>
       </div>
-      <h3 style="font-size:18px;font-weight:700;color:white;margin-bottom:8px;font-family:'Inter'">Instant Withdrawals</h3>
+      <h3 style="font-size:18px;font-weight:700;color:white;margin-bottom:8px;font-family:'Bricolage Grotesque'">Instant Withdrawals</h3>
       <p style="font-size:14px;color:var(--muted-light);line-height:1.7">Request a withdrawal anytime. Funds hit your wallet in under 5 minutes, no questions asked.</p>
     </div>
 
@@ -674,15 +672,15 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
       <div class="feature-icon" style="background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.18)">
         <i data-lucide="bar-chart-3" class="w-6 h-6" style="color:#67E8F9"></i>
       </div>
-      <h3 style="font-size:18px;font-weight:700;color:white;margin-bottom:8px;font-family:'Inter'">Full Transparency</h3>
-      <p style="font-size:14px;color:var(--muted-light);line-height:1.7">On-chain audit trails. Every trade, every rebalance all verifiable on Etherscan in real time.</p>
+      <h3 style="font-size:18px;font-weight:700;color:white;margin-bottom:8px;font-family:'Bricolage Grotesque'">Full Transparency</h3>
+      <p style="font-size:14px;color:var(--muted-light);line-height:1.7">On-chain audit trails. Every trade, every rebalance — all verifiable on Etherscan in real time.</p>
     </div>
 
     <div class="card p-8 hover:border-rose-500/20">
       <div class="feature-icon" style="background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.18)">
         <i data-lucide="infinity" class="w-6 h-6" style="color:#FDA4AF"></i>
       </div>
-      <h3 style="font-size:18px;font-weight:700;color:white;margin-bottom:8px;font-family:'Inter'">Emotion-Free</h3>
+      <h3 style="font-size:18px;font-weight:700;color:white;margin-bottom:8px;font-family:'Bricolage Grotesque'">Emotion-Free</h3>
       <p style="font-size:14px;color:var(--muted-light);line-height:1.7">No panic selling. No FOMO buying. Pure mathematical precision executing your strategy 24/7.</p>
     </div>
 
@@ -696,29 +694,29 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
     </div>
     <div class="grid md:grid-cols-3 gap-8 relative">
       <!-- Connecting line (desktop) -->
-      <div class="hidden md:block absolute top-10 left-1/3 right-1/3 h-px" style="background:linear-gradient(to right,transparent,rgba(29,155,240,0.4),transparent);z-index:0"></div>
+      <div class="hidden md:block absolute top-10 left-1/3 right-1/3 h-px" style="background:linear-gradient(to right,transparent,rgba(37,99,235,0.4),transparent);z-index:0"></div>
 
       <div class="text-center space-y-4 relative z-10">
-        <div class="w-20 h-20 rounded-[24px] mx-auto flex items-center justify-center" style="background:linear-gradient(135deg,rgba(29,155,240,0.2),rgba(29,155,240,0.05));border:1px solid rgba(29,155,240,0.3)">
-          <span style="font-size:28px;font-weight:900;color:var(--blue-light);font-family:'Inter'">1</span>
+        <div class="w-20 h-20 rounded-[24px] mx-auto flex items-center justify-center" style="background:linear-gradient(135deg,rgba(37,99,235,0.2),rgba(37,99,235,0.05));border:1px solid rgba(37,99,235,0.3)">
+          <span style="font-size:28px;font-weight:900;color:var(--blue-light);font-family:'Bricolage Grotesque'">1</span>
         </div>
-        <h3 style="font-size:18px;font-weight:700;color:white;font-family:'Inter'">Join the Waitlist</h3>
+        <h3 style="font-size:18px;font-weight:700;color:white;font-family:'Bricolage Grotesque'">Join the Waitlist</h3>
         <p style="font-size:14px;color:var(--muted-light);line-height:1.7">Secure your spot. Early access members get priority onboarding and locked-in tier pricing.</p>
       </div>
 
       <div class="text-center space-y-4 relative z-10">
-        <div class="w-20 h-20 rounded-[24px] mx-auto flex items-center justify-center" style="background:linear-gradient(135deg,rgba(29,155,240,0.3),rgba(29,155,240,0.08));border:1px solid rgba(29,155,240,0.4)">
-          <span style="font-size:28px;font-weight:900;color:var(--blue-light);font-family:'Inter'">2</span>
+        <div class="w-20 h-20 rounded-[24px] mx-auto flex items-center justify-center" style="background:linear-gradient(135deg,rgba(37,99,235,0.3),rgba(37,99,235,0.08));border:1px solid rgba(37,99,235,0.4)">
+          <span style="font-size:28px;font-weight:900;color:var(--blue-light);font-family:'Bricolage Grotesque'">2</span>
         </div>
-        <h3 style="font-size:18px;font-weight:700;color:white;font-family:'Inter'">Choose Your Tier</h3>
+        <h3 style="font-size:18px;font-weight:700;color:white;font-family:'Bricolage Grotesque'">Choose Your Tier</h3>
         <p style="font-size:14px;color:var(--muted-light);line-height:1.7">Pick a portfolio tier from $5K to $50K. Connect your wallet. The AI starts optimising immediately.</p>
       </div>
 
       <div class="text-center space-y-4 relative z-10">
-        <div class="w-20 h-20 rounded-[24px] mx-auto flex items-center justify-center" style="background:linear-gradient(135deg,rgba(0,186,124,0.2),rgba(0,186,124,0.05));border:1px solid rgba(0,186,124,0.3)">
-          <span style="font-size:28px;font-weight:900;color:var(--green-light);font-family:'Inter'">3</span>
+        <div class="w-20 h-20 rounded-[24px] mx-auto flex items-center justify-center" style="background:linear-gradient(135deg,rgba(34,197,94,0.2),rgba(34,197,94,0.05));border:1px solid rgba(34,197,94,0.3)">
+          <span style="font-size:28px;font-weight:900;color:var(--green-light);font-family:'Bricolage Grotesque'">3</span>
         </div>
-        <h3 style="font-size:18px;font-weight:700;color:white;font-family:'Inter'">Watch It Grow</h3>
+        <h3 style="font-size:18px;font-weight:700;color:white;font-family:'Bricolage Grotesque'">Watch It Grow</h3>
         <p style="font-size:14px;color:var(--muted-light);line-height:1.7">Track gains in real time. Withdraw anytime. Compound to accelerate returns.</p>
       </div>
     </div>
@@ -729,7 +727,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
 <!-- ═══════════════════════════════════════════
      GROWTH CALCULATOR
 ═══════════════════════════════════════════ -->
-<section class="py-32 px-6 border-t border-white/[0.06]" style="background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(29,155,240,0.07) 0%,transparent 70%)">
+<section class="py-32 px-6 border-t border-white/[0.06]" style="background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(37,99,235,0.07) 0%,transparent 70%)">
   <div class="max-w-5xl mx-auto fade-up">
     <div class="text-center mb-16">
       <div class="label label-blue mb-4">Projection Tool</div>
@@ -742,7 +740,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
           <div class="flex justify-between items-end">
             <div>
               <div class="label mb-2">Investment Amount</div>
-              <div style="font-size:3rem;font-weight:900;letter-spacing:-0.04em;color:var(--blue-light);font-family:'Inter'" id="calc-val-display">$5,000</div>
+              <div style="font-size:3rem;font-weight:900;letter-spacing:-0.04em;color:var(--blue-light);font-family:'Bricolage Grotesque'" id="calc-val-display">$5,000</div>
             </div>
             <div class="text-right">
               <div class="label mb-2">Daily Profit</div>
@@ -755,9 +753,9 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
             <div id="slider-labels" class="flex justify-between mt-4" style="font-size:11px;font-weight:600;color:var(--muted)"></div>
           </div>
 
-          <div class="p-6 rounded-2xl" style="background:rgba(0,186,124,0.07);border:1px solid rgba(0,186,124,0.15)">
+          <div class="p-6 rounded-2xl" style="background:rgba(34,197,94,0.07);border:1px solid rgba(34,197,94,0.15)">
             <div class="label mb-2">Illustrative 30-Day Projection</div>
-            <div style="font-size:2.5rem;font-weight:900;letter-spacing:-0.04em;color:white;font-family:'Inter'" id="projected-monthly-display">$26,380</div>
+            <div style="font-size:2.5rem;font-weight:900;letter-spacing:-0.04em;color:white;font-family:'Bricolage Grotesque'" id="projected-monthly-display">$26,380</div>
             <div style="font-size:12px;color:var(--muted);margin-top:6px">Based on current AI performance data · Results vary</div>
           </div>
 
@@ -787,20 +785,20 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
       <div class="space-y-8">
         <div class="label label-blue">Powered by AI</div>
         <h2 class="headline text-white">Not a trading bot.<br><span style="color:var(--muted-light)">A financial brain.</span></h2>
-        <p style="font-size:17px;color:var(--muted-light);line-height:1.8">Equiflow's neural engine was built by Christian Szegedy seven years of PhD research in non-linear predictive modeling, now running for you around the clock.</p>
+        <p style="font-size:17px;color:var(--muted-light);line-height:1.8">Equiflow's neural engine was built by Dr. Sarah Vance — seven years of PhD research in non-linear predictive modeling, now running for you around the clock.</p>
 
         <div class="space-y-4">
           <div class="flex items-start gap-4 p-5 card rounded-[18px] hover:border-blue-500/20">
-            <div class="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 mt-0.5" style="background:rgba(29,155,240,0.15)">
+            <div class="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 mt-0.5" style="background:rgba(37,99,235,0.15)">
               <i data-lucide="cpu" class="w-4 h-4" style="color:var(--blue-light)"></i>
             </div>
             <div>
               <div style="font-weight:600;color:white;margin-bottom:4px">140+ Market Signals</div>
-              <div style="font-size:13px;color:var(--muted-light)">Cross-asset correlation, sentiment analysis, on-chain metrics, and macro indicators all processed simultaneously.</div>
+              <div style="font-size:13px;color:var(--muted-light)">Cross-asset correlation, sentiment analysis, on-chain metrics, and macro indicators — all processed simultaneously.</div>
             </div>
           </div>
           <div class="flex items-start gap-4 p-5 card rounded-[18px] hover:border-green-500/20">
-            <div class="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 mt-0.5" style="background:rgba(0,186,124,0.12)">
+            <div class="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 mt-0.5" style="background:rgba(34,197,94,0.12)">
               <i data-lucide="refresh-cw" class="w-4 h-4" style="color:var(--green-light)"></i>
             </div>
             <div>
@@ -814,7 +812,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
             </div>
             <div>
               <div style="font-weight:600;color:white;margin-bottom:4px">Research-Driven AI Architecture</div>
-              <div style="font-size:13px;color:var(--muted-light)">Built on a decade of AI research and neural network design rigorous, tested, and transparent. Institutional-grade intelligence now available to everyone.</div>
+              <div style="font-size:13px;color:var(--muted-light)">Built on a decade of AI research and neural network design — rigorous, tested, and transparent. Institutional-grade intelligence now available to everyone.</div>
             </div>
           </div>
         </div>
@@ -823,7 +821,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
       <!-- Right: AI diagram -->
       <div class="relative glass rounded-[40px] p-12 border-white/[0.08] overflow-hidden min-h-[420px] flex items-center justify-center">
         <div class="absolute inset-0 opacity-[0.05]" style="background-image:radial-gradient(circle at 2px 2px,rgba(255,255,255,0.8) 1px,transparent 0);background-size:24px 24px"></div>
-        <div class="orb w-64 h-64 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="background:rgba(29,155,240,0.1);filter:blur(60px)"></div>
+        <div class="orb w-64 h-64 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="background:rgba(37,99,235,0.1);filter:blur(60px)"></div>
 
         <div class="relative z-10 w-full max-w-xs space-y-6">
           <!-- Input signals -->
@@ -848,7 +846,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
           </div>
 
           <!-- AI Engine center -->
-          <div class="mx-auto w-28 h-28 rounded-3xl flex items-center justify-center relative" style="background:linear-gradient(135deg,#1D9BF0,#1d4ed8);box-shadow:0 0 60px rgba(29,155,240,0.4)">
+          <div class="mx-auto w-28 h-28 rounded-3xl flex items-center justify-center relative" style="background:linear-gradient(135deg,#2563EB,#1d4ed8);box-shadow:0 0 60px rgba(37,99,235,0.4)">
             <i data-lucide="zap" class="w-10 h-10 text-white"></i>
             <div class="absolute -inset-3 rounded-[36px] border border-blue-500/20 animate-[spin_8s_linear_infinite]"></div>
           </div>
@@ -885,13 +883,13 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
       <div class="relative group">
         <div class="absolute -inset-4 rounded-[2.5rem] blur-3xl opacity-15" style="background:linear-gradient(135deg,var(--blue),var(--green))"></div>
         <div class="relative glass rounded-[2.5rem] overflow-hidden border-white/[0.07]" style="aspect-ratio:4/5">
-          <img src="images/founder.png" alt="Founder" style="width:100%;height:100%;object-fit:cover;object-position:center top;"> 
-          <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,rgba(29,155,240,.06),rgba(0,186,124,.04))">
+          <img src="/images/founder.png" alt="Founder" style="width:100%;height:100%;object-fit:cover;object-position:center top;"> 
+          <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,rgba(37,99,235,.06),rgba(34,197,94,.04))">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
             <p style="color:rgba(255,255,255,.25);font-size:13px;font-weight:600;text-align:center;padding:0 20px">Founder Photo<br><span style="font-size:11px;font-weight:400">Recommended: 600×750px portrait</span></p>
           </div>
           <div class="absolute bottom-7 left-7 right-7 glass p-5 rounded-[18px] border-white/[0.08]">
-            <h4 class="text-base font-bold text-white mb-0.5 tracking-tight" style="font-family:'Inter'">Christian Szegedy</h4>
+            <h4 class="text-base font-bold text-white mb-0.5 tracking-tight" style="font-family:'Bricolage Grotesque'">Christian Szegedy</h4>
             <p class="label label-blue" style="font-size:10px">Founder · xAI Researcher · Quant</p>
           </div>
         </div>
@@ -900,7 +898,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
         <div class="label label-blue mb-2">The Architect</div>
         <h2 class="headline text-white">The mind behind<br><span style="color:var(--muted-light)">the machine.</span></h2>
         <p style="font-size:17px;font-style:italic;color:var(--muted-light);line-height:1.8">"I’ve spent my career exploring AI—from building deep learning architectures at Google Brain to co-founding xAI, studying the limits of neural networks, and running quantitative strategies for institutional desks. Equiflow embodies the system I’ve always wanted the same intelligence and rigor that the largest firms rely on, now accessible to everyone."</p>
-        <p style="font-size:15px;color:var(--muted-light);line-height:1.8">Christian brings deep expertise from xAI's research division and years running live quantitative strategies across crypto and equities. He built Equiflow's neural engine from scratch processing 140+ live market signals with sub-second rebalancing precision that was previously only available to institutional desks.</p>
+        <p style="font-size:15px;color:var(--muted-light);line-height:1.8">Christian brings deep expertise from xAI's research division and years running live quantitative strategies across crypto and equities. He built Equiflow's neural engine from scratch — processing 140+ live market signals with sub-second rebalancing precision that was previously only available to institutional desks.</p>
         <div class="grid sm:grid-cols-2 gap-3">
           <div class="flex items-center gap-3 p-4 card rounded-[14px] border-white/[0.07]">
             <i data-lucide="building-2" class="w-4 h-4 shrink-0" style="color:var(--blue-light)"></i>
@@ -933,7 +931,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
          style="background:linear-gradient(135deg,#0e0608,#180a0a,#0a0a14);
                 border:1px solid rgba(239,68,68,.2)">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-56 rounded-full pointer-events-none" style="background:rgba(239,68,68,.07);filter:blur(80px)"></div>
-        <div class="absolute bottom-0 right-0 w-72 h-60 rounded-full pointer-events-none" style="background:rgba(29,155,240,.06);filter:blur(80px)"></div>
+        <div class="absolute bottom-0 right-0 w-72 h-60 rounded-full pointer-events-none" style="background:rgba(99,102,241,.06);filter:blur(80px)"></div>
         <div class="relative z-10 p-6 md:p-10 lg:p-16">
             <div class="flex justify-center mb-8 md:mb-10">
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-black tracking-[0.2em] uppercase" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#f87171">
@@ -970,7 +968,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
                 </div>
                 <div class="flex flex-col gap-4">
                     <div class="relative rounded-2xl overflow-hidden" style="border:1px solid rgba(239,68,68,.15);background:#0e0608">
-                       <img src="images/Teslav.png" alt="Tesla" class="w-full object-cover" style="height:200px;mix-blend-mode:luminosity;opacity:0.9" loading="lazy"> 
+                       <img src="/images/Teslav.png" alt="Tesla" class="w-full object-cover" style="height:200px;mix-blend-mode:luminosity;opacity:0.9" loading="lazy"> 
                         <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(14,6,8,.9) 0%,transparent 55%)"></div>
                         <div class="absolute bottom-4 left-4">
                             <p class="text-2xl font-black text-white tracking-tight leading-none">Tesla Models</p>
@@ -979,7 +977,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
                         <div class="absolute top-3 right-3 text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-widest" style="background:rgba(239,68,68,.2);color:#fca5a5;border:1px solid rgba(239,68,68,.3)">Grand Prize</div>
                     </div>
                     <div class="glass p-5 rounded-2xl space-y-4" style="border-color:rgba(239,68,68,.15)">
-                        <div class="flex items-start gap-3 p-3 rounded-xl" style="background:rgba(0,186,124,.06);border:1px solid rgba(0,186,124,.15)">
+                        <div class="flex items-start gap-3 p-3 rounded-xl" style="background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.15)">
                             <i data-lucide="check-circle" class="w-4 h-4 text-green-400 shrink-0 mt-0.5"></i>
                             <p class="text-xs text-green-300 leading-relaxed"><strong>Open to all active investors.</strong> Any confirmed deposit — Tier 1 through Tier 4 — automatically enters you in every monthly draw.</p>
                         </div>
@@ -1016,7 +1014,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
     <div class="space-y-3">
       <div class="flex items-center gap-2">
         <i data-lucide="star" class="tp-star w-7 h-7"></i>
-        <span style="font-size:22px;font-weight:700;font-family:'Inter'">Investor Reviews</span>
+        <span style="font-size:22px;font-weight:700;font-family:'Bricolage Grotesque'">Investor Reviews</span>
       </div>
       <h2 class="headline text-white">Rated Excellent <span style="color:var(--blue-light)">4.5/5</span></h2>
       <p style="color:var(--muted-light)">Over 400+ independent investor reviews verified globally.</p>
@@ -1032,7 +1030,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
   </div>
 
   <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 fade-up">
-    <div class="card p-6 space-y-4 hover:border-green-500/15"><div class="flex justify-between"><div class="flex gap-0.5"><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i></div><span class="label" style="font-size:9px">Today</span></div><h5 style="font-weight:700;color:white">The AI actually works.</h5><p style="font-size:13px;color:var(--muted-light);line-height:1.6">Started with $5,000 tier. The compounding rebalancing is visible in the dashboard daily. Incredible.</p><div class="pt-4 border-t border-white/[0.06] flex items-center gap-3"><div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style="background:rgba(29,155,240,0.15);color:var(--blue-light)">MG</div><div><p style="font-size:12px;font-weight:600;color:white">Marcus G.</p><p style="font-size:10px;color:var(--green-light);display:flex;align-items:center;gap:4px;margin-top:2px"><i data-lucide="check-circle" class="w-3 h-3"></i> Verified</p></div></div></div>
+    <div class="card p-6 space-y-4 hover:border-green-500/15"><div class="flex justify-between"><div class="flex gap-0.5"><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i></div><span class="label" style="font-size:9px">Today</span></div><h5 style="font-weight:700;color:white">The AI actually works.</h5><p style="font-size:13px;color:var(--muted-light);line-height:1.6">Started with $5,000 tier. The compounding rebalancing is visible in the dashboard daily. Incredible.</p><div class="pt-4 border-t border-white/[0.06] flex items-center gap-3"><div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style="background:rgba(37,99,235,0.15);color:var(--blue-light)">MG</div><div><p style="font-size:12px;font-weight:600;color:white">Marcus G.</p><p style="font-size:10px;color:var(--green-light);display:flex;align-items:center;gap:4px;margin-top:2px"><i data-lucide="check-circle" class="w-3 h-3"></i> Verified</p></div></div></div>
     <div class="card p-6 space-y-4 hover:border-green-500/15"><div class="flex justify-between"><div class="flex gap-0.5"><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 text-gray-700 fill-gray-700"></i></div><span class="label" style="font-size:9px">Yesterday</span></div><h5 style="font-weight:700;color:white">Institutional Math.</h5><p style="font-size:13px;color:var(--muted-light);line-height:1.6">Christian Szegedy background gave me confidence to move to the $25k tier. Performance is steady.</p><div class="pt-4 border-t border-white/[0.06] flex items-center gap-3"><div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style="background:rgba(139,92,246,0.15);color:#A78BFA">EF</div><div><p style="font-size:12px;font-weight:600;color:white">Dr. Elias F.</p><p style="font-size:10px;color:var(--green-light);display:flex;align-items:center;gap:4px;margin-top:2px"><i data-lucide="check-circle" class="w-3 h-3"></i> Verified</p></div></div></div>
     <div class="card p-6 space-y-4 hover:border-green-500/15"><div class="flex justify-between"><div class="flex gap-0.5"><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i></div><span class="label" style="font-size:9px">2 days ago</span></div><h5 style="font-weight:700;color:white">Excellent long term.</h5><p style="font-size:13px;color:var(--muted-light);line-height:1.6">Started with the $10K tier. Already seeing the power of compounding logic after 1 month.</p><div class="pt-4 border-t border-white/[0.06] flex items-center gap-3"><div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style="background:rgba(6,182,212,0.15);color:#67E8F9">SW</div><div><p style="font-size:12px;font-weight:600;color:white">Sophie W.</p><p style="font-size:10px;color:var(--green-light);display:flex;align-items:center;gap:4px;margin-top:2px"><i data-lucide="check-circle" class="w-3 h-3"></i> Verified</p></div></div></div>
     <div class="card p-6 space-y-4"><div class="flex gap-0.5 mb-1"><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i><i data-lucide="star" class="w-3 h-3 tp-star fill-[#00b67a]"></i></div><h5 style="font-size:14px;font-weight:700;color:white">Institutional level tools.</h5><p style="font-size:13px;color:var(--muted-light)">The neural flow diagram helped me understand the logic. Refreshing to see AI that manages risk properly.</p><p style="font-size:11px;color:white;font-weight:600;margin-top:8px">— James W.</p></div>
@@ -1068,7 +1066,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
 <section class="py-24 border-t border-white/[0.06] overflow-hidden">
   <div class="max-w-7xl mx-auto px-6 mb-12">
     <div class="label label-blue mb-3">Testimonials</div>
-    <h2 style="font-size:clamp(1.8rem,3vw,2.5rem);font-weight:800;color:white;letter-spacing:-0.03em;font-family:'Inter'">Trusted by hundreds of investors</h2>
+    <h2 style="font-size:clamp(1.8rem,3vw,2.5rem);font-weight:800;color:white;letter-spacing:-0.03em;font-family:'Bricolage Grotesque'">Trusted by hundreds of investors</h2>
   </div>
   <div class="relative flex overflow-x-hidden">
     <div class="vid-inner" id="vid-track">
@@ -1076,7 +1074,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
       <!-- Card 1: Alex -->
       <div class="card vid-card rounded-[22px] overflow-hidden flex flex-col shrink-0 mr-5" style="width:300px">
         <div class="relative cursor-pointer" style="height:340px;background:#0a0a10;" onclick="toggleVid(this)">
-          <video class="w-full h-full object-cover" src="videos/compressed-alexvid.mp4" preload="metadata" playsinline></video>
+          <video class="w-full h-full object-cover" src="../videos/compressed-alexvid.mp4" preload="metadata" playsinline></video>
           <div class="play-overlay absolute inset-0 flex items-center justify-center" style="background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.1) 100%)">
             <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);backdrop-filter:blur(8px)">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
@@ -1093,7 +1091,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
       <!-- Card 2: Matt -->
       <div class="card vid-card rounded-[22px] overflow-hidden flex flex-col shrink-0 mr-5" style="width:300px">
         <div class="relative cursor-pointer" style="height:340px;background:#0a0a10;" onclick="toggleVid(this)">
-          <video class="w-full h-full object-cover" src="videos/compressed-mattvid.mp4" preload="metadata" playsinline></video>
+          <video class="w-full h-full object-cover" src="../videos/compressed-mattvid.mp4" preload="metadata" playsinline></video>
           <div class="play-overlay absolute inset-0 flex items-center justify-center" style="background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.1) 100%)">
             <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);backdrop-filter:blur(8px)">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
@@ -1110,7 +1108,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
       <!-- Card 3: Mike -->
       <div class="card vid-card rounded-[22px] overflow-hidden flex flex-col shrink-0 mr-5" style="width:300px">
         <div class="relative cursor-pointer" style="height:340px;background:#0a0a10;" onclick="toggleVid(this)">
-          <video class="w-full h-full object-cover" src="videos/compressed-mikevid.mp4" preload="metadata" playsinline></video>
+          <video class="w-full h-full object-cover" src="../videos/compressed-mikevid.mp4" preload="metadata" playsinline></video>
           <div class="play-overlay absolute inset-0 flex items-center justify-center" style="background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.1) 100%)">
             <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);backdrop-filter:blur(8px)">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
@@ -1127,7 +1125,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
       <!-- Card 4: Carlos -->
       <div class="card vid-card rounded-[22px] overflow-hidden flex flex-col shrink-0 mr-5" style="width:300px">
         <div class="relative cursor-pointer" style="height:340px;background:#0a0a10;" onclick="toggleVid(this)">
-          <video class="w-full h-full object-cover" src="videos/compressed-carlosvid.mp4" preload="metadata" playsinline></video>
+          <video class="w-full h-full object-cover" src="../videos/compressed-carlosvid.mp4" preload="metadata" playsinline></video>
           <div class="play-overlay absolute inset-0 flex items-center justify-center" style="background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.1) 100%)">
             <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);backdrop-filter:blur(8px)">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
@@ -1144,7 +1142,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
       <!-- Card 5: Emma -->
       <div class="card vid-card rounded-[22px] overflow-hidden flex flex-col shrink-0 mr-5" style="width:300px">
         <div class="relative cursor-pointer" style="height:340px;background:#0a0a10;" onclick="toggleVid(this)">
-          <video class="w-full h-full object-cover" src="videos/compressed-emmavid.mp4" preload="metadata" playsinline></video>
+          <video class="w-full h-full object-cover" src="../videos/compressed-emmavid.mp4" preload="metadata" playsinline></video>
           <div class="play-overlay absolute inset-0 flex items-center justify-center" style="background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.1) 100%)">
             <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);backdrop-filter:blur(8px)">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
@@ -1161,7 +1159,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
       <!-- Clones for seamless loop -->
       <div class="card vid-card rounded-[22px] overflow-hidden flex flex-col shrink-0 mr-5" style="width:300px">
         <div class="relative cursor-pointer" style="height:340px;background:#0a0a10;" onclick="toggleVid(this)">
-          <video class="w-full h-full object-cover" src="videos/compressed-alexvid.mp4" preload="metadata" playsinline></video>
+          <video class="w-full h-full object-cover" src="../videos/compressed-alexvid.mp4" preload="metadata" playsinline></video>
           <div class="play-overlay absolute inset-0 flex items-center justify-center" style="background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.1) 100%)">
             <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);backdrop-filter:blur(8px)">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
@@ -1172,7 +1170,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
       </div>
       <div class="card vid-card rounded-[22px] overflow-hidden flex flex-col shrink-0 mr-5" style="width:300px">
         <div class="relative cursor-pointer" style="height:340px;background:#0a0a10;" onclick="toggleVid(this)">
-          <video class="w-full h-full object-cover" src="videos/compressed-mattvid.mp4" preload="metadata" playsinline></video>
+          <video class="w-full h-full object-cover" src="../videos/compressed-mattvid.mp4" preload="metadata" playsinline></video>
           <div class="play-overlay absolute inset-0 flex items-center justify-center" style="background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.1) 100%)">
             <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);backdrop-filter:blur(8px)">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
@@ -1183,7 +1181,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
       </div>
       <div class="card vid-card rounded-[22px] overflow-hidden flex flex-col shrink-0 mr-5" style="width:300px">
         <div class="relative cursor-pointer" style="height:340px;background:#0a0a10;" onclick="toggleVid(this)">
-          <video class="w-full h-full object-cover" src="videos/compressed-mikevid.mp4" preload="metadata" playsinline></video>
+          <video class="w-full h-full object-cover" src="../videos/compressed-mikevid.mp4" preload="metadata" playsinline></video>
           <div class="play-overlay absolute inset-0 flex items-center justify-center" style="background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.1) 100%)">
             <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);backdrop-filter:blur(8px)">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
@@ -1194,7 +1192,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
       </div>
       <div class="card vid-card rounded-[22px] overflow-hidden flex flex-col shrink-0 mr-5" style="width:300px">
         <div class="relative cursor-pointer" style="height:340px;background:#0a0a10;" onclick="toggleVid(this)">
-          <video class="w-full h-full object-cover" src="videos/compressed-carlosvid.mp4" preload="metadata" playsinline></video>
+          <video class="w-full h-full object-cover" src="../videos/compressed-carlosvid.mp4" preload="metadata" playsinline></video>
           <div class="play-overlay absolute inset-0 flex items-center justify-center" style="background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.1) 100%)">
             <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);backdrop-filter:blur(8px)">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
@@ -1205,7 +1203,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.15); }
       </div>
       <div class="card vid-card rounded-[22px] overflow-hidden flex flex-col shrink-0 mr-5" style="width:300px">
         <div class="relative cursor-pointer" style="height:340px;background:#0a0a10;" onclick="toggleVid(this)">
-          <video class="w-full h-full object-cover" src="videos/compressed-emmavid.mp4" preload="metadata" playsinline></video>
+          <video class="w-full h-full object-cover" src="../videos/compressed-emmavid.mp4" preload="metadata" playsinline></video>
           <div class="play-overlay absolute inset-0 flex items-center justify-center" style="background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.1) 100%)">
             <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);backdrop-filter:blur(8px)">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
@@ -1301,20 +1299,20 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVidModa
 
     <div class="space-y-10 fade-up" style="animation-delay:0.1s">
       <div>
-        <div class="inline-flex px-3 py-1.5 rounded-full text-xs font-semibold mb-4" style="background:rgba(0,186,124,0.1);border:1px solid rgba(0,186,124,0.2);color:var(--green-light)">24/7 Support</div>
-        <h3 style="font-size:clamp(1.5rem,2.5vw,2rem);font-weight:800;color:white;letter-spacing:-0.03em;font-family:'Inter'">We've got your back.<br>Anytime. Anywhere.</h3>
+        <div class="inline-flex px-3 py-1.5 rounded-full text-xs font-semibold mb-4" style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);color:var(--green-light)">24/7 Support</div>
+        <h3 style="font-size:clamp(1.5rem,2.5vw,2rem);font-weight:800;color:white;letter-spacing:-0.03em;font-family:'Bricolage Grotesque'">We've got your back.<br>Anytime. Anywhere.</h3>
         <p style="margin-top:12px;color:var(--muted-light);line-height:1.7">Human support in 20+ languages. No bots. No waiting. Real answers from real people who understand investing.</p>
       </div>
       <div class="grid sm:grid-cols-2 gap-4">
         <a href="https://t.me/equiflowai" target="_blank" class="card p-7 rounded-[20px] space-y-4 hover:border-blue-500/25 block transition-all">
-          <div class="w-10 h-10 rounded-2xl flex items-center justify-center" style="background:rgba(29,155,240,0.12)">
+          <div class="w-10 h-10 rounded-2xl flex items-center justify-center" style="background:rgba(37,99,235,0.12)">
             <i data-lucide="send" class="w-4 h-4" style="color:var(--blue-light)"></i>
           </div>
           <h4 style="font-weight:700;color:white">Telegram Support</h4>
           <p style="font-size:13px;color:var(--muted-light)">Official 24/7 community help channel.</p>
         </a>
         <a href="#" class="card p-7 rounded-[20px] space-y-4 hover:border-green-500/25 block transition-all">
-          <div class="w-10 h-10 rounded-2xl flex items-center justify-center" style="background:rgba(0,186,124,0.1)">
+          <div class="w-10 h-10 rounded-2xl flex items-center justify-center" style="background:rgba(34,197,94,0.1)">
             <i data-lucide="mail" class="w-4 h-4" style="color:var(--green-light)"></i>
           </div>
           <h4 style="font-weight:700;color:white">Direct Email</h4>
@@ -1327,15 +1325,15 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVidModa
         <div class="label mb-4">Security &amp; Compliance</div>
         <div class="space-y-3">
           <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-xl flex items-center justify-center shrink-0" style="background:rgba(0,186,124,0.1)"><i data-lucide="shield-check" class="w-4 h-4" style="color:var(--green-light)"></i></div>
+            <div class="w-8 h-8 rounded-xl flex items-center justify-center shrink-0" style="background:rgba(34,197,94,0.1)"><i data-lucide="shield-check" class="w-4 h-4" style="color:var(--green-light)"></i></div>
             <span style="font-size:13px;font-weight:600;color:white">256-bit AES Encryption</span>
           </div>
           <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-xl flex items-center justify-center shrink-0" style="background:rgba(0,186,124,0.1)"><i data-lucide="check-circle-2" class="w-4 h-4" style="color:var(--green-light)"></i></div>
+            <div class="w-8 h-8 rounded-xl flex items-center justify-center shrink-0" style="background:rgba(34,197,94,0.1)"><i data-lucide="check-circle-2" class="w-4 h-4" style="color:var(--green-light)"></i></div>
             <span style="font-size:13px;font-weight:600;color:white">Fully Audited Smart Contract</span>
           </div>
           <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-xl flex items-center justify-center shrink-0" style="background:rgba(0,186,124,0.1)"><i data-lucide="search" class="w-4 h-4" style="color:var(--green-light)"></i></div>
+            <div class="w-8 h-8 rounded-xl flex items-center justify-center shrink-0" style="background:rgba(34,197,94,0.1)"><i data-lucide="search" class="w-4 h-4" style="color:var(--green-light)"></i></div>
             <span style="font-size:13px;font-weight:600;color:white">On-Chain Transparent Audit</span>
           </div>
         </div>
@@ -1354,7 +1352,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVidModa
   </div>
   <div class="relative flex overflow-x-hidden">
     <div class="logos-inner" style="padding:0 20px">
-      <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3;transition:opacity 0.2s" onmouseenter="this.style.opacity=0.8" onmouseleave="this.style.opacity=0.3"><span style="font-size:14px;font-weight:800;color:white;font-family:'Inter'">COIN<span style="color:#f97316">TELEGRAPH</span></span></div>
+      <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3;transition:opacity 0.2s" onmouseenter="this.style.opacity=0.8" onmouseleave="this.style.opacity=0.3"><span style="font-size:14px;font-weight:800;color:white;font-family:'Bricolage Grotesque'">COIN<span style="color:#f97316">TELEGRAPH</span></span></div>
       <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3;transition:opacity 0.2s" onmouseenter="this.style.opacity=0.8" onmouseleave="this.style.opacity=0.3"><span style="font-size:14px;font-weight:700;color:white">Bitcoin.com</span></div>
       <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3;transition:opacity 0.2s" onmouseenter="this.style.opacity=0.8" onmouseleave="this.style.opacity=0.3"><span style="font-size:14px;font-weight:800;color:white;letter-spacing:0.08em">DECRYPT</span></div>
       <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3;transition:opacity 0.2s" onmouseenter="this.style.opacity=0.8" onmouseleave="this.style.opacity=0.3"><span style="font-size:14px;font-weight:700;color:white;letter-spacing:0.1em">THE BLOCK</span></div>
@@ -1362,7 +1360,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVidModa
       <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3;transition:opacity 0.2s" onmouseenter="this.style.opacity=0.8" onmouseleave="this.style.opacity=0.3"><span style="font-size:14px;font-weight:800;color:black;background:#eab308;padding:2px 8px;border-radius:4px">CoinDesk</span></div>
       <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3;transition:opacity 0.2s" onmouseenter="this.style.opacity=0.8" onmouseleave="this.style.opacity=0.3"><span style="font-size:14px;font-weight:300;color:white;letter-spacing:0.15em;text-transform:uppercase">Bankless</span></div>
       <!-- clones -->
-      <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3" ><span style="font-size:14px;font-weight:800;color:white;font-family:'Inter'">COIN<span style="color:#f97316">TELEGRAPH</span></span></div>
+      <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3" ><span style="font-size:14px;font-weight:800;color:white;font-family:'Bricolage Grotesque'">COIN<span style="color:#f97316">TELEGRAPH</span></span></div>
       <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3"><span style="font-size:14px;font-weight:700;color:white">Bitcoin.com</span></div>
       <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3"><span style="font-size:14px;font-weight:800;color:white;letter-spacing:0.08em">DECRYPT</span></div>
       <div style="width:200px;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0.3"><span style="font-size:14px;font-weight:700;color:white;letter-spacing:0.1em">THE BLOCK</span></div>
@@ -1378,8 +1376,8 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVidModa
      CTA BANNER
 ═══════════════════════════════════════════ -->
 <section class="py-24 px-6 max-w-7xl mx-auto fade-up">
-  <div class="relative rounded-[40px] overflow-hidden p-14 text-center" style="background:linear-gradient(135deg,#0f172a 0%,#0c1a3a 50%,#071330 100%);border:1px solid rgba(29,155,240,0.25)">
-    <div class="orb w-96 h-96 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="background:rgba(29,155,240,0.15)"></div>
+  <div class="relative rounded-[40px] overflow-hidden p-14 text-center" style="background:linear-gradient(135deg,#0f172a 0%,#0c1a3a 50%,#071330 100%);border:1px solid rgba(37,99,235,0.25)">
+    <div class="orb w-96 h-96 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="background:rgba(37,99,235,0.15)"></div>
     <div class="relative z-10 space-y-6 max-w-2xl mx-auto">
       <div class="label label-blue">Limited Early Access</div>
       <h2 class="headline text-white">Ready to put your<br>money to work?</h2>
@@ -1404,7 +1402,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVidModa
     <div class="space-y-5">
       <div class="flex items-center gap-2">
         <div class="w-7 h-7 rounded-[9px] flex items-center justify-center" style="background:var(--blue)"><i data-lucide="activity" class="text-white w-3.5 h-3.5"></i></div>
-        <span style="color:white;font-weight:700;font-family:'Inter'">EQUIFLOW AI</span>
+        <span style="color:white;font-weight:700;font-family:'Bricolage Grotesque'">EQUIFLOW AI</span>
       </div>
       <p class="leading-relaxed">Democratizing institutional-grade AI investment strategies for global capital builders.</p>
       <div class="flex gap-3">
@@ -1422,6 +1420,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVidModa
     <p style="line-height:1.7"><strong style="color:rgba(255,255,255,.4)">Risk Disclaimer:</strong> All investment activity involves substantial risk of loss. Past performance is not indicative of future results. The returns referenced on this platform represent historical performance data and are not guaranteed. You should never invest more than you can afford to lose.</p>
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
       <p>© 2026 Equiflow AI. All rights reserved.</p>
+      <p>Capital at risk · Not financial advice · Past performance ≠ future results</p>
     </div>
   </div>
 </footer>
@@ -1435,7 +1434,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVidModa
     <div class="p-7 flex justify-between items-center border-b border-white/[0.07]">
       <div class="flex items-center gap-3">
         <i data-lucide="bell" style="color:var(--blue-light)" class="w-4 h-4"></i>
-        <h3 style="font-size:16px;font-weight:700;color:white;font-family:'Inter'">Join the Waitlist</h3>
+        <h3 style="font-size:16px;font-weight:700;color:white;font-family:'Bricolage Grotesque'">Join the Waitlist</h3>
       </div>
       <button onclick="closeWaitlist()" style="color:rgba(255,255,255,0.4)" class="hover:text-white transition-colors"><i data-lucide="x" class="w-4 h-4"></i></button>
     </div>
@@ -1451,12 +1450,12 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVidModa
         </button>
       </div>
       <div id="waitlist-success" class="hidden text-center space-y-4 py-4">
-        <div class="w-14 h-14 rounded-full flex items-center justify-center mx-auto" style="background:rgba(0,186,124,0.1);border:1px solid rgba(0,186,124,0.25)">
+        <div class="w-14 h-14 rounded-full flex items-center justify-center mx-auto" style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25)">
           <i data-lucide="check" style="color:var(--green-light)" class="w-6 h-6"></i>
         </div>
-        <h4 style="font-size:18px;font-weight:700;color:white;font-family:'Inter'">You're on the list! 🎉</h4>
-        <p style="font-size:14px;color:var(--muted-light)">We'll send your personal invite link by email once your spot is ready.</p>
-        <div class="rounded-xl px-4 py-3 text-xs font-medium" style="background:rgba(29,155,240,0.08);color:var(--blue-light);border:1px solid rgba(29,155,240,0.15)">Keep an eye on your inbox — invites are sent personally.</div>
+        <h4 style="font-size:18px;font-weight:700;color:white;font-family:'Bricolage Grotesque'">You're on the list! 🎉</h4>
+        <p style="font-size:14px;color:var(--muted-light)">We'll send you a personal invite when your spot is ready.</p>
+        <div class="rounded-xl px-4 py-3 text-xs font-medium" style="background:rgba(37,99,235,0.08);color:var(--blue-light);border:1px solid rgba(37,99,235,0.15)">Keep an eye on your inbox — invites are sent personally.</div>
       </div>
     </div>
   </div>
@@ -1528,7 +1527,7 @@ function renderChart(principal) {
     const h = Math.max(4, Math.round((v/max)*100));
     const op = 0.2 + (i/steps)*0.8;
     bar.className = 'flex-1 rounded-t-sm chart-bar';
-    bar.style.cssText = `height:${h}%;background:rgba(0,186,124,${op});transition:height 0.5s ease ${i*30}ms`;
+    bar.style.cssText = `height:${h}%;background:rgba(34,197,94,${op});transition:height 0.5s ease ${i*30}ms`;
     container.appendChild(bar);
   });
 }
@@ -1639,7 +1638,7 @@ async function fetchIndexTicker() {
       if (el && data[coinId]) {
         const chg = parseFloat(data[coinId].usd_24h_change || 0);
         el.textContent = priceFmt(parseFloat(data[coinId].usd || 0));
-        el.style.color  = chg >= 0 ? '#00BA7C' : '#F87171';
+        el.style.color  = chg >= 0 ? '#4ADE80' : '#F87171';
       }
     });
 

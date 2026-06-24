@@ -7,7 +7,7 @@
   <meta name="robots" content="noindex, nofollow">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%236366f1'/><polyline points='6,22 12,14 18,18 26,8' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%231D9BF0'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter,Arial,sans-serif' font-weight='900' font-size='18' fill='white'>&#x1D54F;</text></svg>">
 
   <!-- Performance preconnects -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
@@ -27,13 +27,13 @@
   *,*::before,*::after{box-sizing:border-box;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.1) transparent}
   ::-webkit-scrollbar{width:4px;height:4px}
   ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:999px}
-  body{background:#04050a;color:#e2e4ed;font-family:'Inter',system-ui,sans-serif;min-height:100vh}
-  .card{background:#0c0e18;border:1px solid rgba(255,255,255,.07);border-radius:16px}
+  body{background:#060608;color:#e2e4ed;font-family:'Inter',system-ui,sans-serif;min-height:100vh}
+  .card{background:#0A0A0A;border:1px solid #2F3336;border-radius:14px}
   .card-inner{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px}
   .pill{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:999px;font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
   .pill-green{background:rgba(34,197,94,.1);color:#22c55e;border:1px solid rgba(34,197,94,.2)}
   .pill-amber{background:rgba(245,158,11,.1);color:#f59e0b;border:1px solid rgba(245,158,11,.2)}
-  .pill-blue {background:rgba(99,102,241,.1);color:#818cf8;border:1px solid rgba(99,102,241,.2)}
+  .pill-blue {background:rgba(29,155,240,.1);color:#1D9BF0;border:1px solid rgba(29,155,240,.2)}
   .pill-red  {background:rgba(239,68,68,.1); color:#f87171;border:1px solid rgba(239,68,68,.2)}
   .pill-gray {background:rgba(255,255,255,.06);color:#9ca3af;border:1px solid rgba(255,255,255,.1)}
   .pill-dot  {width:5px;height:5px;border-radius:50%;background:currentColor;animation:blink 1.6s ease-in-out infinite}
@@ -42,11 +42,11 @@
   @keyframes slideU{from{transform:translateY(12px);opacity:0}to{transform:translateY(0);opacity:1}}
   @keyframes spin{to{transform:rotate(360deg)}}
   .input{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:9px 12px;color:#e2e4ed;font-family:'Inter',sans-serif;font-size:13px;outline:none;transition:border-color .15s}
-  .input:focus{border-color:#6366f1}
+  .input:focus{border-color:#1D9BF0}
   .input::placeholder{color:#4b5563}
   .btn{cursor:pointer;border:none;font-family:'Inter',sans-serif;font-weight:600;font-size:12px;transition:all .15s;display:inline-flex;align-items:center;justify-content:center;gap:6px}
   .btn:active{transform:scale(.97)}
-  .btn-primary{background:linear-gradient(135deg,#6366f1,#a855f7);color:#fff;border-radius:10px;padding:8px 16px;box-shadow:0 4px 14px rgba(99,102,241,.25)}
+  .btn-primary{background:#1D9BF0;color:#fff;border-radius:10px;padding:8px 16px;box-shadow:0 4px 14px rgba(29,155,240,.25)}
   .btn-primary:hover{opacity:.9}
   .btn-success{background:rgba(34,197,94,.12);color:#22c55e;border:1px solid rgba(34,197,94,.22);border-radius:9px;padding:7px 13px}
   .btn-success:hover{background:rgba(34,197,94,.22)}
@@ -56,7 +56,7 @@
   .btn-ghost:hover{background:rgba(255,255,255,.08);color:#e2e4ed}
   .sb{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:500;color:#6b7280;transition:all .15s;white-space:nowrap}
   .sb:hover{background:rgba(255,255,255,.05);color:#e2e4ed}
-  .sb.active{background:rgba(99,102,241,.12);color:#818cf8;font-weight:600}
+  .sb.active{background:rgba(29,155,240,.1);color:#1D9BF0;font-weight:700}
   table{width:100%;border-collapse:collapse}
   th{text-align:left;padding:9px 14px;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6b7280;border-bottom:1px solid rgba(255,255,255,.07)}
   td{padding:12px 14px;font-size:13px;border-bottom:1px solid rgba(255,255,255,.05)}
@@ -65,15 +65,58 @@
   .num{font-variant-numeric:tabular-nums}
   .overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.75);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:16px}
   .overlay.open{display:flex;animation:fadeIn .18s ease}
-  .modal-box{background:#0c0e18;border:1px solid rgba(255,255,255,.1);border-radius:20px;width:100%;max-width:460px;max-height:90vh;overflow-y:auto;animation:slideU .25s cubic-bezier(.16,1,.3,1)}
-  #login-screen{position:fixed;inset:0;z-index:300;background:#04050a;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .25s ease}
+  .modal-box{background:#0A0A0A;border:1px solid #2F3336;border-radius:16px;width:100%;max-width:460px;max-height:90vh;overflow-y:auto;animation:slideU .25s cubic-bezier(.16,1,.3,1)}
+
+
+  /* ── MOBILE ── */
+  #mob-nav { display:none }
+  @media (max-width:767px) {
+    #app { flex-direction:column !important }
+    #sidebar { display:none !important }
+    #mob-nav { display:flex; position:fixed; bottom:0; left:0; right:0; z-index:100;
+               background:#0A0A0A; border-top:1px solid #2F3336;
+               padding:6px 0 env(safe-area-inset-bottom,6px); }
+    #mob-nav-btn { display:flex !important }
+    .mob-tab { flex:1; display:flex; flex-direction:column; align-items:center;
+               justify-content:center; gap:3px; padding:6px 4px; cursor:pointer;
+               color:#71767B; font-size:9px; font-weight:600; letter-spacing:.03em;
+               border:none; background:transparent; transition:color .15s }
+    .mob-tab.active { color:#1D9BF0 }
+    .mob-tab svg { width:20px; height:20px; stroke-width:1.8 }
+    .mob-badge { position:absolute; top:-3px; right:-3px; min-width:14px; height:14px;
+                 border-radius:999px; background:#1D9BF0; color:#fff;
+                 font-size:8px; font-weight:700; display:flex; align-items:center;
+                 justify-content:center; padding:0 3px; line-height:1 }
+    #main-content { padding-bottom:68px }
+    #main-header { padding:0 14px }
+    #main-header .clock-btn { display:none }
+    #main-pad { padding:12px }
+    .stat-card { padding:12px }
+    .stat-card .text-2xl { font-size:1.4rem }
+    th { font-size:9px; padding:7px 10px }
+    td { font-size:12px; padding:10px 10px }
+    .modal-box { border-radius:12px; margin:0 }
+    .overlay { padding:10px; align-items:flex-end }
+    .modal-box { border-radius:16px 16px 0 0; max-width:100% }
+  }
+  @media (min-width:768px) {
+    #mob-nav { display:none !important }
+  }
+
+  /* ── STAR CANVAS ── */
+  #star-canvas {
+    position: fixed; inset: 0; z-index: -1;
+    pointer-events: none; display: block;
+  }
+
+  #login-screen{position:fixed;inset:0;z-index:300;background:transparent;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .25s ease}
   #login-screen.hidden{display:none}
   #toast{position:fixed;bottom:20px;right:20px;z-index:400;display:none}
   #toast.show{display:flex;animation:slideU .25s ease}
-  @keyframes rowNew{0%{background:rgba(99,102,241,.12)}100%{background:transparent}}
+  @keyframes rowNew{0%{background:rgba(29,155,240,.12)}100%{background:transparent}}
   .row-new{animation:rowNew 2s ease forwards}
   .spin{animation:spin .75s linear infinite;display:inline-block}
-  .stat-card{background:#0c0e18;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:18px}
+  .stat-card{background:#0A0A0A;border:1px solid #2F3336;border-radius:12px;padding:18px}
 </style>
 </head>
 <body>
@@ -86,10 +129,12 @@
 </div>
 
 <!-- ══ LOGIN ══ -->
+<!-- Star particle canvas -->
+<canvas id="star-canvas"></canvas>
 <div id="login-screen">
   <div class="w-full max-w-sm">
     <div class="text-center mb-6">
-      <div class="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-3" style="background:linear-gradient(135deg,#6366f1,#a855f7)">
+      <div class="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-3" style="background:#1D9BF0">
         <i data-lucide="shield" class="w-6 h-6 text-white"></i>
       </div>
       <h1 class="text-xl font-bold">Admin Portal</h1>
@@ -150,9 +195,9 @@
     <div id="inv-user-info" class="card-inner p-4 rounded-xl mb-4"></div>
     <div id="inv-link-section" class="hidden mb-4">
       <label class="text-xs font-medium text-gray-500 block mb-1.5">Registration Link</label>
-      <div class="flex overflow-hidden rounded-xl" style="background:rgba(0,0,0,.3);border:1px solid rgba(99,102,241,.2)">
+      <div class="flex overflow-hidden rounded-xl" style="background:rgba(0,0,0,.3);border:1px solid rgba(29,155,240,.2)">
         <input readonly id="inv-link-input" class="input flex-1 rounded-none border-none bg-transparent text-xs font-mono text-indigo-300" style="background:transparent">
-        <button onclick="copyInvLink()" id="inv-copy-btn" class="btn btn-ghost px-4 rounded-none border-0 text-xs" style="background:rgba(99,102,241,.15);color:#818cf8;border-radius:0">Copy</button>
+        <button onclick="copyInvLink()" id="inv-copy-btn" class="btn btn-ghost px-4 rounded-none border-0 text-xs" style="background:rgba(29,155,240,.15);color:#1D9BF0;border-radius:0">Copy</button>
       </div>
       <p class="text-xs text-gray-600 mt-1.5">Share this link with the user so they can register.</p>
     </div>
@@ -166,9 +211,9 @@
 <div id="app" class="hidden min-h-screen flex">
 
   <!-- SIDEBAR -->
-  <aside class="w-52 shrink-0 border-r flex flex-col" style="background:#070910;border-color:rgba(255,255,255,.06);min-height:100vh">
+  <aside id="sidebar" class="w-52 shrink-0 border-r flex flex-col" style="background:#070910;border-color:rgba(255,255,255,.06);min-height:100vh">
     <div class="flex items-center gap-2.5 px-4 h-14 border-b" style="border-color:rgba(255,255,255,.06)">
-      <div class="w-7 h-7 rounded-lg flex items-center justify-center" style="background:linear-gradient(135deg,#6366f1,#a855f7)">
+      <div class="w-7 h-7 rounded-lg flex items-center justify-center" style="background:#1D9BF0">
         <i data-lucide="shield" class="w-3.5 h-3.5 text-white"></i>
       </div>
       <div><p class="text-sm font-bold leading-none">Equiflow</p><p class="text-xs text-gray-600 mt-0.5">Admin</p></div>
@@ -190,19 +235,19 @@
   </aside>
 
   <!-- MAIN -->
-  <div class="flex-1 flex flex-col overflow-hidden">
-    <header class="h-14 border-b flex items-center justify-between px-5 shrink-0" style="background:#070910;border-color:rgba(255,255,255,.06)">
+  <div class="flex-1 flex flex-col overflow-hidden" id="main-col">
+    <header id="main-header" class="h-14 border-b flex items-center justify-between px-5 shrink-0" style="background:#070910;border-color:rgba(255,255,255,.06)">
       <div class="flex items-center gap-2.5">
         <span class="w-2 h-2 rounded-full bg-green-400" style="box-shadow:0 0 6px rgba(34,197,94,.6);animation:blink 1.6s ease-in-out infinite"></span>
         <span id="sec-title" class="text-sm font-semibold">Overview</span>
       </div>
       <div class="flex items-center gap-3">
-        <span id="clock" class="text-xs text-gray-600"></span>
+        <span id="clock" class="text-xs text-gray-600 clock-btn"></span>
         <button onclick="refreshAll()" class="btn btn-ghost py-1.5 px-3 text-xs"><i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>Refresh</button>
       </div>
     </header>
 
-    <div class="flex-1 overflow-y-auto p-5 space-y-5">
+    <div id="main-pad" class="flex-1 overflow-y-auto p-5 space-y-5" id="main-content">
 
       <!-- ── OVERVIEW ── -->
       <section id="sec-overview">
@@ -339,7 +384,51 @@
       </section>
 
     </div>
-  </div>
+  
+<!-- ── MOBILE BOTTOM NAV ── -->
+<nav id="mob-nav">
+  <button class="mob-tab active" id="mt-overview" onclick="show('overview',null);setMobTab('mt-overview')">
+    <span style="position:relative;display:inline-flex">
+      <i data-lucide="layout-dashboard"></i>
+    </span>
+    Overview
+  </button>
+  <button class="mob-tab" id="mt-waitlist" onclick="show('waitlist',null);setMobTab('mt-waitlist')">
+    <span style="position:relative;display:inline-flex">
+      <i data-lucide="users"></i>
+      <span id="mob-wl-badge" class="mob-badge hidden">0</span>
+    </span>
+    Waitlist
+  </button>
+  <button class="mob-tab" id="mt-deposits" onclick="show('deposits',null);setMobTab('mt-deposits')">
+    <span style="position:relative;display:inline-flex">
+      <i data-lucide="credit-card"></i>
+      <span id="mob-dep-badge" class="mob-badge hidden">0</span>
+    </span>
+    Deposits
+  </button>
+  <button class="mob-tab" id="mt-withdrawals" onclick="show('withdrawals',null);setMobTab('mt-withdrawals')">
+    <span style="position:relative;display:inline-flex">
+      <i data-lucide="send"></i>
+      <span id="mob-wd-badge" class="mob-badge hidden">0</span>
+    </span>
+    Payouts
+  </button>
+  <button class="mob-tab" id="mt-users" onclick="show('users',null);setMobTab('mt-users')">
+    <span style="position:relative;display:inline-flex">
+      <i data-lucide="user-check"></i>
+    </span>
+    Users
+  </button>
+  <button class="mob-tab" id="mt-settings" onclick="show('settings',null);setMobTab('mt-settings')">
+    <span style="position:relative;display:inline-flex">
+      <i data-lucide="settings"></i>
+    </span>
+    More
+  </button>
+</nav>
+
+</div>
 </div>
 
 <script>
@@ -362,6 +451,27 @@ const ago   = iso => {
 };
 // XSS sanitiser — always use esc() before inserting user data into innerHTML
 const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#x27;');
+
+
+/* ── Mobile tab helper ── */
+function setMobTab(id) {
+  document.querySelectorAll('.mob-tab').forEach(b => b.classList.remove('active'));
+  const el = document.getElementById(id);
+  if(el) el.classList.add('active');
+}
+
+/* ── Sync mobile badges ── */
+function syncMobBadges() {
+  const wlB  = document.getElementById('mob-wl-badge');
+  const depB = document.getElementById('mob-dep-badge');
+  const wdB  = document.getElementById('mob-wd-badge');
+  const wlN  = document.getElementById('wl-badge')?.textContent;
+  const depN = document.getElementById('dep-badge')?.textContent;
+  const wdN  = document.getElementById('wd-badge')?.textContent;
+  if(wlB)  { wlB.textContent  = wlN||'0';  wlB.classList.toggle('hidden',  !wlN||wlN==='0'); }
+  if(depB) { depB.textContent = depN||'0'; depB.classList.toggle('hidden', !depN||depN==='0'); }
+  if(wdB)  { wdB.textContent  = wdN||'0';  wdB.classList.toggle('hidden',  !wdN||wdN==='0'); }
+}
 
 /* ── User name cache (populated during refreshAll) ── */
 let userCache = new Map();
@@ -521,6 +631,10 @@ async function show(name, elRef) {
 
 /* ══ Refresh — async, fetches fresh data from Supabase ══ */
 async function refreshAll() {
+  await refreshAll_inner();
+  syncMobBadges();
+}
+async function refreshAll_inner() {
   // renderOverview MUST run first — it populates userCache which is used
   // by renderDeposits and renderWithdrawals to look up user names.
   // Running them in parallel caused a race condition where those renders
@@ -576,7 +690,7 @@ async function renderOverview() {
     users.forEach(u => userCache.set(u.id, u));
 
     const actives = users.filter(u=>u.status==='ACTIVE').length;
-    const pending = deps.filter(d=>d.status==='PENDING').length + wds.filter(w=>w.status==='PENDING').length;
+    const pending = deps.filter(d=>d.status==='PENDING'||d.status==='AWAITING_PAYMENT').length + wds.filter(w=>w.status==='PENDING').length;
 
     $('ov-wl').textContent     = wlCount;
     $('ov-users').textContent  = users.length;
@@ -729,10 +843,10 @@ async function renderActivityLog() {
     const el = $('log-list');
     if(!(logs||[]).length) { el.innerHTML='<div class="flex items-center justify-center py-8 opacity-25 text-xs font-medium">No activity yet</div>'; return; }
     const ic = {info:'ℹ',success:'✓',error:'✕',warning:'⚠'};
-    const cl = {info:'#818cf8',success:'#4ade80',error:'#f87171',warning:'#fbbf24'};
+    const cl = {info:'#1D9BF0',success:'#4ade80',error:'#f87171',warning:'#fbbf24'};
     el.innerHTML = logs.map(l=>`
       <div class="flex items-start gap-2.5 py-2 border-b" style="border-color:rgba(255,255,255,.05)">
-        <span class="text-xs font-bold mt-0.5 shrink-0" style="color:${cl[l.type]||'#818cf8'}">${ic[l.type]||'•'}</span>
+        <span class="text-xs font-bold mt-0.5 shrink-0" style="color:${cl[l.type]||'#1D9BF0'}">${ic[l.type]||'•'}</span>
         <div class="flex-1 min-w-0"><p class="text-xs">${esc(l.message)}</p><p class="text-xs text-gray-600 mt-0.5">${ago(l.created_at)}</p></div>
       </div>`).join('');
   } catch(e) {}
@@ -923,7 +1037,7 @@ async function openInvModal(id) {
 
   $('inv-user-info').innerHTML = `
     <div class="flex items-center gap-3">
-      <div class="w-9 h-9 rounded-xl flex items-center justify-center text-xs font-bold text-white shrink-0" style="background:linear-gradient(135deg,#6366f1,#a855f7)">${esc(e.email.slice(0,2).toUpperCase())}</div>
+      <div class="w-9 h-9 rounded-xl flex items-center justify-center text-xs font-bold text-white shrink-0" style="background:#1D9BF0">${esc(e.email.slice(0,2).toUpperCase())}</div>
       <div>
         <div class="flex items-center gap-2 flex-wrap">
           <p class="font-semibold text-sm">${esc(e.email)}</p>${refBadge}
@@ -1004,7 +1118,7 @@ function toast(msg, type='info') {
   const styles = {
     success:{bg:'#052e16',border:'rgba(34,197,94,.25)',icon:'✓',color:'#4ade80'},
     error:  {bg:'#2d0a0a',border:'rgba(239,68,68,.25)', icon:'✕',color:'#f87171'},
-    info:   {bg:'#1e1b4b',border:'rgba(99,102,241,.25)',icon:'ℹ',color:'#818cf8'},
+    info:   {bg:'#061018',border:'rgba(29,155,240,.25)',icon:'ℹ',color:'#1D9BF0'},
     warning:{bg:'#1f1200',border:'rgba(245,158,11,.25)',icon:'⚠',color:'#fbbf24'},
   };
   const st = styles[type]||styles.info;
@@ -1073,6 +1187,68 @@ if(document.readyState==='loading') {
 } else {
   icons();
 }
+</script>
+
+
+
+<script>
+/* ── Star particles — fixed ── */
+(function(){
+  const canvas = document.getElementById('star-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let stars = [], W = 0, H = 0, rafId = null;
+
+  function resize(){
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function mkStar(){
+    return {
+      x:  Math.random() * W,
+      y:  Math.random() * H,
+      r:  Math.random() * 1.2 + 0.2,
+      vx: (Math.random() - 0.5) * 0.06,
+      vy: -(Math.random() * 0.1 + 0.02),
+      a:  Math.random() * 0.7 + 0.15,
+      da: (Math.random() * 0.004 + 0.001) * (Math.random() > .5 ? 1 : -1),
+      blue: Math.random() > 0.8
+    };
+  }
+
+  function loop(){
+    ctx.clearRect(0, 0, W, H);
+    for(let s of stars){
+      s.a += s.da;
+      if(s.a > 0.9 || s.a < 0.1) s.da *= -1;
+      s.x += s.vx;
+      s.y += s.vy;
+      if(s.y < -2) { s.y = H + 2; s.x = Math.random() * W; }
+      if(s.x < -2) s.x = W + 2;
+      if(s.x > W + 2) s.x = -2;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.fillStyle = s.blue
+        ? `rgba(29,155,240,${(s.a*0.6).toFixed(2)})`
+        : `rgba(255,255,255,${s.a.toFixed(2)})`;
+      ctx.fill();
+    }
+    rafId = requestAnimationFrame(loop);
+  }
+
+  resize();
+  stars = Array.from({length:140}, mkStar);
+
+  let resizeT;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeT);
+    resizeT = setTimeout(resize, 120);
+  });
+
+  if(rafId) cancelAnimationFrame(rafId);
+  loop();
+})();
 </script>
 </body>
 </html>

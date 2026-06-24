@@ -1,6 +1,7 @@
 [build]
   command = "npm ci --include=dev && npm run build"
   publish = "."
+  functions = "netlify/functions"
 
 [[redirects]]
   from = "/*"

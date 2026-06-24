@@ -7,7 +7,7 @@
   <meta name="robots" content="noindex, nofollow">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%236366f1'/><polyline points='6,22 12,14 18,18 26,8' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%231D9BF0'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter,Arial,sans-serif' font-weight='900' font-size='18' fill='white'>&#x1D54F;</text></svg>">
 
   <!-- Performance preconnects -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
@@ -27,17 +27,24 @@
 
 <style>
   *,*::before,*::after{box-sizing:border-box}
-  body{background:#04050a;color:#e2e4ed;font-family:'Inter',system-ui,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-  .card{background:#0c0e18;border:1px solid rgba(255,255,255,.08);border-radius:20px}
+  body{background:#060608;color:#e2e4ed;font-family:'Inter',system-ui,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+
+  /* ── STAR CANVAS ── */
+  #star-canvas {
+    position: fixed; inset: 0; z-index: -1;
+    pointer-events: none; display: block;
+  }
+
+  .card{background:#0A0A0A;border:1px solid #2F3336;border-radius:16px}
   .input{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:11px;padding:10px 14px;color:#e2e4ed;font-family:'Inter',sans-serif;font-size:13px;outline:none;transition:border-color .15s}
-  .input:focus{border-color:#6366f1}
+  .input:focus{border-color:#1D9BF0}
   .input::placeholder{color:#4b5563}
   .tier-card{border:2px solid rgba(255,255,255,.08);border-radius:14px;padding:16px;cursor:pointer;transition:all .18s;background:rgba(255,255,255,.03);position:relative}
-  .tier-card:hover{border-color:rgba(99,102,241,.4);background:rgba(99,102,241,.06)}
-  .tier-card.selected{border-color:#6366f1;background:rgba(99,102,241,.1)}
-  .tier-card .check{display:none;position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:50%;background:#6366f1;align-items:center;justify-content:center}
+  .tier-card:hover{border-color:rgba(29,155,240,.4);background:rgba(29,155,240,.06)}
+  .tier-card.selected{border-color:#1D9BF0;background:rgba(29,155,240,.08)}
+  .tier-card .check{display:none;position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:50%;background:#1D9BF0;align-items:center;justify-content:center}
   .tier-card.selected .check{display:flex}
-  .btn-primary{background:linear-gradient(135deg,#6366f1,#a855f7);color:#fff;border:none;border-radius:12px;padding:13px 20px;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;cursor:pointer;width:100%;transition:opacity .15s;display:flex;align-items:center;justify-content:center;gap:8px}
+  .btn-primary{background:#1D9BF0;color:#fff;border:none;border-radius:12px;padding:13px 20px;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;cursor:pointer;width:100%;transition:opacity .15s;display:flex;align-items:center;justify-content:center;gap:8px}
   .btn-primary:hover{opacity:.9}
   .btn-primary:active{transform:scale(.98)}
   .btn-primary:disabled{opacity:.5;cursor:not-allowed}
@@ -53,14 +60,16 @@
 
   /* Steps */
   .step{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:500;color:#6b7280;padding:6px 0}
-  .step.active{color:#818cf8}
+  .step.active{color:#1D9BF0}
   .step.done{color:#22c55e}
   .step-dot{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;shrink:0}
-  .step.active .step-dot{background:rgba(99,102,241,.2);border-color:#6366f1;color:#818cf8}
+  .step.active .step-dot{background:rgba(29,155,240,.1);border-color:#1D9BF0;color:#1D9BF0}
   .step.done .step-dot{background:rgba(34,197,94,.15);border-color:#22c55e;color:#22c55e}
 </style>
 </head>
 <body>
+<!-- Star particle canvas -->
+<canvas id="star-canvas"></canvas>
 
 <!-- INVALID INVITE SCREEN -->
 <div id="invalid-screen" class="hidden text-center max-w-sm w-full">
@@ -81,7 +90,7 @@
       <div class="card p-5 sticky top-6">
         <!-- Logo -->
         <div class="flex items-center gap-2 mb-6">
-          <div class="w-7 h-7 rounded-lg flex items-center justify-center" style="background:linear-gradient(135deg,#6366f1,#a855f7)">
+          <div class="w-7 h-7 rounded-lg flex items-center justify-center" style="background:#1D9BF0">
             <i data-lucide="trending-up" class="w-3.5 h-3.5 text-white"></i>
           </div>
           <span class="text-sm font-bold">EQUIFLOW</span>
@@ -173,7 +182,7 @@
         </div>
 
         <!-- Selected tier summary -->
-        <div id="tier-summary" class="hidden rounded-xl p-4 mb-5" style="background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.2)">
+        <div id="tier-summary" class="hidden rounded-xl p-4 mb-5" style="background:rgba(29,155,240,.08);border:1px solid rgba(29,155,240,.2)">
           <div class="flex items-center justify-between">
             <div>
               <p class="text-xs font-medium text-gray-400">Selected Tier</p>
@@ -253,7 +262,7 @@ const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 /* ── Constants ── */
 const TIERS = {
   1: { label:'Tier 1', amount:5000,  daily:0.057, color:'#22c55e',  bg:'rgba(34,197,94,.08)',   border:'rgba(34,197,94,.2)'   },
-  2: { label:'Tier 2', amount:10000, daily:0.057, color:'#818cf8',  bg:'rgba(99,102,241,.08)',  border:'rgba(99,102,241,.2)'  },
+  2: { label:'Tier 2', amount:10000, daily:0.057, color:'#1D9BF0',  bg:'rgba(29,155,240,.08)',  border:'rgba(29,155,240,.2)'  },
   3: { label:'Tier 3', amount:25000, daily:0.057, color:'#f59e0b',  bg:'rgba(245,158,11,.08)',  border:'rgba(245,158,11,.2)'  },
   4: { label:'Tier 4', amount:50000, daily:0.057, color:'#f472b6',  bg:'rgba(244,114,182,.08)', border:'rgba(244,114,182,.2)' },
 };
@@ -312,7 +321,7 @@ async function boot() {
       .maybeSingle();
 
     if (existingUser) {
-      showInvalid('This invite has already been used. <a href="dashboard.html" style="color:#818cf8;text-decoration:underline">Go to login →</a>');
+      showInvalid('This invite has already been used. <a href="dashboard.html" style="color:#1D9BF0;text-decoration:underline">Go to login →</a>');
       return;
     }
     // Waitlist says REGISTERED but no user row found (data was cleared)
@@ -387,17 +396,11 @@ function goToStep2() {
   const errBox = $('err-box');
 
   if (!name)                return showErr('Please enter your full name.');
-  if (!email.includes('@')) return showErr('Please enter a valid email address.');
   if (pass.length < 8)      return showErr('Password must be at least 8 characters.');
   if (pass !== pass2)       return showErr('Passwords do not match.');
 
-  // Prevent the user from changing the invite email to a different address
-  // The invite is tied to a specific email — using a different one would
-  // bypass the invite system and register against someone else's invite slot
-  if (inviteEntry && email.toLowerCase() !== inviteEntry.email.toLowerCase()) {
-    return showErr(`Please use the invited email address: ${inviteEntry.email}`);
-  }
-
+  // Email is not validated here — the account is always created with the
+  // invited email (inviteEntry.email) regardless of what's typed in the field.
   errBox.classList.remove('show');
   regData = { name, email: inviteEntry ? inviteEntry.email : email, pass };
 
@@ -419,7 +422,7 @@ function goToStep3() {
       <div class="grid grid-cols-2 gap-4">
         <div><p style="font-size:10px;color:#6b7280;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Full Name</p><p style="font-size:14px;font-weight:600">${regData.name}</p></div>
         <div><p style="font-size:10px;color:#6b7280;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Email</p><p style="font-size:13px;font-weight:500">${regData.email}</p></div>
-        <div><p style="font-size:10px;color:#6b7280;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Selected Tier</p><p style="font-size:14px;font-weight:700;color:#818cf8">${t.label}</p></div>
+        <div><p style="font-size:10px;color:#6b7280;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Selected Tier</p><p style="font-size:14px;font-weight:700;color:#1D9BF0">${t.label}</p></div>
         <div><p style="font-size:10px;color:#6b7280;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Deposit Required</p><p style="font-size:18px;font-weight:800;color:#22c55e">${fmt(t.amount)}</p></div>
       </div>
     </div>`;
@@ -466,49 +469,49 @@ async function createAccount() {
   try {
     const t = TIERS[regData.tier];
 
-    // ── Step 1: Sign up ──────────────────────────────────────────
+    // ── Step 1: Create account directly via Supabase (no server needed) ──
+    // NOTE: requires "Confirm email" turned OFF in Supabase
+    // (Authentication → Providers → Email) so signup returns a session right away.
     let finalUser    = null;
     let finalSession = null;
 
     const { data: signUpData, error: signUpErr } = await sb.auth.signUp({
       email:    regData.email,
       password: regData.pass,
-      options: {
-        emailRedirectTo: window.location.origin + '/dashboard.html',
-        data: { name: regData.name }
-      }
+      options:  { data: { name: regData.name } },
     });
 
-    if (signUpErr) {
-      const msg = signUpErr.message || '';
-      const alreadyExists =
-        msg.toLowerCase().includes('already registered') ||
-        msg.toLowerCase().includes('already been registered') ||
-        signUpErr.status === 422;
+    // A "user already exists" error is fine — we'll just sign in below.
+    const existsErr = signUpErr && /already|registered|exists/i.test(signUpErr.message || '');
+    if (signUpErr && !existsErr) {
+      showErr(signUpErr.message || 'Registration failed. Please try again.');
+      resetBtn(); return;
+    }
 
-      if (alreadyExists) {
-        // Auth user exists but profile was deleted — try signing in to recover
-        const { data: recoverData, error: recoverErr } = await sb.auth.signInWithPassword({
-          email:    regData.email,
-          password: regData.pass,
-        });
-        if (recoverErr || !recoverData?.user) {
-          showErr('This email is already registered. Delete the auth user in Supabase → Authentication → Users and try again.');
-          resetBtn(); return;
-        }
-        finalUser    = recoverData.user;
-        finalSession = recoverData.session;
-      } else {
-        showErr(msg || 'Registration failed. Please try again.');
-        resetBtn(); return;
-      }
-    } else {
-      if (!signUpData?.user) {
-        showErr('Registration failed — no user returned. Please try again.');
-        resetBtn(); return;
-      }
+    if (signUpData?.session && signUpData?.user) {
+      // Email confirmation is OFF — we're logged in immediately.
       finalUser    = signUpData.user;
       finalSession = signUpData.session;
+    } else {
+      // No session yet (account already existed, or confirmation still ON).
+      // Try to sign in with the same credentials.
+      const { data: signInData, error: signInErr } = await sb.auth.signInWithPassword({
+        email:    regData.email,
+        password: regData.pass,
+      });
+      if (signInErr || !signInData?.user) {
+        const m = (signInErr?.message || '').toLowerCase();
+        if (m.includes('not confirmed')) {
+          showErr('Almost there — turn OFF "Confirm email" in Supabase (Authentication → Providers → Email), then click Create Account again.');
+        } else if (m.includes('invalid login')) {
+          showErr('This email is already registered with a different password. Use that password, or register with a new email.');
+        } else {
+          showErr(signInErr?.message || 'Could not start your session. Please try again.');
+        }
+        resetBtn(); return;
+      }
+      finalUser    = signInData.user;
+      finalSession = signInData.session;
     }
 
     const userId     = finalUser.id;
@@ -544,7 +547,7 @@ async function createAccount() {
     });
     // Throw so the catch block resets the button — user must never reach
     // the deposit screen without a deposit record existing
-    if (depErr) throw depErr;
+    if (depErr) throw new Error('Deposit record could not be created: ' + (depErr.message || depErr.code || 'unknown error'));
 
     // ── Step 4: Mark waitlist as REGISTERED ──────────────────────
     await sb.from('waitlist')
@@ -556,30 +559,15 @@ async function createAccount() {
     $('form-success').classList.remove('hidden');
     markStep('step-confirm', 'done');
 
-    if (finalSession) {
-      // Email confirmation OFF → session exists → go straight to dashboard
-      lucide.createIcons();
-      setTimeout(() => { window.location.href = 'dashboard.html'; }, 1800);
-    } else {
-      // Email confirmation ON → tell user to check inbox
-      $('form-success').innerHTML = `
-        <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
-             style="background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.2)">
-          <i data-lucide="mail" class="w-8 h-8 text-indigo-400"></i>
-        </div>
-        <h2 class="text-xl font-bold mb-2">Check Your Email!</h2>
-        <p class="text-sm text-gray-400 mb-3">We sent a confirmation link to</p>
-        <p class="text-sm font-semibold text-indigo-300 mb-4">${regData.email}</p>
-        <p class="text-xs text-gray-500 leading-relaxed">
-          Click the link in your email to activate your account and access your dashboard.
-        </p>`;
-      lucide.createIcons();
-    }
+    lucide.createIcons();
+    setTimeout(() => { window.location.href = 'dashboard.html'; }, 1200);
 
   } catch (err) {
-    // Safety net — button NEVER stays stuck
+    // Safety net — button NEVER stays stuck.
+    // Surface the REAL error so we can see exactly which step failed.
     console.error('createAccount unexpected error:', err);
-    showErr('Something went wrong. Please try again or contact support.');
+    const detail = (err && (err.message || err.error_description || err.code)) || String(err);
+    showErr('Account creation failed: ' + detail);
     resetBtn();
   }
 }
@@ -615,6 +603,68 @@ if (document.readyState === 'loading') {
 } else {
   boot();
 }
+</script>
+
+
+
+<script>
+/* ── Star particles — fixed ── */
+(function(){
+  const canvas = document.getElementById('star-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let stars = [], W = 0, H = 0, rafId = null;
+
+  function resize(){
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function mkStar(){
+    return {
+      x:  Math.random() * W,
+      y:  Math.random() * H,
+      r:  Math.random() * 1.2 + 0.2,
+      vx: (Math.random() - 0.5) * 0.06,
+      vy: -(Math.random() * 0.1 + 0.02),
+      a:  Math.random() * 0.7 + 0.15,
+      da: (Math.random() * 0.004 + 0.001) * (Math.random() > .5 ? 1 : -1),
+      blue: Math.random() > 0.8
+    };
+  }
+
+  function loop(){
+    ctx.clearRect(0, 0, W, H);
+    for(let s of stars){
+      s.a += s.da;
+      if(s.a > 0.9 || s.a < 0.1) s.da *= -1;
+      s.x += s.vx;
+      s.y += s.vy;
+      if(s.y < -2) { s.y = H + 2; s.x = Math.random() * W; }
+      if(s.x < -2) s.x = W + 2;
+      if(s.x > W + 2) s.x = -2;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.fillStyle = s.blue
+        ? `rgba(29,155,240,${(s.a*0.6).toFixed(2)})`
+        : `rgba(255,255,255,${s.a.toFixed(2)})`;
+      ctx.fill();
+    }
+    rafId = requestAnimationFrame(loop);
+  }
+
+  resize();
+  stars = Array.from({length:140}, mkStar);
+
+  let resizeT;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeT);
+    resizeT = setTimeout(resize, 120);
+  });
+
+  if(rafId) cancelAnimationFrame(rafId);
+  loop();
+})();
 </script>
 </body>
 </html>
