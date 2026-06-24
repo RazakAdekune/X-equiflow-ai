@@ -1048,7 +1048,7 @@ async function openInvModal(id) {
 
   if(e.invite_code) {
     // Rebuild link — include ref code if this person was referred
-    const base = window.location.href.replace(/admin\.html.*$/, '');
+    const base = (window.location.origin + '/');
     const refParam = e.referred_by ? `&ref=${esc(e.referred_by)}` : '';
     const link = `${base}register.html?invite=${e.invite_code}${refParam}`;
     $('inv-link-input').value = link;
@@ -1074,7 +1074,7 @@ async function generateInvite() {
 
   if (!updated) { toast('Failed to generate invite', 'error'); return; }
 
-  const base = window.location.href.replace(/admin\.html.*$/, '');
+  const base = (window.location.origin + '/');
   // Carry the referral code through so register.html knows who referred this person
   const refParam = updated.referred_by ? `&ref=${esc(updated.referred_by)}` : '';
   const link = `${base}register.html?invite=${esc(code)}${refParam}`;
